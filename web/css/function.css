@@ -1,0 +1,100 @@
+.effect h2 {
+    transition: transform 0.35s;
+    font-size: 30px;
+    -webkit-transform: translate3d(0, 40px, 0);
+    transform: translate3d(0, 40px, 0);
+}
+
+.effect p {
+    margin-top: 20px;
+    opacity: 0;
+    font-weight: 300;
+    transform: translate3d(0, 40px, 0);
+    -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+    transition: opacity 0.35s, transform 0.35s;
+}
+
+.effect a {
+    color: #000;
+}
+
+.effect:hover h2,
+.effect:hover p,
+.effect a:hover h2,
+.effect a:hover p {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    -webkit-transition-delay: 0.15s;
+    transition-delay: 0.15s;
+    color: #FFF;
+}
+
+.grid {
+    text-align: center;
+}
+
+.grid h1 {
+    margin-top: 2%;
+    color: #000;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    font-size: 25px;
+}
+
+.grid h2 {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    font-size: 150%;
+    font-weight: normal;
+}
+
+.effect {
+    display: inline-block;
+    overflow: hidden;
+    width: 25%;
+    margin: 2%;
+    padding: 4% 1%;
+
+    border-color: #000;
+    border-style: solid;
+    border-width: 1px;
+
+    cursor: pointer;
+    color: #000;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    margin-bottom: 80px;
+    color: #000;
+}
+
+.effect:hover {
+    border-color: rgb(102, 102, 255);
+    border-style: solid;
+    border-width: 1px;
+    background-color: rgb(102, 102, 255);
+}
+
+#next-grid {
+    background-color: rgb(214, 237, 237);
+    padding: 3%;
+}
+
+.grid h3 {
+    font-size: 90%;
+    margin-bottom: 2%;
+}
+
+.grid li {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    font-size: 110%;
+    color: #000;
+    cursor: pointer;
+    display: inline;
+    margin: 2%;
+}
+
+#next-grid li:hover {
+    color: rgb(102, 102, 255);
+}
+
+#main-function {
+    margin: 0 auto;
+}

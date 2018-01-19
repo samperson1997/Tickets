@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets</h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+
+            <b>个人中心</b>
+            <li>
+                <a href="#order">订单中心</a>
+            </li>
+
+            <li>
+                <a href="#member-info">会员中心</a>
+            </li>
+
+            <li><b>
+                <a href="index.html">搜索活动</a>
+            </b></li>
+
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0">
+
+        <div id="order">
+            <!--<div class="stock-name" style="display: inline;">订单中心</div>-->
+            <!--<div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Orders</div>-->
+        </div>
+
+
+        <div id="member-info">
+            <div class="stock-name" style="display: inline;">我的会员</div>
+            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Member</div>
+
+            <table class="whole-table">
+                <tr>
+                    <th>注册邮箱</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>会员昵称</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>会员等级</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>会员积分</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <th>钱包余额</th>
+                    <td></td>
+                </tr>
+            </table>
+            <div>
+                <button class="button-green">信息修改</button>
+                <button class="button-red">注销会员</button>
+                注销后不可恢复，请谨慎选择。
+            </div>
+        </div>
+
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/scrollReveal.js"></script>
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+<script src="js/user/log_state.js"></script>
+
+</html>

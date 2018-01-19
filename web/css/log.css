@@ -1,0 +1,75 @@
+#whole-page {
+    background-image: url("../img/background3.png");
+    font-family: "Chalkduster", sans-serif;
+    text-align: center;
+    padding: 16% 2%;
+    color: #FFF;
+    background-size: 100% 100%;
+}
+
+#whole-page-r {
+    background-image: url("../img/background3.png");
+    font-family: "Chalkduster", sans-serif;
+    text-align: center;
+    padding: 14% 2%;
+    color: #FFF;
+    background-size: 100% 100%;
+}
+
+#whole-page p, #whole-page-r p {
+    font-weight: 300;
+    font-size: 110%;
+}
+
+#whole-page fieldset, #whole-page-r fieldset {
+    border-color: transparent;
+}
+
+#log-part,
+#register-part {
+    margin: 0 30%;
+    padding: 2% 1%;
+    border-radius: 5px;
+    border: 2px solid #FFF;
+
+    background-color: rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+#whole-page h1, #whole-page-r h1 {
+    margin: 5%;
+    font-family: "Chalkduster", sans-serif;
+}
+
+#whole-page input, #whole-page-r input {
+    font-weight: 300;
+    font-size: 90%;
+    width: 50%;
+    border-radius: 5px;
+    border-color: #FFF;
+    border-width: 2px;
+
+    padding: 1.5%;
+    margin: 2%;
+}
+
+#whole-page input:focus, #whole-page-r input:focus {
+    outline: none;
+}
+
+#log-label,
+#register-label {
+    cursor: pointer;
+    margin: 2%;
+}
+
+.log-buttons {
+    margin-top: 5%;
+}
+
+#log-tip,
+#reg-tip {
+    color: red;
+    font-size: 80%;
+    font-weight: 300;
+}

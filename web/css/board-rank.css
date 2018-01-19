@@ -1,0 +1,7 @@
+.content .pane {
+    display: none;
+}
+
+.content .active {
+    display: block; !important
+}

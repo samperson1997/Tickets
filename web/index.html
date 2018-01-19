@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/footer.css">
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <!--<a href="login.html">-->
+    <!--<div data-scroll-reveal="enter bottom but wait 1s" id="login-button">登录注册</div>-->
+    <!--</a>-->
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets</h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+            <b>搜索活动</b>
+            <li>
+                <a href="#concert">音乐演唱</a>
+            </li>
+            <li>
+                <a href="#dance">舞蹈表演</a>
+            </li>
+            <li>
+                <a href="#play">话剧喜剧</a>
+            </li>
+            <li>
+                <a href="#game">体育比赛</a>
+            </li>
+            <li>
+                <a href="#other">其他活动</a>
+            </li>
+
+
+            <li><b>
+                <a href="member.html">个人中心</a>
+            </b></li>
+
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0">
+        <div id="concert">
+            <div class="stock-name" style="display: inline;">音乐演唱</div>
+            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Concerts</div>
+        </div>
+
+        <div id="dance">
+            <div class="stock-name" style="display: inline;">舞蹈表演</div>
+            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Dancings</div>
+        </div>
+
+        <div id="play">
+            <div class="stock-name" style="display: inline;">话剧喜剧</div>
+            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Plays & Dramas</div>
+        </div>
+
+        <div id="game">
+            <div class="stock-name" style="display: inline;">体育比赛</div>
+            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Sport Games</div>
+        </div>
+
+        <div id="other">
+            <div class="stock-name" style="display: inline;">其他活动</div>
+            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Other</div>
+        </div>
+
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/scrollReveal.js"></script>
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+<script src="js/user/log_state.js"></script>
+
+</html>

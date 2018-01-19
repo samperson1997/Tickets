@@ -1,0 +1,174 @@
+.button-big {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    color: #FFF;
+    background-color: transparent;
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #FFF;
+    font-size: 50%;
+}
+
+.button-big:focus {
+    outline: none;
+}
+
+.button-big:hover {
+    color: rgb(16, 32, 58);
+    background-color: #FFF;
+}
+
+.button-big:active {
+    color: #FFF;
+    background-color: rgb(16, 32, 58);
+}
+
+.button-big a:link {
+    color: #FFF;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.button-big a:hover {
+    color: rgb(16, 32, 58);
+    font-style: normal;
+    text-decoration: none;
+}
+
+.button-big a:visited {
+    color: #FFF;
+    font-style: normal;
+    text-decoration: none;
+}
+
+.button-blue {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    color: #FFF;
+    background-color: #0080ff;
+    cursor: pointer;
+    display: inline-block;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border-color: #FFF;
+    border-width: 1px;
+    border-style: solid;
+
+    font-size: 110%;
+}
+
+.button-blue:focus {
+    outline: none;
+}
+
+.button-blue:hover {
+    color: #0080ff;
+    background-color: #FFF;
+    border-color: #0080ff;
+}
+
+.button-blue:active {
+    color: #FFF;
+    background-color: #0080ff;
+}
+
+.button-page {
+    cursor: pointer;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    color: #FFF;
+    border: 1px solid #0080ff;
+    border-radius: 5px;
+    background-color: #0080ff;
+    display: inline-block;
+    margin: 1%;
+    padding: 0.8% 1.2%;
+
+    font-size: 90%;
+}
+
+.button-page:focus {
+    outline: none;
+}
+
+.button-page:hover {
+    color: #0080ff;
+    background-color: #FFF;
+    border: 1px solid #0080ff;
+}
+
+.button-page:active {
+    color: #FFF;
+    background-color: #0080ff;
+    border: 1px solid #0080ff;
+}
+
+.button-red {
+    cursor: pointer;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    color: #FFF;
+    border: 1px solid #cc0000;
+    border-radius: 5px;
+    background-color: #cc0000;
+    display: inline-block;
+    margin: 1%;
+    padding: 0.8% 1.2%;
+
+    font-size: 90%;
+}
+
+.button-red:focus {
+    outline: none;
+}
+
+.button-red:hover {
+    color: #cc0000;
+    background-color: #FFF;
+    border: 1px solid #cc0000;
+}
+
+.button-red:active {
+    color: #FFF;
+    background-color: #cc0000;
+    border: 1px solid #cc0000;
+}
+
+.button-green {
+    cursor: pointer;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    color: #FFF;
+    border: 1px solid #00cc00;
+    border-radius: 5px;
+    background-color: #00cc00;
+    display: inline-block;
+    margin: 1%;
+    padding: 0.8% 1.2%;
+
+    font-size: 90%;
+}
+
+.button-green:focus {
+    outline: none;
+}
+
+.button-green:hover {
+    color: #00cc00;
+    background-color: #FFF;
+    border: 1px solid #00cc00;
+}
+
+.button-green:active {
+    color: #FFF;
+    background-color: #00cc00;
+    border: 1px solid #00cc00;
+}
+
+#save-already {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    color: lightseagreen;
+    display: inline-block;
+    margin: 10px;
+    padding: 6px 11px;
+    font-size: 110%;
+}

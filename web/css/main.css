@@ -1,0 +1,18 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    color: #FFF;
+    font-style: normal;
+    text-decoration-line: none;
+}
+
+a:hover,
+a:link,
+a:visited {
+    color: #FFF;
+    font-style: normal;
+    text-decoration: none;
+}

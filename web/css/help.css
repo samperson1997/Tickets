@@ -1,0 +1,60 @@
+#help-page ul {
+    margin: 2.5%;
+    border-bottom: 1px solid #AAA;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+}
+
+#help-page li {
+    margin: 1%;
+}
+
+#help-page a {
+    color: #0080ff;
+}
+
+#help-page a:hover {
+    color: #0080ff;
+    text-decoration: underline;
+}
+
+.page-content-long {
+    position: fixed;
+    top: 20%;
+    background-color: rgb(25, 44, 72);
+    padding: 1% 2%;
+    border: 1px solid rgb(25, 44, 72);
+    border-top-right-radius: 5%;
+    border-bottom-right-radius: 5%;
+    color: #FFF;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+}
+
+.page-content-long li {
+    list-style: square;
+    cursor: pointer;
+    margin: 5% 0;
+}
+
+.page-content-long li:hover {
+    color: red;
+}
+
+code {
+    background-color: rgba(255, 204, 204, 0.3);
+    color: red;
+    font-family: monospace;
+    border-radius: 5px;
+    padding: 0.2% 0.5%;
+    font-size: 100%;
+    font-weight: 300;
+}
+
+h3 code {
+    background-color: #FFF;
+    color: red;
+    font-family: monospace;
+    border-radius: 5px;
+    padding: 0.2% 0.5%;
+    font-size: 130%;
+    line-height: 300%;
+}

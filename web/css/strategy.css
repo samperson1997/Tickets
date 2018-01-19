@@ -1,0 +1,173 @@
+.stra-table {
+
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    margin: 3%;
+    width: 90%;
+    display: inline-table;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.stra-table th {
+    color: #AAA;
+    font-size: 80%;
+    font-weight: 400;
+}
+
+.stra-table td {
+    border-bottom: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    padding: 0.5% 0;
+}
+
+.stra-table tr td:first-child,
+.stra-table tr td:first-child a {
+    cursor: pointer;
+    color: #000;
+}
+
+.stra-table tr td:first-child:hover,
+.stra-table tr td:first-child a:hover {
+    color: #0080ff;
+}
+
+#new-stra-item {
+
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#new-stra-item a {
+    color: #000;
+}
+
+#new-stra-item li {
+    cursor: pointer;
+    border: 1px dotted #AAA;
+    display: inline-block;
+    width: 18%;
+    margin: 3%;
+    padding-bottom: 4%;
+}
+
+#new-stra-item h1 {
+    font-size: 300%;
+    margin-top: 20%;
+}
+
+#new-stra-item h4 {
+    font-size: 120%;
+    margin: 4% 0 0.5% 0;
+}
+
+#new-stra-item li:hover {
+    transition: transform 0.35s;
+    -webkit-transform: translate3d(0, -30px, 0);
+    transform: translate3d(0, -30px, 0);
+    background-color: #0080ff;
+    color: #FFF;
+}
+
+.log-area {
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    width: 40%;
+    height: 500px;
+    float: right;
+    border: 1px solid #DDD;
+    font-size: 90%;
+    margin: 0% 5% 0 0;
+}
+
+.log-title {
+    background-color: #DDD;
+    font-size: 120%;
+    padding: 1%;
+    margin-bottom: 2%;
+}
+
+#log-content {
+    padding: 1%;
+    height: 480px;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+
+.input-box {
+    font-size: 90%;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 0.5% 1%;
+
+    color: #0080ff;
+    width: 9%;
+    outline: none;
+}
+
+.num-box {
+    font-size: 90%;
+    border: 1px solid #000;
+    border-radius: 5px;
+    padding: 0.5% 1%;
+
+    color: #0080ff;
+    width: 1%;
+    outline: none;
+}
+
+#code {
+    border: 1px solid #DDD;
+}
+
+#result-figure {
+    margin: 1% auto;
+}
+
+.res-spec-figure {
+    display: inline-block;
+    width: 11%;
+    background-color: transparent;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    font-size: 70%;
+    text-align: center;
+    margin: 0 -2%;
+
+    border-bottom: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    line-height: 150%;
+    padding: 1% 0;
+}
+
+.res-spec-figure h2 {
+    font-weight: 400;
+}
+
+.res-spec-figure p {
+    margin-top: 5%;
+    font-weight: 200;
+}
+
+select {
+    border: solid 1px #000;
+    border-radius: 5px;
+    color: #0080ff;
+
+    outline: none;
+    font-size: 90%;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+
+    /*很关键：将默认的select选择框样式清除*/
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+
+    /*在选择框的最右侧中间显示小箭头图片*/
+    background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
+    /*为下拉小箭头留出一点位置，避免被文字覆盖*/
+    padding: 5px 15px 5px 5px;
+    margin-top: 1%;
+}
+
+select::-ms-expand {
+    display: none;
+}

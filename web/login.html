@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/log.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <script src="js/util/jquery-3.2.1.min.js"></script>
+    <script src="js/angular/angular.js"></script>
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <script src="js/user/log_state.js"></script>
+</head>
+
+<body>
+<header>
+    <div id="whole-page" onselectstart="return false;" ng-app="mainapp">
+        <div id="log-part" ng-controller="UserController">
+            <h1 data-scroll-reveal="enter from the top over 1s">登录Tickets</h1>
+            <a href="register.html">
+                <h5 id="log-label">没有账号？去注册>></h5>
+            </a>
+
+            <form method="post" data-scroll-reveal="enter from bottom over 1s but wait 0.5s">
+                <p><input type="text" name="username" placeholder="用户邮箱" class="form-username form-control"
+                          id="log-username" ng-model="inputUsername" onblur="emailIsValid()"></p>
+                <p><input type="password" name="password" placeholder="密码" class="form-password form-control"
+                          id="log-password" ng-model="inputPassword"></p>
+                <div>
+                    <p id="log-tip"></p>
+                </div>
+                <div>
+                    <div class="log-buttons">
+                        <button class="button-blue" id="login-button" type="button" ng-click="login()">登录</button>
+                        <a href="javascript: history.go(-1);">
+                            <button class="button-big" id="log-back-button" type="button">取消</button>
+                        </a>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/scrollReveal.js"></script>
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+
+
+<script src="js/user/log_state.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/user/login.js"></script>
+
+</html>
