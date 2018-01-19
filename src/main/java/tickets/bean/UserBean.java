@@ -1,13 +1,6 @@
-package tickets.model;
+package tickets.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
+public class UserBean {
     private String email;
 
     private String name;
@@ -16,7 +9,7 @@ public class User {
 
     private int isMember;
 
-    private int currentScore;
+    private String level;
 
     private int score;
 
@@ -24,15 +17,15 @@ public class User {
 
     private double account;
 
-    public User() {
+    public UserBean() {
     }
 
-    public User(String email, String name, String password, int isMember, int currentScore, int score, String pin, double account) {
+    public UserBean(String email, String name, String password, int isMember, String level, int score, String pin, double account) {
         this.email = email;
         this.name = name;
         this.password = password;
         this.isMember = isMember;
-        this.currentScore = currentScore;
+        this.level = level;
         this.score = score;
         this.pin = pin;
         this.account = account;
@@ -70,12 +63,12 @@ public class User {
         this.isMember = isMember;
     }
 
-    public int getCurrentScore() {
-        return currentScore;
+    public String getLevel() {
+        return level;
     }
 
-    public void setCurrentScore(int currentScore) {
-        this.currentScore = currentScore;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public int getScore() {

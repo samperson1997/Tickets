@@ -1,6 +1,9 @@
 package tickets.dao;
 
+import tickets.model.Coupon;
 import tickets.model.User;
+
+import java.util.List;
 
 public interface UserDao {
 
@@ -17,7 +20,21 @@ public interface UserDao {
      *
      * @param user
      */
-    void saveOrUpdateUser(User user);
+    boolean saveOrUpdateUser(User user);
 
+    /**
+     * 获得用户优惠券
+     *
+     * @param email
+     * @return
+     */
+    List<Coupon> getCoupon(String email);
 
+    /**
+     * 兑换优惠券
+     *
+     * @param couponId
+     * @return
+     */
+    boolean saveOrUpdateCoupon(String email, int couponId);
 }

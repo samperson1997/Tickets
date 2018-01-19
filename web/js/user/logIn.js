@@ -48,16 +48,15 @@ angular.module("mainapp", [])
                 success: function (data) {
                     $scope.$apply(function () {
                         var str = document.referrer;
-                        if (data.msg === "success") {
+                        if (data.result) {
                             if (str === null || str === "") {
-                                // window.location.href = "/index.html";
+                                window.location.href = "/index.html";
                             } else {
-                                // window.location.href = str;
+                                window.location.href = str;
                             }
-                            alert("success!!!!!");
                             sessionStorage.setItem("log_state", "true");
-                            sessionStorage.setItem("userId", data.email);
-                        } else if (data.msg === "fail") {
+                            sessionStorage.setItem("userId", data.message);
+                        } else {
                             $scope.inputPassword = "";
                             tip.innerHTML = "用户名不存在或密码错误";
                         }

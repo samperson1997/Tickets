@@ -7,7 +7,10 @@ import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import tickets.dao.UserDao;
+import tickets.model.Coupon;
 import tickets.model.User;
+
+import java.util.List;
 
 @Repository
 public class UserDaoImpl implements UserDao {
@@ -18,7 +21,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUser(String email) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
         Query<User> query = session.createNativeQuery("SELECT * FROM users WHERE email = ?", User.class);
@@ -32,9 +35,9 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void saveOrUpdateUser(User user) {
+    public boolean saveOrUpdateUser(User user) {
 
-        Session session = sessionFactory.openSession();
+        Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
         session.saveOrUpdate(user);
@@ -42,6 +45,47 @@ public class UserDaoImpl implements UserDao {
         tx.commit();
         session.close();
 
+        return true;
+    }
+
+    @Override
+    public List<Coupon> getCoupon(String email) {
+        Session session = sessionFactory.openSession();
+        Transaction tx = session.beginTransaction();
+
+        Query<Coupon> query = session.createNativeQuery("SELECT * FROM coupons WHERE email = ?", Coupon.class);
+        query.setParameter(1, email);
+        List<Coupon> coupons = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return coupons;
+    }
+
+    @Override
+    public boolean saveOrUpdateCoupon(String email, int couponId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        List<Coupon> coupons = getCoupon(email);
+        boolean isExit = false;
+        for (Coupon coupon : coupons) {
+            if (coupon.getCoupon() == couponId) {
+                coupon.setNumber(coupon.getNumber() + 1);
+                session.saveOrUpdate(coupon);
+                isExit = true;
+                break;
+            }
+        }
+
+        if (!isExit) {
+            session.saveOrUpdate(new Coupon(email, couponId, 1));
+        }
+
+        tx.commit();
+        session.close();
+        return true;
     }
 
 }

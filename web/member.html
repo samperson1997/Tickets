@@ -11,8 +11,13 @@
     <link rel="stylesheet" href="css/function.css">
     <link rel="stylesheet" href="css/page-main-body.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/strategy.css">
 
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <script src="js/util/jquery-3.2.1.min.js"></script>
+    <script src="js/util/scrollReveal.js"></script>
+    <script src="js/angular/angular.js"></script>
+
 </head>
 
 <body>
@@ -31,16 +36,28 @@
 
             <b>个人中心</b>
             <li>
-                <a href="#order">订单中心</a>
+                <a href="#member-info">我的会员</a>
+            </li>
+            <li><b>
+                <a href="#coupon">兑换优惠券</a>
+            </b></li>
+            <li>
+                <a href="#password">修改账户密码</a>
             </li>
 
             <li>
-                <a href="#member-info">会员中心</a>
+                <a href="#pin">修改钱包密码</a>
             </li>
 
+            <li>
+                <a href="#abort">注销会员</a>
+            </li>
             <li><b>
                 <a href="index.html">搜索活动</a>
             </b></li>
+            <li>
+                <a href="#order">订单中心</a>
+            </li>
 
         </ul>
     </div>
@@ -53,37 +70,198 @@
         </div>
 
 
-        <div id="member-info">
-            <div class="stock-name" style="display: inline;">我的会员</div>
-            <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Member</div>
+        <div id="member-info" class="stock-name" style="display: inline;">我的会员</div>
+        <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Member</div>
 
+        <div class="userinfo-div">
+            <p class="item-title">
+                注册邮箱
+            </p>
+            <p id="email">root1@336.com</p>
+
+            <p class="item-title">
+                会员昵称
+            </p>
+            <input id="name" class="input-box" value="root1"/>
+            <button class="button-green">确认修改</button>
+
+            <p class="item-title">
+                会员等级
+            </p>
+            <p id="level">1</p>
+
+            <p class="item-title">
+                会员积分
+            </p>
+            <p id="score">100</p>
+
+            <p class="item-title">
+                钱包余额
+            </p>
+            <p id="account">10000</p>
+        </div>
+        <div class="userinfo-div">
+            <p class="item-title">
+                会员积分可由购票获得，每实际花费1元可获得100积分。会员等级可通过积分升级，不同的会员等级享受不同的购票优惠。
+                <br>
+                会员等级分为五个等级，会员等级、等级优惠、等级升级需要积分见下表：
+            </p>
             <table class="whole-table">
                 <tr>
-                    <th>注册邮箱</th>
-                    <td></td>
-                </tr>
-                <tr>
-                    <th>会员昵称</th>
-                    <td></td>
-                </tr>
-                <tr>
                     <th>会员等级</th>
-                    <td></td>
+                    <td>大众会员</td>
+                    <td>青铜会员</td>
+                    <td>白银会员</td>
+                    <td>黄金会员</td>
+                    <td>鸣钻会员</td>
                 </tr>
                 <tr>
-                    <th>会员积分</th>
-                    <td></td>
+                    <th>等级优惠</th>
+                    <td>优惠1%</td>
+                    <td>优惠5%</td>
+                    <td>优惠10%</td>
+                    <td>优惠15%</td>
+                    <td>优惠20%</td>
                 </tr>
                 <tr>
-                    <th>钱包余额</th>
-                    <td></td>
+                    <th>等级升级需要积分</th>
+                    <td>0</td>
+                    <td>10000</td>
+                    <td>30000</td>
+                    <td>60000</td>
+                    <td>100000</td>
                 </tr>
             </table>
-            <div>
-                <button class="button-green">信息修改</button>
-                <button class="button-red">注销会员</button>
-                注销后不可恢复，请谨慎选择。
-            </div>
+            <p class="item-title">
+                会员积分可用于<a href="#coupon">兑换优惠券</a>。兑换优惠券会消耗会员积分，但是不影响会员等级。
+            </p>
+        </div>
+
+        <div id="coupon" class="stock-name" style="display: inline;">兑换优惠券</div>
+        <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Converting Coupons</div>
+        <div class="userinfo-div">
+            <p class="item-title">
+                兑换优惠券后，会消耗相应的积分，不影响会员等级。
+                <br>
+                兑换优惠券后不可以退换，优惠券只能用于线上购票，不能以任何方式折现，也不能转赠他人。
+            </p>
+            <table class="whole-table">
+                <tr>
+                    <td>
+                        1元优惠券
+                    </td>
+                    <td>消耗3000会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(1)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        2元优惠券
+                    </td>
+                    <td>消耗5500会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(2)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        5元优惠券
+                    </td>
+                    <td>消耗12000会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(3)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        10元优惠券
+                    </td>
+                    <td>消耗20000会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(4)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        20元优惠券
+                    </td>
+                    <td>消耗32000会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(5)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        50元优惠券
+                    </td>
+                    <td>消耗70000会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(6)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        100元优惠券
+                    </td>
+                    <td>消耗120000会员积分</td>
+                    <td>
+                        <button class="button-page" onclick="convertCoupon(7)">&nbsp;&nbsp;&nbsp;兑换&nbsp;&nbsp;&nbsp;
+                        </button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="password" class="stock-name" style="display: inline;">修改账户密码</div>
+        <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Password</div>
+
+        <div class="userinfo-div">
+            <p class="item-title">
+                旧账户密码
+            </p>
+            <input id="old-password" type="password" class="input-box"/>
+            <p class="item-title">
+                新账户密码
+            </p>
+            <input id="new-password" type="password" class="input-box"/>
+            <p class="item-title">
+                确认新账户密码
+            </p>
+            <input id="new-password-confirm" type="password" class="input-box"/>
+            <button class="button-green">确认修改</button>
+        </div>
+
+        <div id="pin" class="stock-name" style="display: inline;">修改钱包密码</div>
+        <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Ticket Wallet Pin</div>
+
+        <div class="userinfo-div">
+            <p class="item-title">
+                旧钱包密码 (默认与账户密码相同)
+            </p>
+            <input id="old-pin" type="password" class="input-box"/>
+            <p class="item-title">
+                新钱包密码
+            </p>
+            <input id="new-pin" type="password" class="input-box"/>
+            <p class="item-title">
+                确认新钱包密码
+            </p>
+            <input id="new-pin-confirm" type="password" class="input-box"/>
+            <button class="button-green">确认修改</button>
+        </div>
+
+        <div id="abort" class="stock-name" style="display: inline;">注销会员</div>
+        <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Aborting Membership</div>
+        <div class="userinfo-div">
+            <p class="item-title">注销后不可恢复，请谨慎选择</p>
+            <button class="button-red" onclick="cancelMember()">注销会员</button>
         </div>
 
     </div>
@@ -91,7 +269,9 @@
 
 </body>
 
-<script src="js/util/scrollReveal.js"></script>
+<script src="js/user/logState.js"></script>
+<script src="js/user/userInfo.js"></script>
+
 <script>
     (function () {
         window.scrollReveal = new scrollReveal({
@@ -101,6 +281,8 @@
     })();
 
 </script>
-<script src="js/user/log_state.js"></script>
 
+<script>
+    $(document).ready(loadUserInfo);
+</script>
 </html>
