@@ -38,6 +38,9 @@
             <li>
                 <a href="#member-info">我的会员</a>
             </li>
+            <li>
+                <a href="#member-coupon">我的优惠券</a>
+            </li>
             <li><b>
                 <a href="#coupon">兑换优惠券</a>
             </b></li>
@@ -65,40 +68,40 @@
     <div style="float: right; width: 80%; margin: 6% 0">
 
         <div id="order">
-            <!--<div class="stock-name" style="display: inline;">订单中心</div>-->
+            <!--<div class="stock-seatName" style="display: inline;">订单中心</div>-->
             <!--<div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Orders</div>-->
         </div>
 
 
-        <div id="member-info" class="stock-name" style="display: inline;">我的会员</div>
+        <div id="member-info" class="stock-seatName" style="display: inline;">我的会员</div>
         <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Member</div>
 
         <div class="userinfo-div">
             <p class="item-title">
                 注册邮箱
             </p>
-            <p id="email">root1@336.com</p>
+            <p id="email"></p>
 
             <p class="item-title">
                 会员昵称
             </p>
-            <input id="name" class="input-box" value="root1"/>
+            <input id="name" class="input-box"/>
             <button class="button-green">确认修改</button>
 
             <p class="item-title">
                 会员等级
             </p>
-            <p id="level">1</p>
+            <p id="level"></p>
 
             <p class="item-title">
                 会员积分
             </p>
-            <p id="score">100</p>
+            <p id="score"></p>
 
             <p class="item-title">
                 钱包余额
             </p>
-            <p id="account">10000</p>
+            <p id="account"></p>
         </div>
         <div class="userinfo-div">
             <p class="item-title">
@@ -137,7 +140,12 @@
             </p>
         </div>
 
-        <div id="coupon" class="stock-name" style="display: inline;">兑换优惠券</div>
+        <div id="member-coupon" class="stock-seatName" style="display: inline;">我的优惠券</div>
+        <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Coupons</div>
+        <div class="userinfo-div" id="coupon-list">
+        </div>
+
+        <div id="coupon" class="stock-seatName" style="display: inline;">兑换优惠券</div>
         <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Converting Coupons</div>
         <div class="userinfo-div">
             <p class="item-title">
@@ -219,7 +227,7 @@
             </table>
         </div>
 
-        <div id="password" class="stock-name" style="display: inline;">修改账户密码</div>
+        <div id="password" class="stock-seatName" style="display: inline;">修改账户密码</div>
         <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Password</div>
 
         <div class="userinfo-div">
@@ -238,7 +246,7 @@
             <button class="button-green">确认修改</button>
         </div>
 
-        <div id="pin" class="stock-name" style="display: inline;">修改钱包密码</div>
+        <div id="pin" class="stock-seatName" style="display: inline;">修改钱包密码</div>
         <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Ticket Wallet Pin</div>
 
         <div class="userinfo-div">
@@ -257,7 +265,7 @@
             <button class="button-green">确认修改</button>
         </div>
 
-        <div id="abort" class="stock-name" style="display: inline;">注销会员</div>
+        <div id="abort" class="stock-seatName" style="display: inline;">注销会员</div>
         <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Aborting Membership</div>
         <div class="userinfo-div">
             <p class="item-title">注销后不可恢复，请谨慎选择</p>
@@ -284,5 +292,6 @@
 
 <script>
     $(document).ready(loadUserInfo);
+    $(document).ready(loadCouponList());
 </script>
 </html>

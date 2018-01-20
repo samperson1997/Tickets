@@ -1,15 +1,8 @@
-package tickets.model;
+package tickets.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+public class VenueBean {
 
-@Entity
-@Table(name = "venues")
-public class Venue implements Serializable {
-    @Id
-    private String id;
+    private String venueId;
 
     private String name;
 
@@ -19,26 +12,23 @@ public class Venue implements Serializable {
 
     private String password;
 
-    private int isChecked;
-
-    public Venue() {
+    public VenueBean() {
     }
 
-    public Venue(String id, String name, String location, double account, String password, int isChecked) {
-        this.id = id;
+    public VenueBean(String venueId, String name, String location, double account, String password) {
+        this.venueId = venueId;
         this.name = name;
         this.location = location;
         this.account = account;
         this.password = password;
-        this.isChecked = isChecked;
     }
 
-    public String getId() {
-        return id;
+    public String getVenueId() {
+        return venueId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setVenueId(String venueId) {
+        this.venueId = venueId;
     }
 
     public String getName() {
@@ -71,13 +61,5 @@ public class Venue implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public int getIsChecked() {
-        return isChecked;
-    }
-
-    public void setIsChecked(int isChecked) {
-        this.isChecked = isChecked;
     }
 }

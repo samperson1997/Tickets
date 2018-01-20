@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets - venue</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/strategy.css">
+
+    <script src="js/angular/angular.js"></script>
+    <script src="js/venue/seat.js"></script>
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets <span id="sub-title">场馆版</span></h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+            <b>场馆注册</b>
+            <li>
+                <a href="#venue-info">场馆基本信息</a>
+            </li>
+            <li>
+                <a href="#venue-seat">场馆座位信息</a>
+            </li>
+            <li><b>
+                <a href="venue-login.html">已有账号？去登录</a>
+            </b></li>
+
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0" ng-app="mainapp" ng-controller="VenueController">
+
+        <form method="post">
+
+            <div id="venue-info">
+                <div class="stock-seatName" style="display: inline;">场馆基本信息</div>
+                <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Information</div>
+                <div class="userinfo-div">
+
+                    <p class="item-title">
+                        场馆名称
+                    </p>
+                    <input type="text" seatName="username" class="form-username form-control input-box"
+                           id="reg-username" ng-model="inputEmail" ng-change="check()">
+                    <p class="item-title">
+                        场馆地点
+                    </p>
+                    <input type="text" seatName="location" class="form-location form-control input-box"
+                           id="reg-location" ng-model="inputLocation">
+
+                    <p class="item-title">
+                        密码
+                    </p>
+                    <input type="password" seatName="password" class="form-password form-control input-box"
+                           id="reg-password" ng-model="inputPassword">
+                    <p class="item-title">
+                        确认密码
+                    </p>
+                    <input type="password" seatName="password2" class="form-password form-control input-box"
+                           id="reg-password2" ng-model="inputPassword2" onblur="passwordIsSame()">
+                    <div>
+                        <h6 style="color:red" id="reg-tip"></h6>
+                    </div>
+                </div>
+            </div>
+
+            <div id="venue-seat">
+                <div class="stock-seatName" style="display: inline;">场馆座位信息</div>
+                <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Seats</div>
+
+                <div class="userinfo-div">
+                    <p class="item-title">
+                        填写场馆的座位类型。在座位名称一栏，可以填写座位的名称，例如一等座、二等座、三等座；
+                        <br>A区座位、B区座位、C区座位；内场座、外场座、看台座等等。座位数量一栏，填写数字。座位类型信息可以修改。
+                    </p>
+                </div>
+
+                <div class="userinfo-div" id="seat-div1">
+
+                    <p class="item-title">
+                        座位名称
+                    </p>
+                    <input type="text" seatName="seat-seatName" class="form-seatname form-control input-box"
+                           id="inputSeatName1" ng-model="inputSeatName1">
+                    <p class="item-title">
+                        座位数量
+                    </p>
+                    <input type="text" seatName="seat-seatNum" class="form-seatnum form-control input-box"
+                           id="inputSeatNum1" ng-model="inputSeatNum1">
+                </div>
+            </div>
+
+            <div class="userinfo-div">
+                <h6 style="color:red" id="reg-seat-tip"></h6>
+            </div>
+
+            <div class="userinfo-div">
+                <button class="button-green" onclick="addInputBox()">添加新座位类型</button>
+                <button class="button-green" id="register-button" ng-click="venueRegister()">注册
+                </button>
+            </div>
+
+            <div class="userinfo-div">
+                <p class="item-title">
+                    点击注册后，您所填写的场馆信息会经过Tickets系统审批，这大概需要花费1小时的时间。
+                    <br>与此同时，你将会获得一个场馆识别码，请妥善记住这个号码，将用于之后的登录。
+                </p>
+            </div>
+        </form>
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/scrollReveal.js"></script>
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+
+<script src="js/util/jquery-3.2.1.min.js"></script>
+<script src="js/bootstrap/bootstrap.min.js"></script>
+<script src="js/venue/logState.js"></script>
+<script src="js/venue/register.js"></script>
+
+</html>

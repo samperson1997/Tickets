@@ -136,9 +136,9 @@
     cursor: pointer;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
     color: #FFF;
-    border: 1px solid #00cc00;
+    border: 1px solid #0080ff;
     border-radius: 5px;
-    background-color: #00cc00;
+    background-color: #0080ff;
     display: inline-block;
     margin: 0 1%;
     padding: 0.4% 1.2%;
@@ -151,15 +151,15 @@
 }
 
 .button-green:hover {
-    color: #00cc00;
+    color: #0080ff;
     background-color: #FFF;
-    border: 1px solid #00cc00;
+    border: 1px solid #0080ff;
 }
 
 .button-green:active {
     color: #FFF;
-    background-color: #00cc00;
-    border: 1px solid #00cc00;
+    background-color: #0080ff;
+    border: 1px solid #0080ff;
 }
 
 #save-already {

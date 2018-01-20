@@ -4,14 +4,14 @@ public class CouponBean {
 
     private String email;
 
-    private int coupon;
+    private String coupon;
 
     private int number;
 
     public CouponBean() {
     }
 
-    public CouponBean(String email, int coupon, int number) {
+    public CouponBean(String email, String coupon, int number) {
         this.email = email;
         this.coupon = coupon;
         this.number = number;
@@ -25,11 +25,11 @@ public class CouponBean {
         this.email = email;
     }
 
-    public int getCoupon() {
+    public String getCoupon() {
         return coupon;
     }
 
-    public void setCoupon(int coupon) {
+    public void setCoupon(String coupon) {
         this.coupon = coupon;
     }
 

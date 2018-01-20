@@ -16,12 +16,21 @@
     background-size: 100% 100%;
 }
 
-#whole-page p, #whole-page-r p {
+#whole-page-r-venue {
+    background-image: url("../img/background3.png");
+    font-family: "Chalkduster", sans-serif;
+    text-align: center;
+    padding: 12% 2%;
+    color: #FFF;
+    background-size: 100% 100%;
+}
+
+#whole-page p, #whole-page-r p, #whole-page-r-venue p {
     font-weight: 300;
     font-size: 110%;
 }
 
-#whole-page fieldset, #whole-page-r fieldset {
+#whole-page fieldset, #whole-page-r fieldset, #whole-page-r-venue fieldset {
     border-color: transparent;
 }
 
@@ -36,12 +45,12 @@
     position: relative;
 }
 
-#whole-page h1, #whole-page-r h1 {
+#whole-page h1, #whole-page-r h1, #whole-page-r-venue h1 {
     margin: 5%;
     font-family: "Chalkduster", sans-serif;
 }
 
-#whole-page input, #whole-page-r input {
+#whole-page input, #whole-page-r input, #whole-page-r-venue input {
     font-weight: 300;
     font-size: 90%;
     width: 50%;
@@ -53,7 +62,7 @@
     margin: 2%;
 }
 
-#whole-page input:focus, #whole-page-r input:focus {
+#whole-page input:focus, #whole-page-r input:focus, #whole-page-r-venue input:focus {
     outline: none;
 }
 
@@ -70,6 +79,6 @@
 #log-tip,
 #reg-tip {
     color: red;
-    font-size: 80%;
+    font-size: 60%;
     font-weight: 300;
 }

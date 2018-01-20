@@ -1,7 +1,7 @@
 window.onload = init;
+tip = document.getElementById('reg-tip');
 
 function init() {
-    tip = document.getElementById('reg-tip');
     tip.innerHTML = "";
 }
 
@@ -14,7 +14,7 @@ function emailIsValid() {
 }
 
 function passwordIsSame() {
-    if ($("#reg-password").val() != $("#reg-password2").val()) {
+    if ($("#reg-password").val() !== $("#reg-password2").val()) {
         tip.innerHTML = "两次输入密码不一致";
     } else {
         tip.innerHTML = "";
@@ -37,9 +37,9 @@ angular.module("mainapp", [])
         };
 
         function checkFirst() {
-            return $scope.inputEmail != null && $scope.inputEmail != "" &&
-                $scope.inputPassword != null && $scope.inputPassword != "" &&
-                $scope.inputPassword2 != null && $scope.inputPassword2 != "";
+            return $scope.inputEmail !== null && $scope.inputEmail !== "" &&
+                $scope.inputPassword !== null && $scope.inputPassword !== "" &&
+                $scope.inputPassword2 !== null && $scope.inputPassword2 !== "";
         }
 
         function register_ajax(email, password) {
@@ -57,14 +57,16 @@ angular.module("mainapp", [])
                 success: function (data) {
                     console.log(data);
                     $scope.$apply(function () {
-                        if (data === "success") {
+                        if (data.result) {
                             $scope.inputEmail = "";
                             $scope.inputPassword = "";
-                            tip.innerHTML = "欢迎,注册成功,请查收您的收件箱";
+                            $scope.inputPassword2 = "";
+                            tip.innerHTML = "欢迎, 注册成功, 请查收您的收件箱";
                             window.location.href = "../../login.html";
                         } else if (data === "fail") {
                             $scope.inputEmail = "";
                             $scope.inputPassword = "";
+                            $scope.inputPassword2 = "";
                             tip.innerHTML = "该用户名已被注册";
                         }
                     });

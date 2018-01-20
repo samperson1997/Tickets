@@ -12,7 +12,7 @@ function loadUserInfo() {
         dataType: "json",
         success: function (data) {
             $("#email").html(data.email);
-            $("#name").html(data.name);
+            $("#name").attr("value", data.name);
             $("#level").html(data.level);
             $("#score").html(data.score);
             $("#account").html(data.account);
@@ -59,6 +59,28 @@ function convertCoupon(couponId) {
                 alert("优惠券兑换成功");
             } else {
                 alert(data.message);
+            }
+        }
+    })
+}
+
+function loadCouponList() {
+    var email = sessionStorage.getItem('userId');
+    $.ajax({
+        type: "GET",
+        url: "/user/coupon",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            "email": email
+        },
+        dataType: "json",
+        success: function (data) {
+            if (data !== null && data.length !== 0) {
+                for (var i = 0; i < data.length; i++) {
+                    $("#coupon-list").append("<p>" + data[i].coupon + " " + data[i].number + "张</p>")
+                }
+            } else {
+                $("#coupon-list").html("<p>暂无优惠券</p>")
             }
         }
     })

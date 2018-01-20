@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
         List<Coupon> coupons = userDao.getCoupon(email);
         List<CouponBean> res = new ArrayList<>();
         for (Coupon coupon : coupons) {
-            res.add(new CouponBean(coupon.getEmail(), coupon.getCoupon(), coupon.getNumber()));
+            res.add(new CouponBean(coupon.getEmail(), couponUtil.getCouponName(coupon.getCoupon()), coupon.getNumber()));
         }
         return res;
     }

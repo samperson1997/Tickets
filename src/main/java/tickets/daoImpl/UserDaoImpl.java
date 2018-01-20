@@ -69,17 +69,17 @@ public class UserDaoImpl implements UserDao {
         Transaction tx = session.beginTransaction();
 
         List<Coupon> coupons = getCoupon(email);
-        boolean isExit = false;
+        boolean isExist = false;
         for (Coupon coupon : coupons) {
             if (coupon.getCoupon() == couponId) {
                 coupon.setNumber(coupon.getNumber() + 1);
                 session.saveOrUpdate(coupon);
-                isExit = true;
+                isExist = true;
                 break;
             }
         }
 
-        if (!isExit) {
+        if (!isExist) {
             session.saveOrUpdate(new Coupon(email, couponId, 1));
         }
 

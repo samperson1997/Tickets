@@ -5,16 +5,8 @@ function init() {
     tip.innerHTML = "";
 }
 
-function emailIsValid() {
-    if (!/^[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test($("#log-username").val())) {
-        tip.innerHTML = "用户邮箱格式不正确";
-    } else {
-        tip.innerHTML = "";
-    }
-}
-
 angular.module("mainapp", [])
-    .controller("UserController", function ($scope) {
+    .controller("VenueController", function ($scope) {
         $scope.inputUsername = "";
         $scope.inputPassword = "";
         //登录
@@ -28,8 +20,8 @@ angular.module("mainapp", [])
         };
 
         function checkFirst() {
-            return $scope.inputUsername != null && $scope.inputUsername != "" &&
-                $scope.inputPassword != null && $scope.inputPassword != "";
+            return $scope.inputUsername !== null && $scope.inputUsername !== "" &&
+                $scope.inputPassword !== null && $scope.inputPassword !== "";
         }
 
         function login_ajax(username, password) {
@@ -38,27 +30,23 @@ angular.module("mainapp", [])
 
             $.ajax({
                 type: "POST",
-                url: "/user/login",
+                url: "/venue/login",
                 data: {
-                    "email": this.username,
+                    "id": this.username,
                     "password": this.password
                 },
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
                 success: function (data) {
                     $scope.$apply(function () {
-                        var str = document.referrer;
                         if (data.result) {
-                            if (str === null || str === "") {
-                                window.location.href = "/index.html";
-                            } else {
-                                window.location.href = str;
-                            }
-                            sessionStorage.setItem("log_state", "true");
-                            sessionStorage.setItem("userId", data.message);
+                            window.location.href = "/venue.html";
+
+                            sessionStorage.setItem("venue_log_state", "true");
+                            sessionStorage.setItem("venueId", data.message);
                         } else {
                             $scope.inputPassword = "";
-                            tip.innerHTML = "用户名不存在或密码错误";
+                            tip.innerHTML = data.message;
                         }
                     });
                 }
