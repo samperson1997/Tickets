@@ -3,8 +3,8 @@ window.onload = init;
 var password = "";
 var account = 0;
 
-tip = document.getElementById('reg-tip');
-seatTip = document.getElementById('reg-seat-tip');
+tip = document.getElementById('info-tip');
+seatTip = document.getElementById('info-seat-tip');
 
 function init() {
     tip.innerHTML = "";
@@ -24,8 +24,8 @@ function loadVenueInfo() {
         dataType: "json",
         success: function (data) {
             $("#id").html(data.venueId);
-            $("#reg-username").attr("value", data.name);
-            $("#reg-location").attr("value", data.location);
+            $("#info-venuename").attr("value", data.name);
+            $("#info-location").attr("value", data.location);
             $("#account").html(data.account);
             password = data.password;
             account = data.account;
@@ -38,17 +38,18 @@ function loadVenueInfo() {
     })
 }
 
-angular.module("mainapp", [])
+angular.module("venueapp", [])
     .controller("VenueController", function ($scope) {
         $scope.inputEmail = "";
         $scope.inputLocation = "";
 
-        //注册
         $scope.venueInfoUpdate = function () {
-            if (checkFirst() && checkSeatFirst()) {
-                updateInfo_ajax(sessionStorage.getItem("venueId"), $scope.inputEmail, $("#reg-location").val(), account, password);
+
+            if (checkInfoFirst() && checkSeatFirst()) {
+                updateInfo_ajax(sessionStorage.getItem("venueId"),
+                    $("#info-venuename").val(), $("#info-location").val(), account, password);
             } else {
-                if (!checkFirst()) {
+                if (!checkInfoFirst()) {
                     tip.innerHTML = "请把信息填写完整";
                 }
                 if (!checkSeatFirst()) {
@@ -57,16 +58,16 @@ angular.module("mainapp", [])
             }
         };
 
-        function checkFirst() {
-            return $scope.inputEmail !== null && $scope.inputEmail !== "" &&
-                $("#reg-location").val() !== null && $("#reg-location").val() !== "";
+        function checkInfoFirst() {
+            return $("#info-venuename").val() !== null && $("#info-venuename").val() !== "" &&
+                $("#info-location").val() !== null && $("#info-location").val() !== "";
         }
 
         function checkSeatFirst() {
             var isValid = true;
             for (var i = 1; i < 10; i++) {
                 if ($("#inputSeatName" + i) !== null) {
-                    if ($("#inputSeatName" + i).val() === "" || $("#inputSeatNum" + i).val() === "") {
+                    if ($("#inputSeatName" + i).val() === null || $("#inputSeatNum" + i).val() === "") {
                         isValid = false;
                         break;
                     }

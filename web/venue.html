@@ -51,8 +51,8 @@
         </ul>
     </div>
 
-    <div style="float: right; width: 80%; margin: 6% 0">
-        <form method="post" ng-app="mainapp" ng-controller="VenueController">
+    <div style="float: right; width: 80%; margin: 6% 0" ng-app="venueapp" ng-controller="VenueController">
+        <form method="post">
 
             <div id="venue-info">
                 <div class="stock-seatName" style="display: inline;">场馆基本信息</div>
@@ -68,14 +68,14 @@
                         场馆名称
                     </p>
                     <input type="text" name="username" class="form-username form-control input-box"
-                           id="reg-username" ng-model="inputEmail">
+                           id="info-venuename" ng-model="inputEmail">
                     <p class="item-title">
                         场馆地点
                     </p>
                     <input type="text" name="location" class="form-location form-control input-box"
-                           id="reg-location" ng-model="inputLocation">
+                           id="info-location" ng-model="inputLocation">
                     <div>
-                        <h6 style="color:red" id="reg-tip"></h6>
+                        <h6 style="color:red" id="info-tip"></h6>
                     </div>
                 </div>
             </div>
@@ -104,23 +104,21 @@
                     <input type="text" name="seat-seatNum" class="form-seatnum form-control input-box"
                            id="inputSeatNum1" ng-model="inputSeatNum1">
                 </div>
-            </div>
-
-            <div class="userinfo-div">
-                <h6 style="color:red" id="reg-seat-tip"></h6>
+                <div class="userinfo-div">
+                    <h6 style="color:red" id="info-seat-tip"></h6>
+                </div>
             </div>
 
             <div class="userinfo-div">
                 <button class="button-green" onclick="addInputBox()">添加新座位类型</button>
                 <button class="button-green" id="venue-confirm-button" ng-click="venueInfoUpdate()">确认修改信息
                 </button>
-            </div>
-
-            <div class="userinfo-div">
-                <p class="item-title">
-                    点击修改信息后，您所新填写的场馆信息会经过Tickets系统审批，这大概需要花费1小时的时间。
-                    <br>在这段时间里，您之前发布的活动不受影响，但是不能登录并发布新的活动。
-                </p>
+                <div class="userinfo-div">
+                    <p class="item-title">
+                        点击修改信息后，您所新填写的场馆信息会经过Tickets系统审批，这大概需要花费1小时的时间。
+                        <br>在这段时间里，您之前发布的活动不受影响，但是不能登录并发布新的活动。
+                    </p>
+                </div>
             </div>
 
             <div id="venue-password">

@@ -47,7 +47,7 @@ angular.module("mainapp", [])
             var isValid = true;
             for (var i = 1; i < 10; i++) {
                 if ($("#inputSeatName" + i) !== null) {
-                    if ($("#inputSeatName" + i).val() === "" || $("#inputSeatNum" + i).val() === "") {
+                    if ($("#inputSeatName" + i).val() === null || $("#inputSeatNum" + i).val() === "") {
                         isValid = false;
                         break;
                     }
@@ -72,21 +72,32 @@ angular.module("mainapp", [])
                 contentType: "application/x-www-form-urlencoded",
                 dataType: "json",
                 success: function (data) {
-                    console.log(data);
+
                     $scope.$apply(function () {
                         if (data.result) {
+                            var seatList = [];
                             for (var i = 1; i < 10; i++) {
-                                if ($("#inputSeatName" + i) !== null) {
-                                    updateSeatInfo_ajax($scope.inputEmail, $("#inputSeatName" + i).val(), $("#inputSeatNum" + i).val());
+                                if ($("#inputSeatName" + i).val() !== undefined) {
+                                    var seatBean = {};
+                                    seatBean.seatName = $("#inputSeatName" + i).val();
+                                    seatBean.seatNum = $("#inputSeatNum" + i).val();
+                                    seatList.push(seatBean);
                                 }
                             }
+
+                            var venueSeatBean = {};
+                            venueSeatBean.name = $scope.inputEmail;
+                            venueSeatBean.seatList = seatList;
+
+                            console.log(venueSeatBean);
+                            updateSeatInfo_ajax(venueSeatBean);
 
                             $scope.inputEmail = "";
                             $scope.inputPassword = "";
                             $scope.inputPassword2 = "";
                             $scope.inputLocation = "";
-                            alert("欢迎, 注册成功, 请等待信息审批后登录");
-                            window.location.href = "/index.html";
+                            // alert("欢迎, 注册成功, 您的场馆识别码为" + data.message + ", 请等待信息审批后登录");
+                            // window.location.href = "/index.html";
 
                         } else {
                             $scope.inputEmail = "";
@@ -99,6 +110,4 @@ angular.module("mainapp", [])
                 }
             });
         }
-
-
     });

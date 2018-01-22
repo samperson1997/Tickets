@@ -1,12 +1,15 @@
 package tickets.bean;
 
-public class SeatBean {
+import java.io.Serializable;
+
+public class SeatBean implements Serializable {
 
     private String seatName;
 
     private int seatNum;
 
     public SeatBean() {
+
     }
 
     public SeatBean(String name, int num) {

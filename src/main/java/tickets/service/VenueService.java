@@ -46,10 +46,11 @@ public interface VenueService {
     /**
      * 更新座位信息
      *
-     * @param seatBean
+     * @param name
+     * @param seatList
      * @return
      */
-    ResultMessageBean updateSeat(String name, SeatBean seatBean);
+    ResultMessageBean updateSeatInfo(String name, List<SeatBean> seatList);
 
     /**
      * 获得座位信息

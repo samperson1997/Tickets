@@ -35,7 +35,7 @@ public class VenueDaoImpl implements VenueDao {
 
     @Override
     public Venue getVenueByName(String name) {
-        Session session = sessionFactory.getCurrentSession();
+        Session session = sessionFactory.openSession();
         Transaction tx = session.beginTransaction();
 
         Query<Venue> query = session.createNativeQuery("SELECT * FROM venues WHERE name = ?", Venue.class);
@@ -75,26 +75,29 @@ public class VenueDaoImpl implements VenueDao {
     }
 
     @Override
-    public boolean saveOrUpdateSeat(String id, Seat seat) {
+    public boolean saveOrUpdateSeat(String id, List<Seat> seatList) {
+
+        System.out.println("dao");
+
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
-        List<Seat> seats = getSeat(id);
-        boolean isExist = false;
-        for (Seat existSeat : seats) {
-            if (existSeat.getName().equals(seat.getName())) {
-                existSeat.setNum(seat.getNum());
-                session.saveOrUpdate(existSeat);
-                isExist = true;
-                break;
+        Query<Seat> query = session.createNativeQuery("SELECT * FROM seats WHERE venueId = ?", Seat.class);
+        query.setParameter(1, id);
+        List<Seat> seats = query.getResultList();
+        if (seats != null && seats.size() != 0) {
+            for (Seat seat : seats) {
+                session.delete(seat);
             }
         }
 
-        if (!isExist) {
+        for (Seat seat : seatList) {
             session.saveOrUpdate(seat);
+            tx.commit();
+            session = sessionFactory.getCurrentSession();
+            tx = session.beginTransaction();
         }
 
-        tx.commit();
         session.close();
         return true;
     }

@@ -1,3 +1,9 @@
+oldPassword = "";
+level = 0;
+score = 0;
+pin = "";
+account = 0.0;
+
 function loadUserInfo() {
     var email = sessionStorage.getItem('userId');
     console.log(email);
@@ -16,6 +22,12 @@ function loadUserInfo() {
             $("#level").html(data.level);
             $("#score").html(data.score);
             $("#account").html(data.account);
+
+            oldPassword = data.password;
+            level = data.level;
+            score = data.score;
+            pin = data.pin;
+            account = data.account;
         },
         error: function (request, status, err) {
             if (status === "timeout") {
@@ -82,6 +94,33 @@ function loadCouponList() {
             } else {
                 $("#coupon-list").html("<p>暂无优惠券</p>")
             }
+        }
+    })
+}
+
+function updateInfo() {
+    alert("update!");
+
+    var userBean = {};
+    userBean.email = sessionStorage.getItem('userId');
+    userBean.name = $("#name").val();
+    userBean.password = oldPassword;
+    userBean.isMember = 1;
+    userBean.level = level;
+    userBean.score = score;
+    userBean.pin = pin;
+    userBean.account = account;
+
+    $.ajax({
+        type: "POST",
+        url: "/user/edit",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            "userBean": userBean
+        },
+        dataType: "json",
+        success: function (data) {
+            alert("会员昵称修改成功! ");
         }
     })
 }

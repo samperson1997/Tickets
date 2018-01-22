@@ -60,8 +60,8 @@ public class UserController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
-    public ResultMessageBean updateUserInfo(String email, UserBean userBean) {
-        return userService.updateUserInfo(email, userBean);
+    public ResultMessageBean updateUserInfo(UserBean userBean) {
+        return userService.updateUserInfo(userBean.getEmail(), userBean);
     }
 
     @RequestMapping(value = "/coupon", method = RequestMethod.GET)

@@ -23,17 +23,15 @@ function deleteInputBox() {
     $("#seat-div" + current).remove();
 }
 
-function updateSeatInfo_ajax(venueName, seatName, seatNum) {
-
+function updateSeatInfo_ajax(venueSeatBean) {
     $.ajax({
-        type: "GET",
+        type: "POST",
         url: "/venue/updateSeat",
         data: {
-            "name": venueName,
-            "seatName": seatName,
-            "seatNum": seatNum
+            venueSeatBean: venueSeatBean
         },
-        contentType: "application/x-www-form-urlencoded",
+        // contentType: "application/x-www-form-urlencoded",
+        contentType: "application/json",
         dataType: "json",
         success: function (data) {
             console.log(data);

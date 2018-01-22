@@ -38,7 +38,7 @@ public class VenueServiceImpl implements VenueService {
         if (venue == null) {
             Venue newVenue = new Venue(getVenueId(), name, location, 0, password, 0);
             venueDao.saveOrUpdateVenue(newVenue);
-            return new ResultMessageBean(true);
+            return new ResultMessageBean(true, newVenue.getId());
         }
         return new ResultMessageBean(false, "场馆名称已存在");
     }
@@ -71,9 +71,15 @@ public class VenueServiceImpl implements VenueService {
     }
 
     @Override
-    public ResultMessageBean updateSeat(String name, SeatBean seatBean) {
-        venueDao.saveOrUpdateSeat(venueDao.getVenueByName(name).getId(),
-                new Seat(venueDao.getVenueByName(name).getId(), seatBean.getSeatName(), seatBean.getSeatNum()));
+    public ResultMessageBean updateSeatInfo(String name, List<SeatBean> seatList) {
+
+        List<Seat> list = new ArrayList<>();
+        for (SeatBean seatBean : seatList) {
+            Seat seat = new Seat(venueDao.getVenueByName(name).getId(), seatBean.getSeatName(), seatBean.getSeatNum());
+            list.add(seat);
+        }
+
+        venueDao.saveOrUpdateSeat(venueDao.getVenueByName(name).getId(), list);
         return new ResultMessageBean(true);
     }
 

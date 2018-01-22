@@ -40,9 +40,10 @@ public interface VenueDao {
     /**
      * 新建座位或更新座位信息
      *
-     * @param seat
+     * @param id
+     * @param seatList
      */
-    boolean saveOrUpdateSeat(String id, Seat seat);
+    boolean saveOrUpdateSeat(String id, List<Seat> seatList);
 
 
     /**
