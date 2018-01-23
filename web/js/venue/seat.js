@@ -27,10 +27,7 @@ function updateSeatInfo_ajax(venueSeatBean) {
     $.ajax({
         type: "POST",
         url: "/venue/updateSeat",
-        data: {
-            venueSeatBean: venueSeatBean
-        },
-        // contentType: "application/x-www-form-urlencoded",
+        data: JSON.stringify(venueSeatBean),
         contentType: "application/json",
         dataType: "json",
         success: function (data) {

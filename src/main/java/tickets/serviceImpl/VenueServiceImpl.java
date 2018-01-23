@@ -61,10 +61,15 @@ public class VenueServiceImpl implements VenueService {
         }
 
         // 修改信息
-        oldVenue.setName(newVenue.getName());
-        oldVenue.setLocation(newVenue.getLocation());
-        oldVenue.setPassword(newVenue.getPassword());
-        oldVenue.setIsChecked(0);
+        if (!newVenue.getPassword().equals(oldVenue.getPassword())) {
+            // 只修改密码，不需要isChecked置为0
+            oldVenue.setPassword(newVenue.getPassword());
+        } else {
+            // 只修改其他信息，需要isChecked置为0
+            oldVenue.setName(newVenue.getName());
+            oldVenue.setLocation(newVenue.getLocation());
+            oldVenue.setIsChecked(0);
+        }
         venueDao.saveOrUpdateVenue(oldVenue);
 
         return new ResultMessageBean(true);

@@ -96,8 +96,8 @@ angular.module("mainapp", [])
                             $scope.inputPassword = "";
                             $scope.inputPassword2 = "";
                             $scope.inputLocation = "";
-                            // alert("欢迎, 注册成功, 您的场馆识别码为" + data.message + ", 请等待信息审批后登录");
-                            // window.location.href = "/index.html";
+                            alert("欢迎, 注册成功, 您的场馆识别码为" + data.message + ", 请等待信息审批后登录");
+                            window.location.href = "/index.html";
 
                         } else {
                             $scope.inputEmail = "";

@@ -111,7 +111,7 @@
 
             <div class="userinfo-div">
                 <button class="button-green" onclick="addInputBox()">添加新座位类型</button>
-                <button class="button-green" id="venue-confirm-button" ng-click="venueInfoUpdate()">确认修改信息
+                <button class="button-green" id="venue-confirm-button" onclick="venueInfoUpdate()">确认修改信息
                 </button>
                 <div class="userinfo-div">
                     <p class="item-title">
@@ -129,18 +129,20 @@
                         原密码
                     </p>
                     <input type="password" seatName="password" class="form-password form-control input-box"
-                           id="reg-old-password" ng-model="inputPassword">
+                           id="venue-old-password" ng-model="venueOldPassword">
                     <p class="item-title">
                         新密码
                     </p>
                     <input type="password" seatName="password" class="form-password form-control input-box"
-                           id="reg-new-password" ng-model="inputPassword">
+                           id="venue-new-password" ng-model="venueNewPassword">
                     <p class="item-title">
                         确认密码
                     </p>
                     <input type="password" seatName="password2" class="form-password form-control input-box"
-                           id="reg-new-password2" ng-model="inputPassword2" onblur="passwordIsSame()">
-                    <button class="button-green">确认修改</button>
+                           id="venue-new-password2" ng-model="venueNewPassword2" onblur="passwordIsSame()">
+                    <button class="button-green" ng-click="venueChangePassword()">确认修改</button>
+
+                    <h6 style="color:red" id="venue-password-tip"></h6>
                 </div>
             </div>
         </form>
@@ -164,9 +166,8 @@
 </body>
 
 <script src="js/util/scrollReveal.js"></script>
-
+<script src="js/venue/venueInformation.js"></script>
 <script src="js/venue/logState.js"></script>
-<script src="js/venue/venueInfo.js"></script>
 <script src="js/venue/seat.js"></script>
 
 <script>
