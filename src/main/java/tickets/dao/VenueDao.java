@@ -53,4 +53,11 @@ public interface VenueDao {
      * @return
      */
     List<Seat> getSeat(String id);
+
+    /**
+     * 获得待审批场馆列表
+     *
+     * @return
+     */
+    List<Venue> getUncheckedVenues();
 }

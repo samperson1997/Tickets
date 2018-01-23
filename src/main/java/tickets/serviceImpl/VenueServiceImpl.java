@@ -25,6 +25,8 @@ public class VenueServiceImpl implements VenueService {
         if (venue != null) {
             if (venue.getIsChecked() == 0) {
                 return new ResultMessageBean(false, "信息审批中, 请稍后尝试");
+            } else if (venue.getIsChecked() == -1) {
+                return new ResultMessageBean(false, "信息审批未通过, 请联系系统管理员");
             } else if (password.equals(venue.getPassword())) {
                 return new ResultMessageBean(true, id);
             }

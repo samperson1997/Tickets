@@ -116,4 +116,17 @@ public class VenueDaoImpl implements VenueDao {
 
         return seats;
     }
+
+    @Override
+    public List<Venue> getUncheckedVenues() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<Venue> query = session.createNativeQuery("SELECT * FROM venues WHERE isChecked = 0", Venue.class);
+        List<Venue> list = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return list;
+    }
 }
