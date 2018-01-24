@@ -1,8 +1,19 @@
+window.onload = init;
+
 oldPassword = "";
 level = 0;
 score = 0;
 pin = "";
 account = 0.0;
+name = "";
+
+passwordTip = document.getElementById('password-tip');
+pinTip = document.getElementById('pin-tip');
+
+function init() {
+    pinTip.innerHTML = "";
+    passwordTip.innerHTML = "";
+}
 
 function loadUserInfo() {
     var email = sessionStorage.getItem('userId');
@@ -28,6 +39,7 @@ function loadUserInfo() {
             score = data.score;
             pin = data.pin;
             account = data.account;
+            name = data.name;
         },
         error: function (request, status, err) {
             if (status === "timeout") {
@@ -99,7 +111,6 @@ function loadCouponList() {
 }
 
 function updateInfo() {
-    alert("update!");
 
     var userBean = {};
     userBean.email = sessionStorage.getItem('userId');
@@ -111,16 +122,101 @@ function updateInfo() {
     userBean.pin = pin;
     userBean.account = account;
 
+    console.log(userBean);
+
     $.ajax({
         type: "POST",
         url: "/user/edit",
-        contentType: "application/x-www-form-urlencoded",
-        data: {
-            "userBean": userBean
-        },
+        contentType: "application/json",
+        data: JSON.stringify(userBean),
         dataType: "json",
         success: function (data) {
             alert("会员昵称修改成功! ");
+            window.location.href = "/member.html";
         }
     })
+}
+
+function passwordIsSame() {
+    if ($("#new-password").val() !== $("#new-password-confirm").val()) {
+        passwordTip.innerHTML = "两次输入密码不一致";
+    } else {
+        passwordTip.innerHTML = "";
+    }
+}
+
+function pinIsSame() {
+    if ($("#new-pin").val() !== $("#new-pin-confirm").val()) {
+        passwordTip.innerHTML = "两次输入密码不一致";
+    } else {
+        passwordTip.innerHTML = "";
+    }
+}
+
+function userChangePassword() {
+    if ($("#old-password").val() !== oldPassword) {
+        passwordTip.innerHTML = "原密码错误";
+    } else if ($("#old-password").val() === $("#new-password").val()) {
+        passwordTip.innerHTML = "新旧密码相同";
+    } else {
+        passwordTip.innerHTML = "";
+
+        var userBean = {};
+        userBean.email = sessionStorage.getItem('userId');
+        userBean.name = name;
+        userBean.password = $("#new-password").val();
+        userBean.isMember = 1;
+        userBean.level = level;
+        userBean.score = score;
+        userBean.pin = pin;
+        userBean.account = account;
+
+        console.log(userBean);
+
+        $.ajax({
+            type: "POST",
+            url: "/user/edit",
+            contentType: "application/json",
+            data: JSON.stringify(userBean),
+            dataType: "json",
+            success: function (data) {
+                alert("账户密码修改成功, 请重新登录");
+                window.location.href = "/login.html";
+            }
+        })
+    }
+}
+
+function userChangePin() {
+    if ($("#old-pin").val() !== pin) {
+        pinTip.innerHTML = "原密码错误";
+    } else if ($("#old-pin").val() === $("#new-pin").val()) {
+        pinTip.innerHTML = "新旧密码相同";
+    } else {
+        pinTip.innerHTML = "";
+
+        var userBean = {};
+        userBean.email = sessionStorage.getItem('userId');
+        userBean.name = name;
+        userBean.password = oldPassword;
+        userBean.isMember = 1;
+        userBean.level = level;
+        userBean.score = score;
+        userBean.pin = $("#new-pin").val();
+        userBean.account = account;
+
+        console.log(userBean);
+
+        $.ajax({
+            type: "POST",
+            url: "/user/edit",
+            contentType: "application/json",
+            data: JSON.stringify(userBean),
+            dataType: "json",
+            success: function (data) {
+                alert("钱包密码修改成功, 请重新登录");
+                window.location.href = "/login.html";
+            }
+        })
+    }
 }

@@ -2,7 +2,7 @@ function loadVenues() {
 
     var load = $.ajax({
         type: "GET",
-        url: "/manager/uncheckedVenues",
+        url: "/managers/uncheckedVenues",
         contentType: "application/x-www-form-urlencoded",
         data: {},
         dataType: "json",
@@ -44,7 +44,7 @@ function checkVenue(id, result) {
 
     $.ajax({
         type: "POST",
-        url: "/manager/checkVenue",
+        url: "/managers/checkVenue",
         data: {
             "id": id,
             "result": result

@@ -12,7 +12,7 @@ import tickets.service.ManagerService;
 import java.util.List;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/managers")
 public class ManagerController {
 
     @Autowired

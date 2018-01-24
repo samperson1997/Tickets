@@ -2,10 +2,7 @@ package tickets.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import tickets.bean.CouponBean;
 import tickets.bean.ResultMessageBean;
 import tickets.bean.UserBean;
@@ -58,9 +55,13 @@ public class UserController {
         return userService.getUser(email);
     }
 
-    @RequestMapping(value = "/edit", method = RequestMethod.POST)
+    @RequestMapping(
+            value = "/edit",
+            method = RequestMethod.POST,
+            consumes = {"application/json; charset=UTF-8"}
+    )
     @ResponseBody
-    public ResultMessageBean updateUserInfo(UserBean userBean) {
+    public ResultMessageBean updateUserInfo(@RequestBody UserBean userBean) {
         return userService.updateUserInfo(userBean.getEmail(), userBean);
     }
 

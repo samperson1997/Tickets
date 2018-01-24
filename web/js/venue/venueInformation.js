@@ -10,6 +10,7 @@ passwordTip = document.getElementById('venue-password-tip');
 function init() {
     tip.innerHTML = "";
     seatTip.innerHTML = "";
+    passwordTip.innerHTML = "";
 }
 
 function loadVenueInfo() {

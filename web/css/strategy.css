@@ -151,6 +151,7 @@ select {
     border: solid 1px #000;
     border-radius: 5px;
     color: #0080ff;
+    width: 32%;
 
     outline: none;
     font-size: 90%;
@@ -164,7 +165,7 @@ select {
     /*在选择框的最右侧中间显示小箭头图片*/
     background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
-    padding: 5px 15px 5px 5px;
+    padding: 0.5% 3% 0.5% 1%;
     margin-top: 1%;
 }
 

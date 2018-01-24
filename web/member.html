@@ -242,8 +242,11 @@
             <p class="item-title">
                 确认新账户密码
             </p>
-            <input id="new-password-confirm" type="password" class="input-box"/>
-            <button class="button-green">确认修改</button>
+            <input id="new-password-confirm" type="password" class="input-box" onblur="passwordIsSame()"/>
+            <button class="button-green" onclick="userChangePassword()">确认修改</button>
+            <div>
+                <h6 style="color:red" id="password-tip"></h6>
+            </div>
         </div>
 
         <div id="pin" class="stock-seatName" style="display: inline;">修改钱包密码</div>
@@ -251,7 +254,7 @@
 
         <div class="userinfo-div">
             <p class="item-title">
-                旧钱包密码 (默认与账户密码相同)
+                旧钱包密码 (初始钱包密码默认与账户密码相同)
             </p>
             <input id="old-pin" type="password" class="input-box"/>
             <p class="item-title">
@@ -261,8 +264,11 @@
             <p class="item-title">
                 确认新钱包密码
             </p>
-            <input id="new-pin-confirm" type="password" class="input-box"/>
-            <button class="button-green">确认修改</button>
+            <input id="new-pin-confirm" type="password" class="input-box" onblur="pinIsSame()"/>
+            <button class="button-green" onclick="userChangePin()">确认修改</button>
+            <div>
+                <h6 style="color:red" id="pin-tip"></h6>
+            </div>
         </div>
 
         <div id="abort" class="stock-seatName" style="display: inline;">注销会员</div>
