@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Tickets</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/origin.css">
     <link rel="stylesheet" href="css/top-bar.css">
     <link rel="stylesheet" href="css/main-body.css">
     <link rel="stylesheet" href="css/button.css">
     <link rel="stylesheet" href="css/function.css">
     <link rel="stylesheet" href="css/page-main-body.css">
     <link rel="stylesheet" href="css/footer.css">
+
+    <script src="js/util/jquery-3.2.1.min.js"></script>
 
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
 </head>
@@ -40,7 +42,7 @@
                 <a href="#dance">舞蹈表演</a>
             </li>
             <li>
-                <a href="#play">话剧喜剧</a>
+                <a href="#play">话剧戏剧</a>
             </li>
             <li>
                 <a href="#game">体育比赛</a>
@@ -57,7 +59,7 @@
         </ul>
     </div>
 
-    <div style="float: right; width: 80%; margin: 6% 0">
+    <div class="member-plan-list" style="float: right; width: 80%; margin: 6% 0">
         <div id="concert">
             <div class="stock-seatName" style="display: inline;">音乐演唱</div>
             <div class="stock-code" style="display: inline;">&nbsp;|&nbsp;Concerts</div>
@@ -99,5 +101,15 @@
 
 </script>
 <script src="js/user/logState.js"></script>
+<script src="js/plan/plan.js"></script>
+
+<script>
+    $(document).ready(loadMusicPlan());
+    $(document).ready(loadDancePlan());
+    $(document).ready(loadPlayPlan());
+    $(document).ready(loadGamePlan());
+    $(document).ready(loadOtherPlan());
+</script>
+
 
 </html>

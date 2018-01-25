@@ -166,7 +166,6 @@ select {
     background: url("http://ourjs.github.io/static/2015/arrow.png") no-repeat scroll right center transparent;
     /*为下拉小箭头留出一点位置，避免被文字覆盖*/
     padding: 0.5% 3% 0.5% 1%;
-    margin-top: 1%;
 }
 
 select::-ms-expand {

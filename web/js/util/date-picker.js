@@ -2,7 +2,7 @@ $(document).ready(function () {
 
     $(function () {
         $("#date-picker").datepicker({
-            // maxDate: 0,
+            minDate: 15,
             hideIfNoPrevNext: true,
             dayNamesMin: ['日', '一', '二', '三', '四', '五', '六'],
             changeMonth: true,
@@ -15,6 +15,20 @@ $(document).ready(function () {
             dateFormat: 'yy-mm-dd',
             onClose: function (selectedDate) {
                 // $("#end-filter").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $("#start-time-input").timepicker({
+            stepMinute: 10,
+            onClose: function (selectedTime) {
+                $("#end-time-input").timepicker("option", "minTime", selectedTime);
+            }
+        });
+
+        $("#end-time-input").timepicker({
+            stepMinute: 10,
+            onClose: function (selectedTime) {
+                $("#start-time-input").timepicker("option", "maxTime", selectedTime);
             }
         });
     });

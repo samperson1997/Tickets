@@ -158,7 +158,6 @@
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
-      <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="48" parent="18" name="venueId">
       <Position>2</Position>
@@ -176,116 +175,120 @@
     </column>
     <column id="51" parent="18" name="type">
       <Position>5</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="52" parent="18" name="PRIMARY">
+    <column id="52" parent="18" name="introduction">
+      <Position>6</Position>
+      <DataType>varchar(500)|0</DataType>
+    </column>
+    <key id="53" parent="18" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="53" parent="19" name="id">
+    <column id="54" parent="19" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="54" parent="19" name="venueId">
+    <column id="55" parent="19" name="venueId">
       <Position>2</Position>
       <DataType>varchar(7)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="55" parent="19" name="name">
+    <column id="56" parent="19" name="name">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="56" parent="19" name="num">
+    <column id="57" parent="19" name="num">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="57" parent="19" name="PRIMARY">
+    <key id="58" parent="19" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="58" parent="20" name="email">
+    <column id="59" parent="20" name="email">
       <Position>1</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="59" parent="20" name="name">
+    <column id="60" parent="20" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="60" parent="20" name="password">
+    <column id="61" parent="20" name="password">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="61" parent="20" name="isMember">
+    <column id="62" parent="20" name="isMember">
       <Position>4</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="62" parent="20" name="currentScore">
+    <column id="63" parent="20" name="currentScore">
       <Position>5</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="63" parent="20" name="score">
+    <column id="64" parent="20" name="score">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="64" parent="20" name="pin">
+    <column id="65" parent="20" name="pin">
       <Position>7</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="65" parent="20" name="account">
+    <column id="66" parent="20" name="account">
       <Position>8</Position>
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="66" parent="20" name="PRIMARY">
+    <key id="67" parent="20" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>email</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="67" parent="21" name="id">
+    <column id="68" parent="21" name="id">
       <Position>1</Position>
       <DataType>varchar(7)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="68" parent="21" name="name">
+    <column id="69" parent="21" name="name">
       <Position>2</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="69" parent="21" name="location">
+    <column id="70" parent="21" name="location">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="70" parent="21" name="account">
+    <column id="71" parent="21" name="account">
       <Position>4</Position>
       <DataType>double|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="71" parent="21" name="password">
+    <column id="72" parent="21" name="password">
       <Position>5</Position>
       <DataType>varchar(50)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="72" parent="21" name="isChecked">
+    <column id="73" parent="21" name="isChecked">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="73" parent="21" name="PRIMARY">
+    <key id="74" parent="21" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

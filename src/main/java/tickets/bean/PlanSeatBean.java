@@ -1,45 +1,31 @@
-package tickets.model;
+package tickets.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity
-@Table(name = "plans")
-public class Plan implements Serializable {
-    @Id
-    private int id;
+public class PlanSeatBean {
 
     private String venueId;
 
-    private LocalDateTime startTime;
+    private String startTime;
 
-    private LocalDateTime endTime;
+    private String endTime;
 
     private int type;
 
     private String introduction;
 
-    public Plan() {
+    private List<SeatPriceBean> seatPriceBeanList;
+
+    public PlanSeatBean() {
     }
 
-    public Plan(int id, String venueId, LocalDateTime startTime, LocalDateTime endTime, int type, String introduction) {
-        this.id = id;
+    public PlanSeatBean(String venueId, String startTime, String endTime, int type, String introduction, List<SeatPriceBean> seatPriceBeanList) {
         this.venueId = venueId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.type = type;
         this.introduction = introduction;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        this.seatPriceBeanList = seatPriceBeanList;
     }
 
     public String getVenueId() {
@@ -50,19 +36,19 @@ public class Plan implements Serializable {
         this.venueId = venueId;
     }
 
-    public LocalDateTime getStartTime() {
+    public String getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(LocalDateTime startTime) {
+    public void setStartTime(String startTime) {
         this.startTime = startTime;
     }
 
-    public LocalDateTime getEndTime() {
+    public String getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(LocalDateTime endTime) {
+    public void setEndTime(String endTime) {
         this.endTime = endTime;
     }
 
@@ -80,5 +66,13 @@ public class Plan implements Serializable {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public List<SeatPriceBean> getSeatPriceBeanList() {
+        return seatPriceBeanList;
+    }
+
+    public void setSeatPriceBeanList(List<SeatPriceBean> seatPriceBeanList) {
+        this.seatPriceBeanList = seatPriceBeanList;
     }
 }
