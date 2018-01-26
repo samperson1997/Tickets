@@ -15,7 +15,7 @@ public class MemberLevelUtil {
         return levelName[levelScore.length - 1];
     }
 
-    private double getLevelDiscount(int score) {
+    public double getLevelDiscount(int score) {
         for (int i = 0; i < levelScore.length - 1; i++) {
             if (score >= levelScore[i] && score < levelScore[i + 1]) {
                 return levelDiscount[i];

@@ -1,5 +1,7 @@
 package tickets.bean;
 
+import java.util.List;
+
 public class PlanVenueBean {
 
     private int planId;
@@ -20,10 +22,14 @@ public class PlanVenueBean {
 
     private double lowPrice;
 
+    private double highPrice;
+
+    private List<SeatPriceBean> seatPriceBeanList;
+
     public PlanVenueBean() {
     }
 
-    public PlanVenueBean(int planId, String venueId, String name, String location, String startTime, String endTime, int type, String introduction, double lowPrice) {
+    public PlanVenueBean(int planId, String venueId, String name, String location, String startTime, String endTime, int type, String introduction, double lowPrice, double highPrice, List<SeatPriceBean> seatPriceBeanList) {
         this.planId = planId;
         this.venueId = venueId;
         this.name = name;
@@ -33,6 +39,8 @@ public class PlanVenueBean {
         this.type = type;
         this.introduction = introduction;
         this.lowPrice = lowPrice;
+        this.highPrice = highPrice;
+        this.seatPriceBeanList = seatPriceBeanList;
     }
 
     public int getPlanId() {
@@ -105,5 +113,21 @@ public class PlanVenueBean {
 
     public void setLowPrice(double lowPrice) {
         this.lowPrice = lowPrice;
+    }
+
+    public double getHighPrice() {
+        return highPrice;
+    }
+
+    public void setHighPrice(double highPrice) {
+        this.highPrice = highPrice;
+    }
+
+    public List<SeatPriceBean> getSeatPriceBeanList() {
+        return seatPriceBeanList;
+    }
+
+    public void setSeatPriceBeanList(List<SeatPriceBean> seatPriceBeanList) {
+        this.seatPriceBeanList = seatPriceBeanList;
     }
 }

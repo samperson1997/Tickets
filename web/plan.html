@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="css/origin.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/strategy.css">
+
+    <script src="js/util/jquery-3.2.1.min.js"></script>
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets</h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+            <b>活动订票</b>
+
+            <li>
+                <a href="#member-plan">活动详情</a>
+            </li>
+
+            <li>
+                <a href="#member-order">订票</a>
+            </li>
+
+            <li><b>
+                <a href="index.html">返回搜索活动</a>
+            </b></li>
+
+            <li><b>
+                <a href="member.html">个人中心</a>
+            </b></li>
+
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0">
+        <div id="member-plan">
+            <div class="stock-seatName" style="display: inline;">活动详情</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Detailed Information</div>
+            <div class="userinfo-div">
+                <p class="item-title">
+                    活动简介
+                </p>
+                <p id="member-plan-introduction"></p>
+
+                <p class="item-title">
+                    活动日期
+                </p>
+                <p id="member-plan-date"></p>
+
+                <p class="item-title">
+                    开始时间
+                </p>
+                <p id="member-plan-start"></p>
+
+                <p class="item-title">
+                    结束时间
+                </p>
+                <p id="member-plan-end"></p>
+
+                <p class="item-title">
+                    活动类型
+                </p>
+                <p id="member-plan-type"></p>
+
+                <p class="item-title">
+                    活动地点
+                </p>
+                <p id="member-plan-location"></p>
+            </div>
+
+            <div class="userinfo-div" id="member-plan-price">
+
+            </div>
+        </div>
+
+        <div id="member-order">
+            <div class="title-name" style="display: inline;">订票</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Placing Order</div>
+            <div class="userinfo-div">
+                <p class="item-title">
+                    预定方式
+                </p>
+
+                <select id="type-select" onchange="changeChooseDiv()">
+                    <option value="choose">选座购买</option>
+                    <option value="no-choose">立即购买</option>
+                </select>
+
+                <div id="choose-div">
+
+                    <p class="item-title">
+                        选择座位类型
+                    </p>
+                    <select id="seat-select" onchange="changeChooseTotalPrice()">
+
+                    </select>
+
+                    <p class="item-title">
+                        预定张数 (每单上限6张)
+                    </p>
+                    <select id="choose-member-order-num" onchange="changeChooseTotalPrice()">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                    </select>
+
+                    <p class="item-title">
+                        选择优惠券
+                    </p>
+                    <select id="choose-coupon-select" onchange="changeChooseTotalPrice()">
+
+                    </select>
+
+                    <p class="item-title">
+                        预计总价
+                    </p>
+                    <p id="choose-total-price"></p>
+                    <p id="choose-discount-price"></p>
+                    <p id="choose-final-price"></p>
+                </div>
+
+                <div id="no-choose-div">
+                    <p class="item-title">
+                        预定张数 (每单上限20张)
+                    </p>
+                    <select id="no-choose-member-order-num" onchange="changeNoChooseTotalPrice()">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                        <option value="16">16</option>
+                        <option value="17">17</option>
+                        <option value="18">18</option>
+                        <option value="19">19</option>
+                        <option value="20">20</option>
+                    </select>
+
+                    <p class="item-title">
+                        选择优惠券
+                    </p>
+                    <select id="no-choose-coupon-select" onchange="changeNoChooseTotalPrice()">
+
+                    </select>
+
+                    <p class="item-title">
+                        预计总价
+                        <br>演出前2周进行配票。如果配票不成功，系统会自动退款。
+                        <br>目前按照最高座位票价收取，配票后按照实际座位票价退回。
+                    </p>
+                    <p id="no-choose-total-price"></p>
+                    <p id="no-choose-discount-price"></p>
+                    <p id="no-choose-final-price"></p>
+                </div>
+
+                <p class="item-title">
+                    请注意：下单成功后，请在15分钟内支付。未支付成功的订单，15分钟之后系统自动取消。
+                    <br>在这段时间里，为您保留您选择的座位；订单取消后（无论以何种方式），座位将不再保留。
+                </p>
+                <button class="button-green" id="no-choose-order-button" onclick="placeOrder()">下单支付
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/scrollReveal.js"></script>
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+<script src="js/user/logState.js"></script>
+<script src="js/plan/order.js"></script>
+<script src="js/plan/pay.js"></script>
+
+<script>
+    $("#no-choose-div").fadeOut();
+
+    $(document).ready(loadDetailedPlan());
+    $(document).ready(loadCoupons());
+    $(document).ready(loadPlanSeats());
+
+</script>
+
+
+</html>

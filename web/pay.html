@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="css/origin.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/strategy.css">
+
+    <script src="js/util/jquery-3.2.1.min.js"></script>
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets</h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+            <b>支付订单</b>
+
+            <li><b>
+                <a href="index.html">返回搜索活动</a>
+            </b></li>
+
+            <li><b>
+                <a href="member.html">个人中心</a>
+            </b></li>
+
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0">
+        <div id="member-pay">
+            <div class="title-name" style="display: inline;">支付订单</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Paying Order</div>
+            <div class="userinfo-div">
+
+                <p class="item-title">
+                    钱包余额
+                </p>
+                <p id="current-account"></p>
+
+                <p class="item-title">
+                    订单总价
+                </p>
+                <p id="final-price"></p>
+
+                <p class="item-title">
+                    钱包密码
+                </p>
+                <input id="pin" type="password" class="input-box"/>
+
+                <div>
+                    <h6 style="color:red" id="pay-tip"></h6>
+                </div>
+
+                <p class="item-title">
+                    请注意：下单成功后，请在15分钟内支付。未支付成功的订单，15分钟之后系统自动取消。
+                    <br>在这段时间里，为您保留您选择的座位；订单取消后（无论以何种方式），座位将不再保留。
+                    <br>订单一旦支付，退票时将需要支付一定的手续费，订单所使用的优惠券也不再返还。
+                </p>
+                <button class="button-green" id="pay-button" onclick="payOrder()">确认支付
+                </button>
+                <button class="button-red" id="cancel-pay-button" onclick="cancelPayOrder()">取消支付
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/scrollReveal.js"></script>
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+<script src="js/user/logState.js"></script>
+<script src="js/plan/pay.js"></script>
+
+<script>
+
+    $(document).ready(loadAccount());
+    $(document).ready(loadFinalPrice());
+
+</script>
+
+
+</html>

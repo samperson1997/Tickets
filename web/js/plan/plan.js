@@ -33,7 +33,7 @@ function postPlan() {
         dataType: "json",
         success: function (data) {
             alert("活动发布成功! ");
-            window.location.href = "/venue-plan.html";
+            window.location.href = "venue-plan.html";
         }
     })
 }
@@ -145,6 +145,7 @@ function loadOtherPlan() {
                     + "<br><i class='fa fa-ticket'></i> " + data[i].lowPrice + "元起, <a href='/plan.html?planId="
                     + data[i].planId + "'>立即预定</a>" + "</p></div>");
             }
+
         }
     })
 }

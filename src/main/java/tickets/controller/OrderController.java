@@ -7,48 +7,45 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import tickets.bean.PlanSeatBean;
-import tickets.bean.PlanVenueBean;
-import tickets.bean.ResultMessageBean;
+import tickets.bean.OrderBean;
+import tickets.service.OrderService;
 import tickets.service.PlanService;
 
-import java.util.List;
-
 @Controller
-@RequestMapping("/plans")
-public class PlanController {
+@RequestMapping("/orders")
+public class OrderController {
+
+    @Autowired
+    private OrderService orderService;
 
     @Autowired
     private PlanService planService;
 
     @RequestMapping(
-            value = "/postPlan",
+            value = "/addOrder",
             method = RequestMethod.POST,
             consumes = {"application/json; charset=UTF-8"}
     )
     @ResponseBody
-    public ResultMessageBean postPlan(@RequestBody PlanSeatBean planSeatBean) {
+    public String addOrder(@RequestBody OrderBean orderBean) {
+        // 更新座位信息
+        planService.updatePlanSeat(orderBean.getPlanId(), orderBean.getSeatName(), -orderBean.getSeatNum());
 
-        return planService.postPlan(planSeatBean);
+        // 增加订单表
+        String orderId = orderService.addOrder(orderBean);
+
+        // 返回订单id
+        return orderId;
     }
 
     @RequestMapping(
-            value = "/memberPlan",
+            value = "/order",
             method = RequestMethod.GET
     )
     @ResponseBody
-    public List<PlanVenueBean> getMemberPlans(int type) {
+    public OrderBean getOrder(String orderId) {
 
-        return planService.getMemberPlans(type);
+        return orderService.getOrderByOrderId(orderId);
     }
 
-    @RequestMapping(
-            value = "/detailedPlan",
-            method = RequestMethod.GET
-    )
-    @ResponseBody
-    public PlanVenueBean getDetailedPlan(int planId) {
-
-        return planService.getDetailedPlan(planId);
-    }
 }

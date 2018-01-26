@@ -17,7 +17,6 @@ function init() {
 
 function loadUserInfo() {
     var email = sessionStorage.getItem('userId');
-    console.log(email);
 
     var load = $.ajax({
         type: "GET",

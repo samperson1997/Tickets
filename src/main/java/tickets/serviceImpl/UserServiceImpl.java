@@ -116,4 +116,11 @@ public class UserServiceImpl implements UserService {
 
         return new ResultMessageBean(true);
     }
+
+    @Override
+    public double getDiscount(String email) {
+        User user = userDao.getUser(email);
+
+        return memberLevelUtil.getLevelDiscount(user.getScore());
+    }
 }

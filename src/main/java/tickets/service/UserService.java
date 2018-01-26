@@ -75,4 +75,12 @@ public interface UserService {
      * @return
      */
     ResultMessageBean convertCoupon(String email, int couponId);
+
+    /**
+     * 获得会员折扣
+     *
+     * @param email
+     * @return
+     */
+    double getDiscount(String email);
 }

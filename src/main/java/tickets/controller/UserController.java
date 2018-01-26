@@ -76,4 +76,10 @@ public class UserController {
     public ResultMessageBean convertCoupon(String email, int couponId) {
         return userService.convertCoupon(email, couponId);
     }
+
+    @RequestMapping(value = "/discount", method = RequestMethod.GET)
+    @ResponseBody
+    public double getDiscount(String email) {
+        return userService.getDiscount(email);
+    }
 }

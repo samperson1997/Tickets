@@ -46,7 +46,25 @@ public class PlanDaoImpl implements PlanDao {
     }
 
     @Override
-    public List<Plan> getPlan(int type) {
+    public boolean updatePlanSeat(int planId, String seatName, int seatNum) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        Query<PlanSeat> query = session.createNativeQuery("SELECT * FROM planSeats WHERE planId = ? AND name = ?", PlanSeat.class);
+        query.setParameter(1, planId);
+        query.setParameter(2, seatName);
+        PlanSeat planSeat = query.getSingleResult();
+        planSeat.setNumber(planSeat.getNumber() + seatNum);
+
+        session.update(planSeat);
+
+        tx.commit();
+        session.close();
+        return false;
+    }
+
+    @Override
+    public List<Plan> getPlansByType(int type) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
@@ -58,6 +76,21 @@ public class PlanDaoImpl implements PlanDao {
         session.close();
 
         return res;
+    }
+
+    @Override
+    public Plan getPlanByPlanId(int planId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        Query<Plan> query = session.createNativeQuery("SELECT * FROM plans WHERE id = ?", Plan.class);
+        query.setParameter(1, planId);
+        Plan plan = query.uniqueResult();
+
+        tx.commit();
+        session.close();
+
+        return plan;
     }
 
     @Override

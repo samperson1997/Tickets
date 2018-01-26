@@ -51,23 +51,53 @@ public class PlanServiceImpl implements PlanService {
 
     @Override
     public List<PlanVenueBean> getMemberPlans(int type) {
-        List<Plan> planList = planDao.getPlan(type);
+        List<Plan> planList = planDao.getPlansByType(type);
         List<PlanVenueBean> res = new ArrayList<>();
 
         for (Plan plan : planList) {
             Venue venue = venueDao.getVenueById(plan.getVenueId());
             List<PlanSeat> planSeats = planDao.getPlanSeat(plan.getId());
+            List<SeatPriceBean> seatPriceBeans = new ArrayList<>();
 
             double lowPrice = planSeats.get(0).getPrice();
+            double highPrice = planSeats.get(0).getPrice();
             for (PlanSeat planSeat : planSeats) {
                 lowPrice = (planSeat.getPrice() < lowPrice) ? planSeat.getPrice() : lowPrice;
+                highPrice = (planSeat.getPrice() > highPrice) ? planSeat.getPrice() : highPrice;
+                seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
             }
 
             res.add(new PlanVenueBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
                     String.valueOf(plan.getStartTime()), String.valueOf(plan.getEndTime()), plan.getType(),
-                    plan.getIntroduction(), lowPrice));
+                    plan.getIntroduction(), lowPrice, highPrice, seatPriceBeans));
         }
 
         return res;
+    }
+
+    @Override
+    public PlanVenueBean getDetailedPlan(int planId) {
+        Plan plan = planDao.getPlanByPlanId(planId);
+        Venue venue = venueDao.getVenueById(plan.getVenueId());
+        List<PlanSeat> planSeats = planDao.getPlanSeat(plan.getId());
+        List<SeatPriceBean> seatPriceBeans = new ArrayList<>();
+
+        double lowPrice = planSeats.get(0).getPrice();
+        double highPrice = planSeats.get(0).getPrice();
+        for (PlanSeat planSeat : planSeats) {
+            lowPrice = (planSeat.getPrice() < lowPrice) ? planSeat.getPrice() : lowPrice;
+            highPrice = (planSeat.getPrice() > highPrice) ? planSeat.getPrice() : highPrice;
+            seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
+        }
+
+        return new PlanVenueBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
+                String.valueOf(plan.getStartTime()), String.valueOf(plan.getEndTime()), plan.getType(),
+                plan.getIntroduction(), lowPrice, highPrice, seatPriceBeans);
+    }
+
+    @Override
+    public ResultMessageBean updatePlanSeat(int planId, String seatName, int seatNum) {
+        planDao.updatePlanSeat(planId, seatName, seatNum);
+        return new ResultMessageBean(true);
     }
 }

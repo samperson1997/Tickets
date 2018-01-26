@@ -1,15 +1,8 @@
-package tickets.model;
+package tickets.bean;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
-import java.io.Serializable;
+public class OrderBean {
 
-@Entity
-@Table(name = "orders")
-public class Order implements Serializable {
-    @Id
-    private int orderId;
+    private String orderId;
 
     private String email;
 
@@ -19,15 +12,9 @@ public class Order implements Serializable {
 
     private double realPrice;
 
-    private int isPaid;
-
     private int isSeatSelected;
 
-    private int isAssigned;
-
-    private int isUsed;
-
-    private int isClosed;
+    private String state;
 
     private String seatName;
 
@@ -36,30 +23,27 @@ public class Order implements Serializable {
     private String seatAssigned;
 
 
-    public Order() {
+    public OrderBean() {
     }
 
-    public Order(int orderId, String email, int planId, double price, double realPrice, int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed, String seatName, int seatNum, String seatAssigned) {
+    public OrderBean(String orderId, String email, int planId, double price, double realPrice, int isSeatSelected, String state, String seatName, int seatNum, String seatAssigned) {
         this.orderId = orderId;
         this.email = email;
         this.planId = planId;
         this.price = price;
         this.realPrice = realPrice;
-        this.isPaid = isPaid;
         this.isSeatSelected = isSeatSelected;
-        this.isAssigned = isAssigned;
-        this.isUsed = isUsed;
-        this.isClosed = isClosed;
+        this.state = state;
         this.seatName = seatName;
         this.seatNum = seatNum;
         this.seatAssigned = seatAssigned;
     }
 
-    public int getOrderId() {
+    public String getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(int orderId) {
+    public void setOrderId(String orderId) {
         this.orderId = orderId;
     }
 
@@ -95,14 +79,6 @@ public class Order implements Serializable {
         this.realPrice = realPrice;
     }
 
-    public int getIsPaid() {
-        return isPaid;
-    }
-
-    public void setIsPaid(int isPaid) {
-        this.isPaid = isPaid;
-    }
-
     public int getIsSeatSelected() {
         return isSeatSelected;
     }
@@ -111,28 +87,12 @@ public class Order implements Serializable {
         this.isSeatSelected = isSeatSelected;
     }
 
-    public int getIsAssigned() {
-        return isAssigned;
+    public String getState() {
+        return state;
     }
 
-    public void setIsAssigned(int isAssigned) {
-        this.isAssigned = isAssigned;
-    }
-
-    public int getIsUsed() {
-        return isUsed;
-    }
-
-    public void setIsUsed(int isUsed) {
-        this.isUsed = isUsed;
-    }
-
-    public int getIsClosed() {
-        return isClosed;
-    }
-
-    public void setIsClosed(int isClosed) {
-        this.isClosed = isClosed;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public String getSeatName() {
