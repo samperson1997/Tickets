@@ -33,8 +33,18 @@ public interface UserDao {
     /**
      * 兑换优惠券
      *
+     * @param email
      * @param couponId
      * @return
      */
-    boolean saveOrUpdateCoupon(String email, int couponId);
+    boolean addCoupon(String email, int couponId);
+
+    /**
+     * 使用优惠券
+     *
+     * @param email
+     * @param couponId
+     * @return
+     */
+    boolean useCoupon(String email, int couponId);
 }

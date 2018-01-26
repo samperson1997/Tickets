@@ -1,5 +1,5 @@
 pin = "";
-orderBean = {};
+isSeatSelectedGlobal = 0;
 
 var getParam = function (name) {
     var search = document.location.search;
@@ -30,11 +30,37 @@ function placeOrder() {
     var state = "未支付";
     var seatAssigned = "";
 
+    var couponId = 0;
+
     // 未选座
     var isSeatSelected = 0;
     var seatName = "";
     var seatNum = $("#no-choose-member-order-num").val();
     var price = $("#no-choose-final-price").text().split(" ")[1].split("元")[0];
+
+    switch ($("#no-choose-coupon-select").val()) {
+        case("1"):
+            couponId = 1;
+            break;
+        case("2"):
+            couponId = 2;
+            break;
+        case("5"):
+            couponId = 3;
+            break;
+        case("10"):
+            couponId = 4;
+            break;
+        case("20"):
+            couponId = 5;
+            break;
+        case("50"):
+            couponId = 6;
+            break;
+        case("100"):
+            couponId = 7;
+            break;
+    }
 
     // 已选座
     if ($("#type-select").val() === "choose") {
@@ -42,9 +68,37 @@ function placeOrder() {
         seatName = $("#seat-select").val().split("-")[0];
         seatNum = $("#choose-member-order-num").val();
         price = $("#choose-final-price").text().split(" ")[1].split("元")[0];
+
+        switch ($("#choose-coupon-select").val()) {
+            case("1"):
+                couponId = 1;
+                break;
+            case("2"):
+                couponId = 2;
+                break;
+            case("5"):
+                couponId = 3;
+                break;
+            case("10"):
+                couponId = 4;
+                break;
+            case("20"):
+                couponId = 5;
+                break;
+            case("50"):
+                couponId = 6;
+                break;
+            case("100"):
+                couponId = 7;
+                break;
+        }
+
+        isSeatSelectedGlobal = 1;
     }
 
     var realPrice = price;
+
+    var orderBean = {};
 
     orderBean.orderId = orderId;
     orderBean.email = email;
@@ -64,7 +118,22 @@ function placeOrder() {
         data: JSON.stringify(orderBean),
         dataType: "text",
         success: function (data) {
-            window.location.href = "pay.html?orderId=" + data;
+
+            // 优惠券更新
+            $.ajax({
+                type: "GET",
+                url: "/user/useCoupon",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    "email": email,
+                    "couponId": couponId
+                },
+                dataType: "json",
+                success: function (data1) {
+                    console.log("update user coupon: " + data1.result);
+                    window.location.href = "pay.html?orderId=" + data;
+                }
+            });
         }
     })
 }
@@ -108,15 +177,98 @@ function loadFinalPrice() {
     })
 }
 
-function payOrder() {
-    if ($("#pin").val() !== pin) {
-        $("#pay-tip").text("密码错误。如果您未修改过，钱包密码默认与您初始设置的账户密码相同。");
-    } else {
-        alert("支付成功! ");
-        window.location.href = "index.html";
-    }
+// 取消支付
+function cancelPayOrder() {
+
+    $.ajax({
+        type: "POST",
+        url: "/orders/cancelOrder",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            "orderId": getParam("orderId")
+        },
+        dataType: "json",
+        success: function (data) {
+            window.location.href = "javascript: history.go(-1);";
+        }
+    })
+
 }
 
-function cancelPayOrder() {
-    window.location.href = "javascript: history.go(-1);";
+// 确认支付
+function payOrder() {
+
+    $.ajax({
+        type: "GET",
+        url: "/orders/order",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            "orderId": getParam("orderId")
+        },
+        dataType: "json",
+        success: function (data1) {
+            if (data1.state === "已关闭") {
+
+                console.log(data1.state);
+                alert("由于您未及时支付，订单已经关闭。请重新订票！");
+                window.location.href = "javascript: history.go(-1);";
+
+            } else {
+                var currentAccount = parseFloat($("#current-account").text());
+                var finalPrice = parseFloat($("#final-price").text());
+
+                if ($("#pin").val() !== pin) {
+                    $("#pay-tip").text("密码错误。如果您未修改过，钱包密码默认与您初始设置的账户密码相同。");
+                } else if (currentAccount < finalPrice) {
+                    $("#pay-tip").text("钱包余额不足! ");
+                } else {
+
+                    $("#pay-tip").text("");
+
+                    var email = sessionStorage.getItem('userId');
+
+                    // 钱包钱减少, 会员积分增加
+                    var account = currentAccount - finalPrice;
+                    var increaseScore = finalPrice * 100;
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/user/order",
+                        contentType: "application/x-www-form-urlencoded",
+                        data: {
+                            "email": email,
+                            "account": account,
+                            "increaseScore": increaseScore
+                        },
+                        dataType: "json",
+                        success: function (data0) {
+                            console.log("update user information: " + data0.result);
+
+                            // 订单状态: isPaid = 1
+                            var state = (isSeatSelectedGlobal === 1) ? "未开票" : "未配票";
+                            $.ajax({
+                                type: "POST",
+                                url: "/orders/changeOrder",
+                                contentType: "application/x-www-form-urlencoded",
+                                data: {
+                                    "orderId": getParam("orderId"),
+                                    "state": state
+                                },
+                                dataType: "json",
+                                success: function (data) {
+                                    console.log("update order state: " + data.result);
+                                    alert("支付成功! ");
+                                    window.location.href = "index.html";
+                                }
+                            });
+
+                        }
+                    });
+
+                }
+            }
+        }
+    })
+
+
 }

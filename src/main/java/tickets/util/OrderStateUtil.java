@@ -32,7 +32,9 @@ public class OrderStateUtil {
     }
 
     public String getOrderState(int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed) {
-        if (isPaid == 0) {
+        if (isClosed == 1) {
+            return "已关闭";
+        } else if (isPaid == 0) {
             return "未支付";
         } else if (isUsed == 0 && isClosed == 0) {
             if (isAssigned == 0) {
@@ -48,8 +50,6 @@ public class OrderStateUtil {
                     return "已配票";
                 }
             }
-        } else if (isClosed == 1) {
-            return "已关闭";
         } else if (isUsed == 1) {
             return "已使用";
         }

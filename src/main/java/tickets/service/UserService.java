@@ -60,6 +60,16 @@ public interface UserService {
     ResultMessageBean updateUserInfo(String email, UserBean newUser);
 
     /**
+     * 下订单或取消订单后，修改会员信息
+     *
+     * @param email
+     * @param account
+     * @param increaseScore
+     * @return
+     */
+    ResultMessageBean updateUserInfoAfterOrder(String email, double account, int increaseScore);
+
+    /**
      * 获得优惠券信息
      *
      * @param email
@@ -75,6 +85,15 @@ public interface UserService {
      * @return
      */
     ResultMessageBean convertCoupon(String email, int couponId);
+
+    /**
+     * 使用优惠券
+     *
+     * @param email
+     * @param couponId
+     * @return
+     */
+    ResultMessageBean useCoupon(String email, int couponId);
 
     /**
      * 获得会员折扣

@@ -146,9 +146,9 @@ function passwordIsSame() {
 
 function pinIsSame() {
     if ($("#new-pin").val() !== $("#new-pin-confirm").val()) {
-        passwordTip.innerHTML = "两次输入密码不一致";
+        pinTip.innerHTML = "两次输入密码不一致";
     } else {
-        passwordTip.innerHTML = "";
+        pinTip.innerHTML = "";
     }
 }
 

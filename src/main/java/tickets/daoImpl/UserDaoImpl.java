@@ -64,7 +64,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public boolean saveOrUpdateCoupon(String email, int couponId) {
+    public boolean addCoupon(String email, int couponId) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
@@ -81,6 +81,31 @@ public class UserDaoImpl implements UserDao {
 
         if (!isExist) {
             session.saveOrUpdate(new Coupon(email, couponId, 1));
+        }
+
+        tx.commit();
+        session.close();
+        return true;
+    }
+
+    @Override
+    public boolean useCoupon(String email, int couponId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        List<Coupon> coupons = getCoupon(email);
+
+        for (Coupon coupon : coupons) {
+            if (coupon.getCoupon() == couponId) {
+                int currentNum = coupon.getNumber() - 1;
+                if (currentNum > 0) {
+                    coupon.setNumber(currentNum);
+                    session.saveOrUpdate(coupon);
+                } else {
+                    session.delete(coupon);
+                }
+                break;
+            }
         }
 
         tx.commit();

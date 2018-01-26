@@ -1,41 +1,61 @@
 // 企业发布计划
 function postPlan() {
-    var id = sessionStorage.getItem('venueId');
-    var startTime = $("#date-picker").val() + " " + $("#start-time-input").val();
-    var endTime = $("#date-picker").val() + " " + $("#end-time-input").val();
-    var type = $("#type-select").val().substr(0, 1);
-    var introduction = $("#introduction-input").val();
 
-    var seatList = [];
+    if (checkVenuePlanFirst()) {
+        var id = sessionStorage.getItem('venueId');
+        var startTime = $("#date-picker").val() + " " + $("#start-time-input").val();
+        var endTime = $("#date-picker").val() + " " + $("#end-time-input").val();
+        var type = $("#type-select").val().substr(0, 1);
+        var introduction = $("#introduction-input").val();
+
+        var seatList = [];
+        for (var i = 1; i <= sessionStorage.getItem("planSeatNum"); i++) {
+            var seatBean = {};
+            seatBean.seatName = $("#seat-name" + i).text();
+            seatBean.seatNum = $("#seat-num" + i).text();
+            seatBean.seatPrice = $("#seat-price" + i).val();
+            seatList.push(seatBean);
+        }
+
+        var planSeatBean = {};
+        planSeatBean.venueId = id;
+        planSeatBean.startTime = startTime;
+        planSeatBean.endTime = endTime;
+        planSeatBean.type = type;
+        planSeatBean.introduction = introduction;
+        planSeatBean.seatPriceBeanList = seatList;
+
+        console.log(planSeatBean);
+
+        $.ajax({
+            type: "POST",
+            url: "/plans/postPlan",
+            contentType: "application/json",
+            data: JSON.stringify(planSeatBean),
+            dataType: "json",
+            success: function (data) {
+                alert("活动发布成功! ");
+                window.location.href = "venue-plan.html";
+            }
+        })
+    } else {
+        $("#venue-plan-tip").text("请将信息填写完整");
+    }
+}
+
+function checkVenuePlanFirst() {
+    var isValid = $("#date-picker").val() !== null && $("#date-picker").val() !== ""
+        && $("#start-time-input").val() !== null && $("#start-time-input").val() !== ""
+        && $("#end-time-input").val() !== null && $("#end-time-input").val() !== ""
+        && $("#introduction-input").val() !== null && $("#introduction-input").val() !== "";
+
     for (var i = 1; i <= sessionStorage.getItem("planSeatNum"); i++) {
-        var seatBean = {};
-        seatBean.seatName = $("#seat-name" + i).text();
-        seatBean.seatNum = $("#seat-num" + i).text();
-        seatBean.seatPrice = $("#seat-price" + i).val();
-        seatList.push(seatBean);
+        if ($("#seat-price" + i).val() === null || $("#seat-price" + i).val() === "") {
+            isValid = false;
+        }
     }
 
-    var planSeatBean = {};
-    planSeatBean.venueId = id;
-    planSeatBean.startTime = startTime;
-    planSeatBean.endTime = endTime;
-    planSeatBean.type = type;
-    planSeatBean.introduction = introduction;
-    planSeatBean.seatPriceBeanList = seatList;
-
-    console.log(planSeatBean);
-
-    $.ajax({
-        type: "POST",
-        url: "/plans/postPlan",
-        contentType: "application/json",
-        data: JSON.stringify(planSeatBean),
-        dataType: "json",
-        success: function (data) {
-            alert("活动发布成功! ");
-            window.location.href = "venue-plan.html";
-        }
-    })
+    return isValid;
 }
 
 // 用户界面

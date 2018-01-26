@@ -93,6 +93,17 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ResultMessageBean updateUserInfoAfterOrder(String email, double account, int increaseScore) {
+        User user = userDao.getUser(email);
+        user.setAccount(account);
+        user.setScore(user.getScore() + increaseScore);
+        userDao.saveOrUpdateUser(user);
+
+        return new ResultMessageBean(true);
+    }
+
+
+    @Override
     public List<CouponBean> getCoupon(String email) {
         List<Coupon> coupons = userDao.getCoupon(email);
         List<CouponBean> res = new ArrayList<>();
@@ -110,9 +121,17 @@ public class UserServiceImpl implements UserService {
             return new ResultMessageBean(false, "会员积分不足，无法兑换");
         }
 
-        userDao.saveOrUpdateCoupon(email, couponId);
+        userDao.addCoupon(email, couponId);
         user.setCurrentScore(user.getCurrentScore() - couponUtil.getCouponScore(couponId));
         userDao.saveOrUpdateUser(user);
+
+        return new ResultMessageBean(true);
+    }
+
+    @Override
+    public ResultMessageBean useCoupon(String email, int couponId) {
+
+        userDao.useCoupon(email, couponId);
 
         return new ResultMessageBean(true);
     }
