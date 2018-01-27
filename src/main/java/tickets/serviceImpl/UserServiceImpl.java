@@ -93,10 +93,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultMessageBean updateUserInfoAfterOrder(String email, double account, int increaseScore) {
+    public ResultMessageBean updateUserInfoAfterOrder(String email, double deltaAccount, int deltaScore) {
         User user = userDao.getUser(email);
-        user.setAccount(account);
-        user.setScore(user.getScore() + increaseScore);
+        user.setAccount(user.getAccount() + deltaAccount);
+        user.setScore(user.getScore() + deltaScore);
         userDao.saveOrUpdateUser(user);
 
         return new ResultMessageBean(true);

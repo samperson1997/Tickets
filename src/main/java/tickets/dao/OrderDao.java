@@ -2,6 +2,8 @@ package tickets.dao;
 
 import tickets.model.Order;
 
+import java.util.List;
+
 public interface OrderDao {
 
     /**
@@ -26,4 +28,12 @@ public interface OrderDao {
      * @return
      */
     int getOrderNum();
+
+    /**
+     * 获得用户订单列表
+     *
+     * @param email
+     * @return
+     */
+    List<Order> getOrderByEmail(String email);
 }

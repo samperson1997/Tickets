@@ -73,7 +73,7 @@ function loadMusicPlan() {
                 $("#concert").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
                     + "</b><br><i class='fa fa-clock-o'></i> "
                     + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
-                    + "<br><i class='fa fa-location-arrow'></i> " + data[i].name + ", " + data[i].location
+                    + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                     + "<br><i class='fa fa-ticket'></i> " + data[i].lowPrice + "元起, <a href='/plan.html?planId="
                     + data[i].planId + "'>立即预定</a>" + "</p></div>");
             }
@@ -95,7 +95,7 @@ function loadDancePlan() {
                 $("#dance").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
                     + "</b><br><i class='fa fa-clock-o'></i> "
                     + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
-                    + "<br><i class='fa fa-location-arrow'></i> " + data[i].name + ", " + data[i].location
+                    + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                     + "<br><i class='fa fa-ticket'></i> " + data[i].lowPrice + "元起, <a href='/plan.html?planId="
                     + data[i].planId + "'>立即预定</a>" + "</p></div>");
             }
@@ -117,7 +117,7 @@ function loadPlayPlan() {
                 $("#play").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
                     + "</b><br><i class='fa fa-clock-o'></i> "
                     + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
-                    + "<br><i class='fa fa-location-arrow'></i> " + data[i].name + ", " + data[i].location
+                    + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                     + "<br><i class='fa fa-ticket'></i> " + data[i].lowPrice + "元起, <a href='/plan.html?planId="
                     + data[i].planId + "'>立即预定</a>" + "</p></div>");
             }
@@ -139,7 +139,7 @@ function loadGamePlan() {
                 $("#game").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
                     + "</b><br><i class='fa fa-clock-o'></i> "
                     + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
-                    + "<br><i class='fa fa-location-arrow'></i> " + data[i].name + ", " + data[i].location
+                    + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                     + "<br><i class='fa fa-ticket'></i> " + data[i].lowPrice + "元起, <a href='/plan.html?planId="
                     + data[i].planId + "'>立即预定</a>" + "</p></div>");
             }
@@ -161,7 +161,7 @@ function loadOtherPlan() {
                 $("#other").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
                     + "</b><br><i class='fa fa-clock-o'></i> "
                     + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
-                    + "<br><i class='fa fa-location-arrow'></i> " + data[i].name + ", " + data[i].location
+                    + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                     + "<br><i class='fa fa-ticket'></i> " + data[i].lowPrice + "元起, <a href='/plan.html?planId="
                     + data[i].planId + "'>立即预定</a>" + "</p></div>");
             }

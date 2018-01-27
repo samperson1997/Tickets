@@ -8,10 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import tickets.bean.OrderBean;
+import tickets.bean.OrderPlanBean;
+import tickets.bean.OrderStatisticBean;
 import tickets.bean.ResultMessageBean;
 import tickets.service.OrderService;
 import tickets.service.PlanService;
 
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -100,9 +103,29 @@ public class OrderController {
             method = RequestMethod.GET
     )
     @ResponseBody
-    public OrderBean getOrder(String orderId) {
+    public OrderBean getOrderByOrderId(String orderId) {
 
         return orderService.getOrderByOrderId(orderId);
+    }
+
+    @RequestMapping(
+            value = "/list",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public List<OrderPlanBean> getOrderByEmail(String email) {
+
+        return orderService.getOrderByEmail(email);
+    }
+
+    @RequestMapping(
+            value = "/statistics",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public OrderStatisticBean getOrderStatistic(String email) {
+
+        return orderService.getOrderStatistic(email);
     }
 
 }

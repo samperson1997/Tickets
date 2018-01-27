@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import tickets.dao.OrderDao;
 import tickets.model.Order;
 
+import java.util.List;
+
 @Repository
 public class OrderDaoImpl implements OrderDao {
 
@@ -54,5 +56,19 @@ public class OrderDaoImpl implements OrderDao {
         session.close();
 
         return orderNum;
+    }
+
+    @Override
+    public List<Order> getOrderByEmail(String email) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<Order> query = session.createNativeQuery("SELECT * FROM orders WHERE email = ?", Order.class);
+        query.setParameter(1, email);
+        List<Order> orderList = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return orderList;
     }
 }

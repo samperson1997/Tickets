@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets</title>
+    <link rel="stylesheet" href="css/origin.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/strategy.css">
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <script src="js/util/jquery-3.2.1.min.js"></script>
+    <script src="js/util/scrollReveal.js"></script>
+    <script src="js/angular/angular.js"></script>
+
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets</h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+
+            <b>订单中心</b>
+            <li>
+                <a href="#member-order">我的订单</a>
+            </li>
+            <li>
+                <a href="#member-statistics">我的统计信息</a>
+            </li>
+
+            <li><b>
+                <a href="index.html">搜索活动</a>
+            </b></li>
+            <li><b>
+                <a href="member.html">个人中心</a>
+            </b></li>
+
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0">
+
+        <div id="member-order">
+            <div class="title-name" style="display: inline;">我的订单</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Orders</div>
+            <div class="userinfo-div" id="unpaid-order">
+                <p class="item-title">
+                    待支付订单
+                </p>
+            </div>
+            <div class="userinfo-div" id="unassigned-seat-order">
+                <p class="item-title">
+                    待开票订单
+                </p>
+            </div>
+            <div class="userinfo-div" id="unassigned-no-seat-order">
+                <p class="item-title">
+                    待配票订单
+                </p>
+            </div>
+            <div class="userinfo-div" id="unused-order">
+                <p class="item-title">
+                    待使用订单
+                </p>
+            </div>
+            <div class="userinfo-div" id="used-order">
+                <p class="item-title">
+                    已使用订单
+                </p>
+            </div>
+            <div class="userinfo-div" id="closed-order">
+                <p class="item-title">
+                    已关闭订单
+                </p>
+            </div>
+        </div>
+
+        <div id="member-statistics">
+            <div class="title-name" style="display: inline;">我的统计信息</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Statistics</div>
+            <div class="userinfo-div">
+                <p class="item-title">
+                    全部订单总计
+                </p>
+                <p id="all-orders"></p>
+
+                <p class="item-title">
+                    已关闭总计
+                </p>
+                <p id="closed-orders"></p>
+
+                <p class="item-title">
+                    取消订单总计
+                </p>
+                <p id="cancel-orders"></p>
+
+                <p class="item-title">
+                    消费金额总计
+                </p>
+                <p id="total-price"></p>
+
+                <p class="item-title">
+                    活动类型统计
+                </p>
+                <div id="member-chart" style="width:30%; height: 300%;"></div>
+
+            </div>
+        </div>
+    </div>
+</header>
+
+</body>
+
+<script src="js/util/echarts.js"></script>
+<script src="js/order/member.js"></script>
+
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+
+<script>
+    $(document).ready(loadOrders());
+    $(document).ready(loadStatistics());
+</script>
+</html>

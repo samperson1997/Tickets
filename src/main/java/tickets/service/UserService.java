@@ -63,11 +63,11 @@ public interface UserService {
      * 下订单或取消订单后，修改会员信息
      *
      * @param email
-     * @param account
-     * @param increaseScore
+     * @param deltaAccount
+     * @param deltaScore
      * @return
      */
-    ResultMessageBean updateUserInfoAfterOrder(String email, double account, int increaseScore);
+    ResultMessageBean updateUserInfoAfterOrder(String email, double deltaAccount, int deltaScore);
 
     /**
      * 获得优惠券信息

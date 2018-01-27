@@ -6,7 +6,7 @@ var getParam = function (name) {
     var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
     var matcher = pattern.exec(search);
     var items = null;
-    if (null != matcher) {
+    if (null !== matcher) {
         try {
             items = decodeURIComponent(decodeURIComponent(matcher[1]));
         } catch (e) {
@@ -62,11 +62,21 @@ function placeOrder() {
             break;
     }
 
+    var maintainNum = 0;
+    var maintainNumLess = false;
+
     // 已选座
+
+
     if ($("#type-select").val() === "choose") {
         isSeatSelected = 1;
         seatName = $("#seat-select").val().split("-")[0];
+        maintainNum = $("#seat-select").val().split("-")[2];
         seatNum = $("#choose-member-order-num").val();
+
+        console.log(maintainNum);
+        console.log(seatNum);
+
         price = $("#choose-final-price").text().split(" ")[1].split("元")[0];
 
         switch ($("#choose-coupon-select").val()) {
@@ -94,48 +104,57 @@ function placeOrder() {
         }
 
         isSeatSelectedGlobal = 1;
+
+        if (maintainNum < seatNum) {
+            maintainNumLess = true;
+        }
     }
 
-    var realPrice = price;
+    if (isSeatSelected === 1 && maintainNumLess) {
+        alert("所选座位类型数量不足, 请重新选择");
+    } else {
 
-    var orderBean = {};
+        var realPrice = price;
 
-    orderBean.orderId = orderId;
-    orderBean.email = email;
-    orderBean.planId = planId;
-    orderBean.price = price;
-    orderBean.realPrice = realPrice;
-    orderBean.state = state;
-    orderBean.seatAssigned = seatAssigned;
-    orderBean.isSeatSelected = isSeatSelected;
-    orderBean.seatName = seatName;
-    orderBean.seatNum = seatNum;
+        var orderBean = {};
 
-    $.ajax({
-        type: "POST",
-        url: "/orders/addOrder",
-        contentType: "application/json",
-        data: JSON.stringify(orderBean),
-        dataType: "text",
-        success: function (data) {
+        orderBean.orderId = orderId;
+        orderBean.email = email;
+        orderBean.planId = planId;
+        orderBean.price = price;
+        orderBean.realPrice = realPrice;
+        orderBean.state = state;
+        orderBean.seatAssigned = seatAssigned;
+        orderBean.isSeatSelected = isSeatSelected;
+        orderBean.seatName = seatName;
+        orderBean.seatNum = seatNum;
 
-            // 优惠券更新
-            $.ajax({
-                type: "GET",
-                url: "/user/useCoupon",
-                contentType: "application/x-www-form-urlencoded",
-                data: {
-                    "email": email,
-                    "couponId": couponId
-                },
-                dataType: "json",
-                success: function (data1) {
-                    console.log("update user coupon: " + data1.result);
-                    window.location.href = "pay.html?orderId=" + data;
-                }
-            });
-        }
-    })
+        $.ajax({
+            type: "POST",
+            url: "/orders/addOrder",
+            contentType: "application/json",
+            data: JSON.stringify(orderBean),
+            dataType: "text",
+            success: function (data) {
+
+                // 优惠券更新
+                $.ajax({
+                    type: "GET",
+                    url: "/user/useCoupon",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: {
+                        "email": email,
+                        "couponId": couponId
+                    },
+                    dataType: "json",
+                    success: function (data1) {
+                        console.log("update user coupon: " + data1.result);
+                        window.location.href = "pay.html?orderId=" + data;
+                    }
+                });
+            }
+        })
+    }
 }
 
 function loadAccount() {
@@ -209,7 +228,6 @@ function payOrder() {
         success: function (data1) {
             if (data1.state === "已关闭") {
 
-                console.log(data1.state);
                 alert("由于您未及时支付，订单已经关闭。请重新订票！");
                 window.location.href = "javascript: history.go(-1);";
 
@@ -228,17 +246,14 @@ function payOrder() {
                     var email = sessionStorage.getItem('userId');
 
                     // 钱包钱减少, 会员积分增加
-                    var account = currentAccount - finalPrice;
-                    var increaseScore = finalPrice * 100;
-
                     $.ajax({
                         type: "POST",
                         url: "/user/order",
                         contentType: "application/x-www-form-urlencoded",
                         data: {
                             "email": email,
-                            "account": account,
-                            "increaseScore": increaseScore
+                            "deltaAccount": -finalPrice,
+                            "deltaScore": finalPrice * 100
                         },
                         dataType: "json",
                         success: function (data0) {

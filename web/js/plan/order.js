@@ -5,7 +5,7 @@ var getParam = function (name) {
     var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
     var matcher = pattern.exec(search);
     var items = null;
-    if (null != matcher) {
+    if (null !== matcher) {
         try {
             items = decodeURIComponent(decodeURIComponent(matcher[1]));
         } catch (e) {
@@ -89,7 +89,7 @@ function loadPlanSeats() {
         success: function (data) {
             for (var i = 0; i < data.seatPriceBeanList.length; i++) {
                 $("#seat-select").append("<option value='" + data.seatPriceBeanList[i].seatName
-                    + "-" + data.seatPriceBeanList[i].seatPrice + "'>"
+                    + "-" + data.seatPriceBeanList[i].seatPrice + "-" + data.seatPriceBeanList[i].seatNum + "'>"
                     + data.seatPriceBeanList[i].seatName + "区</option>");
             }
 

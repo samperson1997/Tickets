@@ -120,9 +120,9 @@ public class UserController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResultMessageBean updateUserInfoAfterOrder(String email, double account, int increaseScore) {
+    public ResultMessageBean updateUserInfoAfterOrder(String email, double deltaAccount, int deltaScore) {
 
-        return userService.updateUserInfoAfterOrder(email, account, increaseScore);
+        return userService.updateUserInfoAfterOrder(email, deltaAccount, deltaScore);
     }
 
     /**
