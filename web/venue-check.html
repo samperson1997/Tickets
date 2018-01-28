@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html style="width: 100%">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tickets - venue</title>
+    <link rel="stylesheet" href="css/origin.css">
+    <link rel="stylesheet" href="css/top-bar.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/button.css">
+    <link rel="stylesheet" href="css/function.css">
+    <link rel="stylesheet" href="css/page-main-body.css">
+    <link rel="stylesheet" href="css/strategy.css">
+
+    <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
+    <script src="js/util/jquery-3.2.1.min.js"></script>
+    <script src="js/util/scrollReveal.js"></script>
+    <script src="js/angular/angular.js"></script>
+</head>
+
+<body>
+<header>
+
+    <div id="title" onselectstart="return false;">
+
+    </div>
+
+    <div id="title-div">
+        <h1 id="main-title" data-scroll-reveal="enter top over 1s">Tickets <span id="sub-title">场馆版</span></h1>
+    </div>
+
+    <div class="page-content-fix">
+        <ul>
+            <b>活动检票</b>
+            <li>
+                <a href="#plan-info">活动详情</a>
+            </li>
+            <li>
+                <a href="#check-member">检票登记</a>
+            </li>
+            <li>
+                <a href="#buy-member">会员购票</a>
+            </li>
+            <li>
+                <a href="#buy-no-member">非会员购票</a>
+            </li>
+
+            <li><b>
+                <a href="venue-plan.html">发布计划</a>
+            </b></li>
+            <li><b>
+                <a href="venue.html">场馆信息维护</a>
+            </b></li>
+        </ul>
+    </div>
+
+    <div style="float: right; width: 80%; margin: 6% 0">
+
+        <div id="plan-info">
+            <div class="stock-seatName" style="display: inline;">活动详情</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Plan Information</div>
+            <div class="userinfo-div">
+                <p class="item-title">
+                    活动简介
+                </p>
+                <p id="venue-plan-introduction"></p>
+
+                <p class="item-title">
+                    活动日期
+                </p>
+                <p id="venue-plan-date"></p>
+
+                <p class="item-title">
+                    开始时间
+                </p>
+                <p id="venue-plan-start"></p>
+
+                <p class="item-title">
+                    结束时间
+                </p>
+                <p id="venue-plan-end"></p>
+
+                <p class="item-title">
+                    活动类型
+                </p>
+                <p id="venue-plan-type"></p>
+
+                <p class="item-title">
+                    活动地点
+                </p>
+                <p id="venue-plan-location"></p>
+
+                <div id="venue-plan-price">
+
+                </div>
+            </div>
+        </div>
+
+        <div id="check-member">
+            <div class="stock-seatName" style="display: inline;">检票登记</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Checking Tickets</div>
+
+            <div class="userinfo-div">
+                <p class="item-title">
+                    取票号
+                </p>
+                <input type="text" class="input-box" id="check-member-order">
+
+                <button class="button-green" id="check-member-button" onclick="checkOrder()">确认取票
+                </button>
+
+                <h6 style="color:red" id="check-member-tip"></h6>
+            </div>
+        </div>
+
+        <div id="buy-member">
+            <div class="stock-seatName" style="display: inline;">会员购票</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Members</div>
+
+            <div class="userinfo-div">
+                <p class="item-title">
+                    会员邮箱
+                </p>
+                <input type="text" class="input-box" id="buy-member-email">
+
+                <p class="item-title">
+                    座位类型
+                </p>
+                <select id="seat-select" onchange="changeChooseTotalPrice()">
+
+                </select>
+
+                <p class="item-title">
+                    购买张数 (每单上限6张)
+                </p>
+                <select id="choose-member-order-num" onchange="changeChooseTotalPrice()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+
+                <button class="button-green" id="buy-member-button" onclick="placeOrder()">确认订票
+                </button>
+
+                <p class="item-title">
+                    需收总价
+                </p>
+                <p id="choose-total-price"></p>
+                <p id="choose-discount-price"></p>
+                <p id="choose-final-price"></p>
+
+
+            </div>
+        </div>
+
+        <div id="buy-no-member">
+            <div class="stock-seatName" style="display: inline;">非会员购票</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Non-members</div>
+
+            <div class="userinfo-div">
+                <p class="item-title">
+                    座位类型
+                </p>
+                <select id="no-member-seat-select" onchange="changeChooseTotalPrice()">
+
+                </select>
+
+                <p class="item-title">
+                    购买张数 (每单上限6张)
+                </p>
+                <select id="choose-no-member-order-num" onchange="changeChooseTotalPrice()">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                </select>
+
+                <button class="button-green" id="buy-no-member-button" onclick="placeOrder()">确认订票
+                </button>
+
+                <p class="item-title">
+                    需收总价
+                </p>
+                <p id="no-member-choose-total-price"></p>
+
+            </div>
+        </div>
+
+    </div>
+
+</header>
+
+</body>
+
+
+<script src="js/order/venue.js"></script>
+<script src="js/order/check.js"></script>
+
+<script>
+    (function () {
+        window.scrollReveal = new scrollReveal({
+            reset: false,
+            move: '50px'
+        });
+    })();
+
+</script>
+
+<script>
+    $(document).ready(loadPlanInfo());
+</script>
+
+</html>

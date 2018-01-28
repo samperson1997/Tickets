@@ -42,6 +42,14 @@ public interface PlanDao {
     List<Plan> getPlansByType(int type);
 
     /**
+     * 根据场馆识别码获得计划列表
+     *
+     * @param venueId
+     * @return
+     */
+    List<Plan> getPlansByVenueId(String venueId);
+
+    /**
      * 根据计划id获得计划详情
      *
      * @param planId

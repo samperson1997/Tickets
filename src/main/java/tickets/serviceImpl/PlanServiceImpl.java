@@ -2,10 +2,7 @@ package tickets.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tickets.bean.PlanSeatBean;
-import tickets.bean.PlanVenueBean;
-import tickets.bean.ResultMessageBean;
-import tickets.bean.SeatPriceBean;
+import tickets.bean.*;
 import tickets.dao.PlanDao;
 import tickets.dao.VenueDao;
 import tickets.model.Plan;
@@ -50,9 +47,9 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<PlanVenueBean> getMemberPlans(int type) {
+    public List<PlanMemberBean> getMemberPlans(int type) {
         List<Plan> planList = planDao.getPlansByType(type);
-        List<PlanVenueBean> res = new ArrayList<>();
+        List<PlanMemberBean> res = new ArrayList<>();
 
         for (Plan plan : planList) {
             Venue venue = venueDao.getVenueById(plan.getVenueId());
@@ -67,7 +64,7 @@ public class PlanServiceImpl implements PlanService {
                 seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
             }
 
-            res.add(new PlanVenueBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
+            res.add(new PlanMemberBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
                     String.valueOf(plan.getStartTime()), String.valueOf(plan.getEndTime()), plan.getType(),
                     plan.getIntroduction(), lowPrice, highPrice, seatPriceBeans));
         }
@@ -76,7 +73,25 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public PlanVenueBean getDetailedPlan(int planId) {
+    public List<PlanVenueBean> getVenuePlans(String venueId) {
+        List<Plan> planList = planDao.getPlansByVenueId(venueId);
+        List<PlanVenueBean> res = new ArrayList<>();
+        for (Plan plan : planList) {
+            List<PlanSeat> planSeats = planDao.getPlanSeat(plan.getId());
+            List<SeatPriceBean> seatPriceBeans = new ArrayList<>();
+
+            for (PlanSeat planSeat : planSeats) {
+                seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
+            }
+
+            res.add(new PlanVenueBean(plan.getId(), String.valueOf(plan.getStartTime()),
+                    String.valueOf(plan.getEndTime()), plan.getType(), plan.getIntroduction(), seatPriceBeans));
+        }
+        return res;
+    }
+
+    @Override
+    public PlanMemberBean getDetailedPlan(int planId) {
         Plan plan = planDao.getPlanByPlanId(planId);
         Venue venue = venueDao.getVenueById(plan.getVenueId());
         List<PlanSeat> planSeats = planDao.getPlanSeat(plan.getId());
@@ -90,7 +105,7 @@ public class PlanServiceImpl implements PlanService {
             seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
         }
 
-        return new PlanVenueBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
+        return new PlanMemberBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
                 String.valueOf(plan.getStartTime()), String.valueOf(plan.getEndTime()), plan.getType(),
                 plan.getIntroduction(), lowPrice, highPrice, seatPriceBeans);
     }

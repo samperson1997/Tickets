@@ -48,4 +48,12 @@ public interface OrderService {
      * @return
      */
     OrderStatisticBean getOrderStatistic(String email);
+
+    /**
+     * 查看订单有效性
+     *
+     * @param orderId
+     * @return
+     */
+    ResultMessageBean checkValidation(String orderId, String venueId);
 }

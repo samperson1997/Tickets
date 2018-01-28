@@ -79,6 +79,21 @@ public class PlanDaoImpl implements PlanDao {
     }
 
     @Override
+    public List<Plan> getPlansByVenueId(String venueId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        Query<Plan> query = session.createNativeQuery("SELECT * FROM plans WHERE venueId = ?", Plan.class);
+        query.setParameter(1, venueId);
+        List<Plan> res = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return res;
+    }
+
+    @Override
     public Plan getPlanByPlanId(int planId) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();

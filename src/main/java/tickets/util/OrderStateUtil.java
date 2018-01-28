@@ -21,7 +21,7 @@ public class OrderStateUtil {
                 break;
             case "已使用":
                 order.setIsUsed(1);
-                order.setIsClosed(1);
+                order.setIsClosed(0);
                 break;
             case "已关闭":
                 order.setIsClosed(1);
@@ -32,7 +32,9 @@ public class OrderStateUtil {
     }
 
     public String getOrderState(int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed) {
-        if (isClosed == 1) {
+        if (isUsed == 1) {
+            return "已使用";
+        } else if (isClosed == 1) {
             return "已关闭";
         } else if (isPaid == 0) {
             return "未支付";
@@ -50,8 +52,6 @@ public class OrderStateUtil {
                     return "已配票";
                 }
             }
-        } else if (isUsed == 1) {
-            return "已使用";
         }
 
         return "";

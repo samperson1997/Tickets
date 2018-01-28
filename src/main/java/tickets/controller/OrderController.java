@@ -28,6 +28,12 @@ public class OrderController {
     @Autowired
     private PlanService planService;
 
+    /**
+     * 下新订单
+     *
+     * @param orderBean
+     * @return
+     */
     @RequestMapping(
             value = "/addOrder",
             method = RequestMethod.POST,
@@ -63,6 +69,12 @@ public class OrderController {
         return orderId;
     }
 
+    /**
+     * 取消订单
+     *
+     * @param orderId
+     * @return
+     */
     @RequestMapping(
             value = "/cancelOrder",
             method = RequestMethod.POST
@@ -84,6 +96,12 @@ public class OrderController {
         return new ResultMessageBean(true);
     }
 
+    /**
+     * 更换订单状态
+     *
+     * @param orderId
+     * @return
+     */
     @RequestMapping(
             value = "/changeOrder",
             method = RequestMethod.POST
@@ -98,6 +116,28 @@ public class OrderController {
         return new ResultMessageBean(true);
     }
 
+    /**
+     * 查看订单是否有效
+     *
+     * @param orderId
+     * @return
+     */
+    @RequestMapping(
+            value = "/checkValidation",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public ResultMessageBean checkValidation(String orderId, String venueId) {
+
+        return orderService.checkValidation(orderId, venueId);
+    }
+
+    /**
+     * 获得订单详细信息
+     *
+     * @param orderId
+     * @return
+     */
     @RequestMapping(
             value = "/order",
             method = RequestMethod.GET
@@ -108,6 +148,12 @@ public class OrderController {
         return orderService.getOrderByOrderId(orderId);
     }
 
+    /**
+     * 获得会员订单列表
+     *
+     * @param email
+     * @return
+     */
     @RequestMapping(
             value = "/list",
             method = RequestMethod.GET
@@ -118,6 +164,12 @@ public class OrderController {
         return orderService.getOrderByEmail(email);
     }
 
+    /**
+     * 获得会员订单统计数据
+     *
+     * @param email
+     * @return
+     */
     @RequestMapping(
             value = "/statistics",
             method = RequestMethod.GET

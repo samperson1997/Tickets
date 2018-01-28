@@ -54,11 +54,16 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public OrderBean getOrderByOrderId(String orderId) {
         Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderId));
-        String state = orderStateUtil.getOrderState(order.getIsPaid(), order.getIsSeatSelected(), order.getIsAssigned(),
-                order.getIsUsed(), order.getIsClosed());
+        if (order != null) {
+            String state = orderStateUtil.getOrderState(order.getIsPaid(), order.getIsSeatSelected(), order.getIsAssigned(),
+                    order.getIsUsed(), order.getIsClosed());
 
-        return new OrderBean(orderId, order.getEmail(), order.getPlanId(), order.getPrice(), order.getRealPrice(),
-                order.getIsSeatSelected(), state, order.getSeatName(), order.getSeatNum(), order.getSeatAssigned());
+            return new OrderBean(orderId, order.getEmail(), order.getPlanId(), order.getPrice(), order.getRealPrice(),
+                    order.getIsSeatSelected(), state, order.getSeatName(), order.getSeatNum(), order.getSeatAssigned());
+
+        } else {
+            return null;
+        }
     }
 
     @Override
@@ -124,6 +129,25 @@ public class OrderServiceImpl implements OrderService {
         }
         return new OrderStatisticBean(allOrders, closedOrders, cancelOrders, totalPrice,
                 type1Order, type2Order, type3Order, type4Order, type5Order);
+    }
+
+    @Override
+    public ResultMessageBean checkValidation(String orderId, String venueId) {
+        if (orderId.length() != 7) {
+            return new ResultMessageBean(false, "取票号错误");
+        }
+
+        OrderBean orderBean = getOrderByOrderId(orderId);
+        String venue = planDao.getPlanByPlanId(orderBean.getPlanId()).getVenueId();
+        if (!venue.equals(venueId)) {
+            return new ResultMessageBean(false, "取票号错误");
+        } else if (orderBean.getState().equals("已关闭")) {
+            return new ResultMessageBean(false, "该订单已取消");
+        } else if (orderBean.getState().equals("已使用")) {
+            return new ResultMessageBean(false, "该订单已使用");
+        }
+
+        return new ResultMessageBean(true);
     }
 
     /**

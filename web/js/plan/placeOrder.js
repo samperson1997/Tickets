@@ -66,8 +66,6 @@ function placeOrder() {
     var maintainNumLess = false;
 
     // 已选座
-
-
     if ($("#type-select").val() === "choose") {
         isSeatSelected = 1;
         seatName = $("#seat-select").val().split("-")[0];
@@ -105,7 +103,7 @@ function placeOrder() {
 
         isSeatSelectedGlobal = 1;
 
-        if (maintainNum < seatNum) {
+        if (parseInt(maintainNum) < parseInt(seatNum)) {
             maintainNumLess = true;
         }
     }
@@ -245,7 +243,7 @@ function payOrder() {
 
                     var email = sessionStorage.getItem('userId');
 
-                    // 钱包钱减少, 会员积分增加
+                    // 钱包钱减少, 会员积分不增加
                     $.ajax({
                         type: "POST",
                         url: "/user/order",
@@ -253,7 +251,7 @@ function payOrder() {
                         data: {
                             "email": email,
                             "deltaAccount": -finalPrice,
-                            "deltaScore": finalPrice * 100
+                            "deltaScore": 0
                         },
                         dataType: "json",
                         success: function (data0) {

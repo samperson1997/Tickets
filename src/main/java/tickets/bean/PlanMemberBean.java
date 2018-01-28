@@ -2,9 +2,15 @@ package tickets.bean;
 
 import java.util.List;
 
-public class PlanVenueBean {
+public class PlanMemberBean {
 
     private int planId;
+
+    private String venueId;
+
+    private String name;
+
+    private String location;
 
     private String startTime;
 
@@ -14,17 +20,26 @@ public class PlanVenueBean {
 
     private String introduction;
 
+    private double lowPrice;
+
+    private double highPrice;
+
     private List<SeatPriceBean> seatPriceBeanList;
 
-    public PlanVenueBean() {
+    public PlanMemberBean() {
     }
 
-    public PlanVenueBean(int planId, String startTime, String endTime, int type, String introduction, List<SeatPriceBean> seatPriceBeanList) {
+    public PlanMemberBean(int planId, String venueId, String name, String location, String startTime, String endTime, int type, String introduction, double lowPrice, double highPrice, List<SeatPriceBean> seatPriceBeanList) {
         this.planId = planId;
+        this.venueId = venueId;
+        this.name = name;
+        this.location = location;
         this.startTime = startTime;
         this.endTime = endTime;
         this.type = type;
         this.introduction = introduction;
+        this.lowPrice = lowPrice;
+        this.highPrice = highPrice;
         this.seatPriceBeanList = seatPriceBeanList;
     }
 
@@ -34,6 +49,30 @@ public class PlanVenueBean {
 
     public void setPlanId(int planId) {
         this.planId = planId;
+    }
+
+    public String getVenueId() {
+        return venueId;
+    }
+
+    public void setVenueId(String venueId) {
+        this.venueId = venueId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public String getStartTime() {
@@ -66,6 +105,22 @@ public class PlanVenueBean {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public double getLowPrice() {
+        return lowPrice;
+    }
+
+    public void setLowPrice(double lowPrice) {
+        this.lowPrice = lowPrice;
+    }
+
+    public double getHighPrice() {
+        return highPrice;
+    }
+
+    public void setHighPrice(double highPrice) {
+        this.highPrice = highPrice;
     }
 
     public List<SeatPriceBean> getSeatPriceBeanList() {
