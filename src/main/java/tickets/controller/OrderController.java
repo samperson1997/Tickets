@@ -7,10 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import tickets.bean.OrderBean;
-import tickets.bean.OrderPlanBean;
-import tickets.bean.OrderStatisticBean;
-import tickets.bean.ResultMessageBean;
+import tickets.bean.*;
 import tickets.service.OrderService;
 import tickets.service.PlanService;
 
@@ -171,13 +168,29 @@ public class OrderController {
      * @return
      */
     @RequestMapping(
-            value = "/statistics",
+            value = "/memberStatistics",
             method = RequestMethod.GET
     )
     @ResponseBody
-    public OrderStatisticBean getOrderStatistic(String email) {
+    public UserStatisticBean getMemberStatistic(String email) {
 
-        return orderService.getOrderStatistic(email);
+        return orderService.getMemberStatistic(email);
+    }
+
+    /**
+     * 获得场馆订单统计数据
+     *
+     * @param venueId
+     * @return
+     */
+    @RequestMapping(
+            value = "/venueStatistics",
+            method = RequestMethod.GET
+    )
+    @ResponseBody
+    public VenueStatisticBean getVenueStatistic(String venueId) {
+
+        return orderService.getVenueStatistic(venueId);
     }
 
 }

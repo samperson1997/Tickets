@@ -189,7 +189,7 @@ function loadStatistics() {
 
     $.ajax({
         type: "GET",
-        url: "/orders/statistics",
+        url: "/orders/memberStatistics",
         contentType: "application/x-www-form-urlencoded",
         data: {
             "email": email

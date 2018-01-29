@@ -129,4 +129,17 @@ public class VenueDaoImpl implements VenueDao {
 
         return list;
     }
+
+    @Override
+    public List<Venue> getVenues() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<Venue> query = session.createNativeQuery("SELECT * FROM venues", Venue.class);
+        List<Venue> list = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return list;
+    }
 }

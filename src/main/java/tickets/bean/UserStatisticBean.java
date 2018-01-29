@@ -1,6 +1,6 @@
 package tickets.bean;
 
-public class OrderStatisticBean {
+public class UserStatisticBean {
 
     private int allOrders;
 
@@ -20,10 +20,10 @@ public class OrderStatisticBean {
 
     private int type5Order;
 
-    public OrderStatisticBean() {
+    public UserStatisticBean() {
     }
 
-    public OrderStatisticBean(int allOrders, int closedOrders, int cancelOrders, double totalPrice, int type1Order, int type2Order, int type3Order, int type4Order, int type5Order) {
+    public UserStatisticBean(int allOrders, int closedOrders, int cancelOrders, double totalPrice, int type1Order, int type2Order, int type3Order, int type4Order, int type5Order) {
         this.allOrders = allOrders;
         this.closedOrders = closedOrders;
         this.cancelOrders = cancelOrders;

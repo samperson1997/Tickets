@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import tickets.bean.PlanMemberBean;
+import tickets.bean.PlanUserBean;
 import tickets.bean.PlanSeatBean;
 import tickets.bean.PlanVenueBean;
 import tickets.bean.ResultMessageBean;
@@ -50,7 +50,7 @@ public class PlanController {
             method = RequestMethod.GET
     )
     @ResponseBody
-    public List<PlanMemberBean> getMemberPlans(int type) {
+    public List<PlanUserBean> getMemberPlans(int type) {
 
         return planService.getMemberPlans(type);
     }
@@ -82,7 +82,7 @@ public class PlanController {
             method = RequestMethod.GET
     )
     @ResponseBody
-    public PlanMemberBean getDetailedPlan(int planId) {
+    public PlanUserBean getDetailedPlan(int planId) {
 
         return planService.getDetailedPlan(planId);
     }

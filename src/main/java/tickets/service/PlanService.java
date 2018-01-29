@@ -1,6 +1,6 @@
 package tickets.service;
 
-import tickets.bean.PlanMemberBean;
+import tickets.bean.PlanUserBean;
 import tickets.bean.PlanSeatBean;
 import tickets.bean.PlanVenueBean;
 import tickets.bean.ResultMessageBean;
@@ -23,7 +23,7 @@ public interface PlanService {
      * @param type
      * @return
      */
-    List<PlanMemberBean> getMemberPlans(int type);
+    List<PlanUserBean> getMemberPlans(int type);
 
     /**
      * 获得企业计划列表
@@ -39,7 +39,7 @@ public interface PlanService {
      * @param planId
      * @return
      */
-    PlanMemberBean getDetailedPlan(int planId);
+    PlanUserBean getDetailedPlan(int planId);
 
     /**
      * 更新座位数量

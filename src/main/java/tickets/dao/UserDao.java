@@ -47,4 +47,12 @@ public interface UserDao {
      * @return
      */
     boolean useCoupon(String email, int couponId);
+
+    /**
+     * 获得用户列表
+     *
+     * @return
+     */
+
+    List<User> getUserList();
 }

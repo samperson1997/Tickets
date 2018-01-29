@@ -2,10 +2,7 @@ package tickets.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tickets.bean.OrderBean;
-import tickets.bean.OrderPlanBean;
-import tickets.bean.OrderStatisticBean;
-import tickets.bean.ResultMessageBean;
+import tickets.bean.*;
 import tickets.dao.OrderDao;
 import tickets.dao.PlanDao;
 import tickets.dao.VenueDao;
@@ -15,6 +12,7 @@ import tickets.model.Venue;
 import tickets.service.OrderService;
 import tickets.util.OrderStateUtil;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +84,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public OrderStatisticBean getOrderStatistic(String email) {
+    public UserStatisticBean getMemberStatistic(String email) {
         List<Order> orders = orderDao.getOrderByEmail(email);
 
         int allOrders = orders.size();
@@ -127,8 +125,40 @@ public class OrderServiceImpl implements OrderService {
                 }
             }
         }
-        return new OrderStatisticBean(allOrders, closedOrders, cancelOrders, totalPrice,
+        return new UserStatisticBean(allOrders, closedOrders, cancelOrders, totalPrice,
                 type1Order, type2Order, type3Order, type4Order, type5Order);
+    }
+
+    @Override
+    public VenueStatisticBean getVenueStatistic(String venueId) {
+
+        List<Plan> plans = planDao.getPlansByVenueId(venueId);
+
+        int allOrders = 0;
+        int cancelOrders = 0;
+        double totalPrice = 0;
+
+        int planNum = plans.size();
+        int endPlanNum = 0;
+
+        for (Plan plan : plans) {
+            if (plan.getEndTime().isBefore(LocalDateTime.now())) {
+                endPlanNum++;
+            }
+
+            List<Order> orders = orderDao.getOrderByPlanId(plan.getId());
+            allOrders += orders.size();
+
+            for (Order order : orders) {
+                if (order.getIsClosed() == 1 && order.getIsPaid() == 1) {
+                    cancelOrders++;
+                } else if (order.getIsClosed() == 0) {
+                    totalPrice += order.getRealPrice();
+                }
+            }
+        }
+        return new VenueStatisticBean(planNum, endPlanNum, allOrders, cancelOrders, totalPrice,
+                venueDao.getVenueById(venueId).getAccount());
     }
 
     @Override
@@ -138,15 +168,18 @@ public class OrderServiceImpl implements OrderService {
         }
 
         OrderBean orderBean = getOrderByOrderId(orderId);
-        String venue = planDao.getPlanByPlanId(orderBean.getPlanId()).getVenueId();
-        if (!venue.equals(venueId)) {
+        if (orderBean == null) {
             return new ResultMessageBean(false, "取票号错误");
-        } else if (orderBean.getState().equals("已关闭")) {
-            return new ResultMessageBean(false, "该订单已取消");
-        } else if (orderBean.getState().equals("已使用")) {
-            return new ResultMessageBean(false, "该订单已使用");
+        } else {
+            String venue = planDao.getPlanByPlanId(orderBean.getPlanId()).getVenueId();
+            if (!venue.equals(venueId)) {
+                return new ResultMessageBean(false, "取票号错误");
+            } else if (orderBean.getState().equals("已关闭")) {
+                return new ResultMessageBean(false, "该订单已取消");
+            } else if (orderBean.getState().equals("已使用")) {
+                return new ResultMessageBean(false, "该订单已使用");
+            }
         }
-
         return new ResultMessageBean(true);
     }
 

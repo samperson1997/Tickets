@@ -34,8 +34,8 @@ public class PlanServiceImpl implements PlanService {
         LocalDateTime endTime = LocalDateTime.parse(planSeatBean.getEndTime(), df);
 
         Plan plan = new Plan(planId, planSeatBean.getVenueId(), startTime,
-                endTime, planSeatBean.getType(), planSeatBean.getIntroduction());
-        planDao.addPlan(plan);
+                endTime, planSeatBean.getType(), planSeatBean.getIntroduction(), 0);
+        planDao.saveOrUpdatePlan(plan);
 
         // 存planSeat表
         List<SeatPriceBean> seatPriceBeans = planSeatBean.getSeatPriceBeanList();
@@ -47,9 +47,9 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public List<PlanMemberBean> getMemberPlans(int type) {
+    public List<PlanUserBean> getMemberPlans(int type) {
         List<Plan> planList = planDao.getPlansByType(type);
-        List<PlanMemberBean> res = new ArrayList<>();
+        List<PlanUserBean> res = new ArrayList<>();
 
         for (Plan plan : planList) {
             Venue venue = venueDao.getVenueById(plan.getVenueId());
@@ -64,7 +64,7 @@ public class PlanServiceImpl implements PlanService {
                 seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
             }
 
-            res.add(new PlanMemberBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
+            res.add(new PlanUserBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
                     String.valueOf(plan.getStartTime()), String.valueOf(plan.getEndTime()), plan.getType(),
                     plan.getIntroduction(), lowPrice, highPrice, seatPriceBeans));
         }
@@ -91,7 +91,7 @@ public class PlanServiceImpl implements PlanService {
     }
 
     @Override
-    public PlanMemberBean getDetailedPlan(int planId) {
+    public PlanUserBean getDetailedPlan(int planId) {
         Plan plan = planDao.getPlanByPlanId(planId);
         Venue venue = venueDao.getVenueById(plan.getVenueId());
         List<PlanSeat> planSeats = planDao.getPlanSeat(plan.getId());
@@ -105,7 +105,7 @@ public class PlanServiceImpl implements PlanService {
             seatPriceBeans.add(new SeatPriceBean(planSeat.getName(), planSeat.getNumber(), planSeat.getPrice()));
         }
 
-        return new PlanMemberBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
+        return new PlanUserBean(plan.getId(), plan.getVenueId(), venue.getName(), venue.getLocation(),
                 String.valueOf(plan.getStartTime()), String.valueOf(plan.getEndTime()), plan.getType(),
                 plan.getIntroduction(), lowPrice, highPrice, seatPriceBeans);
     }

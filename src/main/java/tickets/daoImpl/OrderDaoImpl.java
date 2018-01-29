@@ -71,4 +71,18 @@ public class OrderDaoImpl implements OrderDao {
 
         return orderList;
     }
+
+    @Override
+    public List<Order> getOrderByPlanId(int planId) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<Order> query = session.createNativeQuery("SELECT * FROM orders WHERE planId = ?", Order.class);
+        query.setParameter(1, planId);
+        List<Order> orderList = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return orderList;
+    }
 }

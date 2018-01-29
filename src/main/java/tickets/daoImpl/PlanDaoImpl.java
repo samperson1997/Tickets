@@ -19,12 +19,12 @@ public class PlanDaoImpl implements PlanDao {
     SessionFactory sessionFactory;
 
     @Override
-    public boolean addPlan(Plan plan) {
+    public boolean saveOrUpdatePlan(Plan plan) {
 
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();
 
-        session.save(plan);
+        session.saveOrUpdate(plan);
 
         tx.commit();
         session.close();

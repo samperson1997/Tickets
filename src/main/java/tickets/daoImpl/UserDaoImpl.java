@@ -113,4 +113,17 @@ public class UserDaoImpl implements UserDao {
         return true;
     }
 
+    @Override
+    public List<User> getUserList() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query<User> query = session.createNativeQuery("SELECT * FROM users WHERE isMember = 1", User.class);
+        List<User> userList = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return userList;
+    }
+
 }

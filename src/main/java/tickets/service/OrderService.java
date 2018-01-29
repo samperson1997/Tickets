@@ -1,9 +1,6 @@
 package tickets.service;
 
-import tickets.bean.OrderBean;
-import tickets.bean.OrderPlanBean;
-import tickets.bean.OrderStatisticBean;
-import tickets.bean.ResultMessageBean;
+import tickets.bean.*;
 
 import java.util.List;
 
@@ -47,7 +44,15 @@ public interface OrderService {
      * @param email
      * @return
      */
-    OrderStatisticBean getOrderStatistic(String email);
+    UserStatisticBean getMemberStatistic(String email);
+
+    /**
+     * 获得场馆订单统计信息
+     *
+     * @param venueId
+     * @return
+     */
+    VenueStatisticBean getVenueStatistic(String venueId);
 
     /**
      * 查看订单有效性

@@ -2,7 +2,7 @@ package tickets.bean;
 
 import java.util.List;
 
-public class PlanMemberBean {
+public class PlanUserBean {
 
     private int planId;
 
@@ -26,10 +26,10 @@ public class PlanMemberBean {
 
     private List<SeatPriceBean> seatPriceBeanList;
 
-    public PlanMemberBean() {
+    public PlanUserBean() {
     }
 
-    public PlanMemberBean(int planId, String venueId, String name, String location, String startTime, String endTime, int type, String introduction, double lowPrice, double highPrice, List<SeatPriceBean> seatPriceBeanList) {
+    public PlanUserBean(int planId, String venueId, String name, String location, String startTime, String endTime, int type, String introduction, double lowPrice, double highPrice, List<SeatPriceBean> seatPriceBeanList) {
         this.planId = planId;
         this.venueId = venueId;
         this.name = name;

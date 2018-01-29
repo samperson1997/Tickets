@@ -1,5 +1,6 @@
 package tickets.service;
 
+import tickets.bean.ManagerStatisticBean;
 import tickets.bean.ResultMessageBean;
 import tickets.bean.VenueMiniBean;
 
@@ -23,4 +24,17 @@ public interface ManagerService {
      */
     ResultMessageBean checkVenue(String id, int result);
 
+    /**
+     * 获得系统统计信息
+     *
+     * @return
+     */
+    ManagerStatisticBean getManagerStatistic();
+
+    /**
+     * 场馆支付结算
+     *
+     * @return
+     */
+    ResultMessageBean charge();
 }

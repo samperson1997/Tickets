@@ -22,16 +22,19 @@ public class Plan implements Serializable {
 
     private String introduction;
 
+    private int isCharged;
+
     public Plan() {
     }
 
-    public Plan(int id, String venueId, LocalDateTime startTime, LocalDateTime endTime, int type, String introduction) {
+    public Plan(int id, String venueId, LocalDateTime startTime, LocalDateTime endTime, int type, String introduction, int isCharged) {
         this.id = id;
         this.venueId = venueId;
         this.startTime = startTime;
         this.endTime = endTime;
         this.type = type;
         this.introduction = introduction;
+        this.isCharged = isCharged;
     }
 
     public int getId() {
@@ -80,5 +83,13 @@ public class Plan implements Serializable {
 
     public void setIntroduction(String introduction) {
         this.introduction = introduction;
+    }
+
+    public int getIsCharged() {
+        return isCharged;
+    }
+
+    public void setIsCharged(int isCharged) {
+        this.isCharged = isCharged;
     }
 }

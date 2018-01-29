@@ -111,8 +111,8 @@ public class UserController {
      * 用户下订单或取消订单后更新用户信息
      *
      * @param email
-     * @param account
-     * @param increaseScore
+     * @param deltaAccount
+     * @param deltaScore
      * @return
      */
     @RequestMapping(

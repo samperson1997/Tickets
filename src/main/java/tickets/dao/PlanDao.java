@@ -13,7 +13,7 @@ public interface PlanDao {
      * @param plan
      * @return
      */
-    boolean addPlan(Plan plan);
+    boolean saveOrUpdatePlan(Plan plan);
 
     /**
      * 添加新计划座位

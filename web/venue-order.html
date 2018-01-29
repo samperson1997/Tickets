@@ -40,7 +40,7 @@
                 <a href="#venue-plans">活动列表</a>
             </li>
             <li>
-                <a href="#venue-finance">财务信息统计</a>
+                <a href="#venue-statistics">场馆统计信息</a>
             </li>
 
             <li><b>
@@ -60,7 +60,7 @@
 
             <div class="userinfo-div" id="venue-check">
                 <p class="item-title">
-                    活动前1小时开始检票。
+                    检票列表 (活动前1小时开始检票)
                 </p>
             </div>
 
@@ -84,11 +84,36 @@
 
         </div>
 
-        <div id="venue-finance">
-            <div class="stock-seatName" style="display: inline;">财务信息统计</div>
-            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Financial Statistics</div>
+        <div id="venue-statistics">
+            <div class="stock-seatName" style="display: inline;">场馆统计信息</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Statistics</div>
 
             <div class="userinfo-div">
+                <p class="item-title">
+                    活动总计
+                </p>
+                <p id="plan-num"></p>
+
+                <p class="item-title">
+                    已结束活动数
+                </p>
+                <p id="end-plan-num"></p>
+
+                <p class="item-title">
+                    全部订单总计
+                </p>
+                <p id="all-orders"></p>
+
+                <p class="item-title">
+                    取消订单总计
+                </p>
+                <p id="cancel-orders"></p>
+
+                <p class="item-title">
+                    预定总价总计
+                </p>
+                <p id="total-price"></p>
+
                 <p class="item-title">
                     盈利总计
                 </p>
@@ -117,6 +142,7 @@
 
 <script>
     $(document).ready(loadVenuePlans());
+    $(document).ready(loadStatistics());
 </script>
 
 </html>

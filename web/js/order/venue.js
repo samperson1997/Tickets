@@ -132,3 +132,25 @@ function loadPlanInfo() {
         }
     })
 }
+
+function loadStatistics() {
+    var venueId = sessionStorage.getItem('venueId');
+
+    $.ajax({
+        type: "GET",
+        url: "/orders/venueStatistics",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            "venueId": venueId
+        },
+        dataType: "json",
+        success: function (data) {
+            $("#plan-num").text(data.planNum);
+            $("#end-plan-num").text(data.endPlanNum);
+            $("#all-orders").text(data.allOrders);
+            $("#cancel-orders").text(data.cancelOrders);
+            $("#total-price").text(data.totalPrice);
+            $("#account").text(data.account);
+        }
+    })
+}

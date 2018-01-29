@@ -60,4 +60,11 @@ public interface VenueDao {
      * @return
      */
     List<Venue> getUncheckedVenues();
+
+    /**
+     * 获得所有场馆列表
+     *
+     * @return
+     */
+    List<Venue> getVenues();
 }

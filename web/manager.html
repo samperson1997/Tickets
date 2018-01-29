@@ -32,18 +32,88 @@
     <div class="page-content-fix">
         <ul>
             <li>
-                <a href="#venue">场馆信息审批</a>
-            </li>
-            <li>
-                <a href="#strike">场馆支付结算</a>
-            </li>
-            <li>
                 <a href="#statistics">系统统计信息</a>
+            </li>
+
+            <li>
+                <a href="#venue">场馆信息审批</a>
             </li>
         </ul>
     </div>
 
     <div style="float: right; width: 80%; margin: 6% 0">
+
+        <div id="statistics">
+            <div class="stock-seatName" style="display: inline;">系统信息统计</div>
+            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Statistics</div>
+
+            <div class="userinfo-div">
+                <p class="item-title">
+                    会员总计
+                </p>
+                <p id="user-num"></p>
+
+                <p class="item-title">
+                    会员等级统计
+                </p>
+                <div id="user-chart" style="width:30%; height: 300%;"></div>
+
+                <p class="item-title">
+                    场馆总计
+                </p>
+                <p id="venue-num"></p>
+
+                <p class="item-title">
+                    待审核场馆总计
+                </p>
+                <p id="unchecked-venue-num"></p>
+
+                <p class="item-title">
+                    活动总计
+                </p>
+                <p id="plan-num"></p>
+
+                <p class="item-title">
+                    已结束活动数
+                </p>
+                <p id="end-plan-num"></p>
+
+                <p class="item-title">
+                    活动类型统计
+                </p>
+                <div id="plan-chart" style="width:30%; height: 300%;"></div>
+
+                <p class="item-title">
+                    全部订单总计
+                </p>
+                <p id="all-orders"></p>
+
+                <p class="item-title">
+                    已关闭订单总计
+                </p>
+                <p id="closed-orders"></p>
+
+                <p class="item-title">
+                    取消订单总计
+                </p>
+                <p id="cancel-orders"></p>
+
+                <p class="item-title">
+                    预定总价总计
+                </p>
+                <p id="total-price"></p>
+
+                <p class="item-title">
+                    盈利总计
+                </p>
+                <p id="account"></p>
+            </div>
+
+            <div class="userinfo-div">
+                <button class="button-green" id="check-member-button" onclick="charge()">场馆支付结算
+                </button>
+            </div>
+        </div>
 
         <div id="venue">
             <div class="stock-seatName" style="display: inline;">场馆信息审批</div>
@@ -51,25 +121,17 @@
 
 
         </div>
-
-        <div id="strike">
-            <div class="stock-seatName" style="display: inline;">场馆支付结算</div>
-            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Account striking</div>
-        </div>
-
-        <div id="statistics">
-            <div class="stock-seatName" style="display: inline;">系统信息统计</div>
-            <div class="title-sub-name" style="display: inline;">&nbsp;|&nbsp;Statistics</div>
-        </div>
-
     </div>
 
 </header>
 
 </body>
 
+<script src="js/util/echarts.js"></script>
 <script src="js/util/scrollReveal.js"></script>
 <script src="js/manager/venueInfo.js"></script>
+<script src="js/manager/statistics.js"></script>
+<script src="js/manager/charge.js"></script>
 
 <script>
     (function () {
@@ -82,7 +144,8 @@
 </script>
 
 <script>
-    $(document).ready(loadVenues);
+    $(document).ready(loadVenues());
+    $(document).ready(loadStatistics());
 </script>
 
 </html>

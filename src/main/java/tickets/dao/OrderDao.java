@@ -36,4 +36,12 @@ public interface OrderDao {
      * @return
      */
     List<Order> getOrderByEmail(String email);
+
+    /**
+     * 获得活动订单列表
+     *
+     * @param planId
+     * @return
+     */
+    List<Order> getOrderByPlanId(int planId);
 }
