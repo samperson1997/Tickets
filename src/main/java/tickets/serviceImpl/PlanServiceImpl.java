@@ -8,6 +8,7 @@ import tickets.dao.VenueDao;
 import tickets.model.Plan;
 import tickets.model.PlanSeat;
 import tickets.model.Venue;
+import tickets.service.OrderService;
 import tickets.service.PlanService;
 
 import java.time.LocalDateTime;
@@ -24,6 +25,9 @@ public class PlanServiceImpl implements PlanService {
     @Autowired
     VenueDao venueDao;
 
+    @Autowired
+    OrderService orderService;
+
     @Override
     public ResultMessageBean postPlan(PlanSeatBean planSeatBean) {
         // 存plan表
@@ -34,14 +38,18 @@ public class PlanServiceImpl implements PlanService {
         LocalDateTime endTime = LocalDateTime.parse(planSeatBean.getEndTime(), df);
 
         Plan plan = new Plan(planId, planSeatBean.getVenueId(), startTime,
-                endTime, planSeatBean.getType(), planSeatBean.getIntroduction(), 0);
+                endTime, planSeatBean.getType(), planSeatBean.getIntroduction(), 0, 0);
         planDao.saveOrUpdatePlan(plan);
 
         // 存planSeat表
         List<SeatPriceBean> seatPriceBeans = planSeatBean.getSeatPriceBeanList();
         for (SeatPriceBean seatPriceBean : seatPriceBeans) {
+            StringBuilder seats = new StringBuilder();
+            for (int i = 1; i <= seatPriceBean.getSeatNum(); i++) {
+                seats.append(i).append(";");
+            }
             planDao.addPlanSeat(new PlanSeat(planId, seatPriceBean.getSeatName(),
-                    seatPriceBean.getSeatNum(), seatPriceBean.getSeatPrice()));
+                    seatPriceBean.getSeatNum(), seatPriceBean.getSeatPrice(), seats.toString()));
         }
         return new ResultMessageBean(true);
     }
@@ -114,5 +122,10 @@ public class PlanServiceImpl implements PlanService {
     public ResultMessageBean updatePlanSeat(int planId, String seatName, int seatNum) {
         planDao.updatePlanSeat(planId, seatName, seatNum);
         return new ResultMessageBean(true);
+    }
+
+    @Override
+    public List<Plan> getPlans() {
+        return planDao.getPlans();
     }
 }

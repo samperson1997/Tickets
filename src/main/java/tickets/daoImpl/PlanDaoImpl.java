@@ -64,6 +64,38 @@ public class PlanDaoImpl implements PlanDao {
     }
 
     @Override
+    public boolean updatePlanSeat(int planId, String seatName, String seats) {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        Query<PlanSeat> query = session.createNativeQuery("SELECT * FROM planSeats WHERE planId = ? AND name = ?", PlanSeat.class);
+        query.setParameter(1, planId);
+        query.setParameter(2, seatName);
+        PlanSeat planSeat = query.getSingleResult();
+        planSeat.setSeats(seats);
+
+        session.update(planSeat);
+
+        tx.commit();
+        session.close();
+        return false;
+    }
+
+    @Override
+    public List<Plan> getPlans() {
+        Session session = sessionFactory.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        Query<Plan> query = session.createNativeQuery("SELECT * FROM plans", Plan.class);
+        List<Plan> res = query.getResultList();
+
+        tx.commit();
+        session.close();
+
+        return res;
+    }
+
+    @Override
     public List<Plan> getPlansByType(int type) {
         Session session = sessionFactory.getCurrentSession();
         Transaction tx = session.beginTransaction();

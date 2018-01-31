@@ -34,6 +34,23 @@ public interface PlanDao {
     boolean updatePlanSeat(int planId, String seatName, int seatNum);
 
     /**
+     * 更新座位号
+     *
+     * @param planId
+     * @param seatName
+     * @param seats
+     * @return
+     */
+    boolean updatePlanSeat(int planId, String seatName, String seats);
+
+    /**
+     * 获得计划列表
+     *
+     * @return
+     */
+    List<Plan> getPlans();
+
+    /**
      * 根据类型获得计划列表
      *
      * @param type

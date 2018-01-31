@@ -61,4 +61,12 @@ public interface OrderService {
      * @return
      */
     ResultMessageBean checkValidation(String orderId, String venueId);
+
+    /**
+     * 开票和配票
+     *
+     * @param planId
+     * @return
+     */
+    void assignTickets(int planId);
 }

@@ -20,14 +20,17 @@ public class PlanSeat implements Serializable {
 
     private double price;
 
+    private String seats;
+
     public PlanSeat() {
     }
 
-    public PlanSeat(int planId, String name, int number, double price) {
+    public PlanSeat(int planId, String name, int number, double price, String seats) {
         this.planId = planId;
         this.name = name;
         this.number = number;
         this.price = price;
+        this.seats = seats;
     }
 
     public int getPlanId() {
@@ -60,5 +63,13 @@ public class PlanSeat implements Serializable {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getSeats() {
+        return seats;
+    }
+
+    public void setSeats(String seats) {
+        this.seats = seats;
     }
 }

@@ -1,9 +1,10 @@
 package tickets.service;
 
-import tickets.bean.PlanUserBean;
 import tickets.bean.PlanSeatBean;
+import tickets.bean.PlanUserBean;
 import tickets.bean.PlanVenueBean;
 import tickets.bean.ResultMessageBean;
+import tickets.model.Plan;
 
 import java.util.List;
 
@@ -51,4 +52,11 @@ public interface PlanService {
      * @return
      */
     ResultMessageBean updatePlanSeat(int planId, String seatName, int seatNum);
+
+    /**
+     * 获得计划列表
+     *
+     * @return
+     */
+    List<Plan> getPlans();
 }
