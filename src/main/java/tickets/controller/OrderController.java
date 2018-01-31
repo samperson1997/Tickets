@@ -29,7 +29,7 @@ public class OrderController {
      * 下新订单
      *
      * @param orderBean
-     * @return
+     * @return 订单id
      */
     @RequestMapping(
             value = "/addOrder",
@@ -64,6 +64,23 @@ public class OrderController {
 
         // 返回订单id
         return orderId;
+    }
+
+    /**
+     * 现场购票开票与配票
+     *
+     * @param orderBean
+     * @return 订单分配座位号
+     */
+    @RequestMapping(
+            value = "/addOrderOnScene",
+            method = RequestMethod.POST,
+            consumes = {"application/json; charset=UTF-8"}
+    )
+    @ResponseBody
+    public String addOrderOnScene(@RequestBody OrderBean orderBean) {
+
+        return orderService.addOrderOnScene(orderBean);
     }
 
     /**

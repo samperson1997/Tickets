@@ -76,7 +76,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserBean getUser(String email) {
         User user = userDao.getUser(email);
-
         return new UserBean(user.getEmail(), user.getName(), user.getPassword(), user.getIsMember(),
                 memberLevelUtil.getLevelName(user.getScore()), user.getCurrentScore(), user.getPin(), user.getAccount());
     }
@@ -140,6 +139,9 @@ public class UserServiceImpl implements UserService {
     public double getDiscount(String email) {
         User user = userDao.getUser(email);
 
+        if (user == null) {
+            return 1;
+        }
         return memberLevelUtil.getLevelDiscount(user.getScore());
     }
 }

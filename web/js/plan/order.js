@@ -88,9 +88,14 @@ function loadPlanSeats() {
         dataType: "json",
         success: function (data) {
             for (var i = 0; i < data.seatPriceBeanList.length; i++) {
-                $("#seat-select").append("<option value='" + data.seatPriceBeanList[i].seatName
-                    + "-" + data.seatPriceBeanList[i].seatPrice + "-" + data.seatPriceBeanList[i].seatNum + "'>"
-                    + data.seatPriceBeanList[i].seatName + "区</option>");
+                if (data.seatPriceBeanList[i].seatNum !== 0) {
+                    $("#seat-select").append("<option value='" + data.seatPriceBeanList[i].seatName
+                        + "-" + data.seatPriceBeanList[i].seatPrice + "-" + data.seatPriceBeanList[i].seatNum + "'>"
+                        + data.seatPriceBeanList[i].seatName + "区</option>");
+                    $("#no-member-seat-select").append("<option value='" + data.seatPriceBeanList[i].seatName
+                        + "-" + data.seatPriceBeanList[i].seatPrice + "-" + data.seatPriceBeanList[i].seatNum + "'>"
+                        + data.seatPriceBeanList[i].seatName + "区</option>");
+                }
             }
 
             changeChooseTotalPrice();

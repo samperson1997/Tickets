@@ -40,11 +40,45 @@ public class OrderServiceImpl implements OrderService {
         String orderId = getOrderId();
         Order order = new Order(Integer.valueOf(orderId), orderBean.getEmail(),
                 orderBean.getPlanId(), orderBean.getPrice(), orderBean.getRealPrice(),
-                0, orderBean.getIsSeatSelected(), 0, 0, 0,
+                0, orderBean.getIsSeatSelected(), 0, 0, 0, 0,
                 orderBean.getSeatName(), orderBean.getSeatNum(), orderBean.getSeatAssigned());
         orderDao.saveOrUpdateOrder(order);
 
         return orderId;
+    }
+
+    @Override
+    public String addOrderOnScene(OrderBean orderBean) {
+
+        List<PlanSeat> planSeats = planDao.getPlanSeat(orderBean.getPlanId());
+
+        String seatName = orderBean.getSeatName();
+        StringBuilder seatAssigned = new StringBuilder(); // 分配到的座位号
+        for (PlanSeat planSeat : planSeats) {
+
+            if (planSeat.getName().equals(seatName)) {
+
+                String seats = planSeat.getSeats(); // 剩下的座位号
+                for (int i = 0; i < orderBean.getSeatNum(); i++) {
+                    seatAssigned.append(seats.split(";")[0]).append(";");
+                    seats = seats.substring(seats.indexOf(";") + 1);
+                }
+
+                Order order = new Order(Integer.valueOf(getOrderId()), orderBean.getEmail(),
+                        orderBean.getPlanId(), orderBean.getPrice(), orderBean.getRealPrice(),
+                        1, 1, 1, 1, 0, 0,
+                        orderBean.getSeatName(), orderBean.getSeatNum(), seatAssigned.toString());
+
+                orderDao.saveOrUpdateOrder(order);
+
+                planDao.updatePlanSeat(orderBean.getPlanId(), seatName, -orderBean.getSeatNum());
+                planDao.updatePlanSeat(orderBean.getPlanId(), seatName, seats);
+                break;
+            }
+        }
+
+        String seatAssignedString = seatAssigned.toString();
+        return seatAssignedString.substring(0, seatAssignedString.lastIndexOf(";"));
     }
 
     @Override
@@ -59,7 +93,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderId));
         if (order != null) {
             String state = orderStateUtil.getOrderState(order.getIsPaid(), order.getIsSeatSelected(), order.getIsAssigned(),
-                    order.getIsUsed(), order.getIsClosed());
+                    order.getIsUsed(), order.getIsClosed(), order.getIsOut());
 
             String seatAssigned = order.getSeatAssigned();
             seatAssigned = seatAssigned.substring(0, seatAssigned.lastIndexOf(";"));
@@ -77,12 +111,12 @@ public class OrderServiceImpl implements OrderService {
         List<OrderPlanBean> res = new ArrayList<>();
         for (Order order : orders) {
             String state = orderStateUtil.getOrderState(order.getIsPaid(), order.getIsSeatSelected(), order.getIsAssigned(),
-                    order.getIsUsed(), order.getIsClosed());
+                    order.getIsUsed(), order.getIsClosed(), order.getIsOut());
             Plan plan = planDao.getPlanByPlanId(order.getPlanId());
             Venue venue = venueDao.getVenueById(plan.getVenueId());
 
             String seatAssigned = order.getSeatAssigned();
-            if(!seatAssigned.equals("")) {
+            if (!seatAssigned.equals("")) {
                 seatAssigned = seatAssigned.substring(0, seatAssigned.lastIndexOf(";"));
             }
             res.add(new OrderPlanBean(getOrderId(order.getOrderId()), order.getPrice(), order.getRealPrice(),
@@ -200,7 +234,7 @@ public class OrderServiceImpl implements OrderService {
 
         for (Order order : orders) {
             // 选座购票
-            if (order.getIsSeatSelected() == 1) {
+            if (order.getIsClosed() == 0 && order.getIsSeatSelected() == 1) {
                 String seatName = order.getSeatName();
                 for (PlanSeat planSeat : planSeats) {
                     if (planSeat.getName().equals(seatName)) {
@@ -215,7 +249,6 @@ public class OrderServiceImpl implements OrderService {
                         order.setIsAssigned(1);
                         orderDao.saveOrUpdateOrder(order);
 
-                        planSeat.setSeats(seats);
                         planDao.updatePlanSeat(planId, seatName, seats);
                         break;
                     }
@@ -223,9 +256,14 @@ public class OrderServiceImpl implements OrderService {
             }
         }
 
+        double highPrice = planSeats.get(0).getPrice();
+        for (PlanSeat planSeat : planSeats) {
+            highPrice = (planSeat.getPrice() > highPrice) ? planSeat.getPrice() : highPrice;
+        }
+
         for (Order order : orders) {
             // 未选座购票
-            if (order.getIsSeatSelected() == 0) {
+            if (order.getIsClosed() == 0 && order.getIsSeatSelected() == 0) {
                 int seatNum = order.getSeatNum();
                 boolean isAssigned = false;
 
@@ -244,9 +282,12 @@ public class OrderServiceImpl implements OrderService {
                         seats = seats.substring(seats.indexOf(";") + 1);
                     }
 
+
                     User user = userDao.getUser(order.getEmail());
                     double discount = memberLevelUtil.getLevelDiscount(user.getScore());
-                    double realPrice = planSeat.getPrice() * seatNum * discount;
+                    double totalPrice = highPrice * seatNum * discount;
+                    double couponPrice = totalPrice - order.getPrice();
+                    double realPrice = planSeat.getPrice() * seatNum * discount - couponPrice;
 
                     order.setSeatName(planSeat.getName());
                     order.setSeatAssigned(seatAssigned.toString());
@@ -254,7 +295,6 @@ public class OrderServiceImpl implements OrderService {
                     order.setIsAssigned(1);
                     orderDao.saveOrUpdateOrder(order);
 
-                    planSeat.setSeats(seats);
                     planDao.updatePlanSeat(planId, planSeat.getName(), seats);
 
                     double returnPrice = order.getPrice() - realPrice;
@@ -280,6 +320,17 @@ public class OrderServiceImpl implements OrderService {
         Plan plan = planDao.getPlanByPlanId(planId);
         plan.setIsAssigned(1);
         planDao.saveOrUpdatePlan(plan);
+    }
+
+    @Override
+    public void closeOrders(int planId) {
+        List<Order> orders = orderDao.getOrderByPlanId(planId);
+        for (Order order : orders) {
+            if (order.getIsUsed() == 0 && order.getIsClosed() == 0) {
+                order.setIsOut(1);
+                orderDao.saveOrUpdateOrder(order);
+            }
+        }
     }
 
     /**

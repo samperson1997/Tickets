@@ -112,7 +112,7 @@ function loadOrders() {
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座, 取票号: " + data[i].orderId
+                                + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座"
                                 + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元</p></div>");
                         } else {
                             $("#used-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
@@ -120,7 +120,7 @@ function loadOrders() {
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座, 取票号: " + data[i].orderId
+                                + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座"
                                 + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元, 预支付" + data[i].price
                                 + "元, 已退款" + returnPrice + "元</div>");
                         }
@@ -139,7 +139,25 @@ function loadOrders() {
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-ticket'></i> 因配票失败, " + data[i].price + "元已全额退款</div>");
+                                + "<br><i class='fa fa-money'></i> 因配票失败, " + data[i].price + "元已全额退款</p></div>");
+                        }
+                        break;
+
+                    case "已过期":
+                        if (data[i].realPrice !== 0) {
+                            $("#out-order").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
+                                + "</b><br><i class='fa fa-clock-o'></i> "
+                                + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
+                                + "<br><i class='fa fa-bookmark'></i> " + type
+                                + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元</p></div>");
+                        } else {
+                            $("#out-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
+                                + "</b><br><i class='fa fa-clock-o'></i> "
+                                + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
+                                + "<br><i class='fa fa-bookmark'></i> " + type
+                                + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元</p></div>");
                         }
                         break;
                 }

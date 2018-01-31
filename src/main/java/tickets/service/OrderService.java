@@ -10,9 +10,17 @@ public interface OrderService {
      * 添加新订单
      *
      * @param orderBean
-     * @return orderId
+     * @return 订单id
      */
     String addOrder(OrderBean orderBean);
+
+    /**
+     * 现场购票，添加新订单
+     *
+     * @param orderBean
+     * @return 订单分配座位号
+     */
+    String addOrderOnScene(OrderBean orderBean);
 
     /**
      * 更新订单
@@ -69,4 +77,11 @@ public interface OrderService {
      * @return
      */
     void assignTickets(int planId);
+
+    /**
+     * 关闭未使用订单
+     *
+     * @param planId
+     */
+    void closeOrders(int planId);
 }

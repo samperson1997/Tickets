@@ -29,6 +29,8 @@ public class Order implements Serializable {
 
     private int isClosed;
 
+    private int isOut;
+
     private String seatName;
 
     private int seatNum;
@@ -39,7 +41,7 @@ public class Order implements Serializable {
     public Order() {
     }
 
-    public Order(int orderId, String email, int planId, double price, double realPrice, int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed, String seatName, int seatNum, String seatAssigned) {
+    public Order(int orderId, String email, int planId, double price, double realPrice, int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed, int isOut, String seatName, int seatNum, String seatAssigned) {
         this.orderId = orderId;
         this.email = email;
         this.planId = planId;
@@ -50,6 +52,7 @@ public class Order implements Serializable {
         this.isAssigned = isAssigned;
         this.isUsed = isUsed;
         this.isClosed = isClosed;
+        this.isOut = isOut;
         this.seatName = seatName;
         this.seatNum = seatNum;
         this.seatAssigned = seatAssigned;
@@ -133,6 +136,14 @@ public class Order implements Serializable {
 
     public void setIsClosed(int isClosed) {
         this.isClosed = isClosed;
+    }
+
+    public int getIsOut() {
+        return isOut;
+    }
+
+    public void setIsOut(int isOut) {
+        this.isOut = isOut;
     }
 
     public String getSeatName() {

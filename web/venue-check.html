@@ -121,19 +121,19 @@
                 <p class="item-title">
                     会员邮箱
                 </p>
-                <input type="text" class="input-box" id="buy-member-email">
-
+                <input type="text" class="input-box" id="buy-member-email"
+                       onchange="changeMemberTotalPrice()">
                 <p class="item-title">
                     座位类型
                 </p>
-                <select id="seat-select" onchange="changeChooseTotalPrice()">
+                <select id="seat-select" onchange="changeMemberTotalPrice()">
 
                 </select>
 
                 <p class="item-title">
                     购买张数 (每单上限6张)
                 </p>
-                <select id="choose-member-order-num" onchange="changeChooseTotalPrice()">
+                <select id="choose-member-order-num" onchange="changeMemberTotalPrice()">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -145,11 +145,12 @@
                 <button class="button-green" id="buy-member-button" onclick="placeOrder()">确认订票
                 </button>
 
+                <h6 style="color:red" id="buy-member-tip"></h6>
+
                 <p class="item-title">
                     需收总价
                 </p>
                 <p id="choose-total-price"></p>
-                <p id="choose-discount-price"></p>
                 <p id="choose-final-price"></p>
 
 
@@ -164,14 +165,14 @@
                 <p class="item-title">
                     座位类型
                 </p>
-                <select id="no-member-seat-select" onchange="changeChooseTotalPrice()">
+                <select id="no-member-seat-select" onchange="changeNoMemberTotalPrice()">
 
                 </select>
 
                 <p class="item-title">
                     购买张数 (每单上限6张)
                 </p>
-                <select id="choose-no-member-order-num" onchange="changeChooseTotalPrice()">
+                <select id="choose-no-member-order-num" onchange="changeNoMemberTotalPrice()">
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -180,7 +181,7 @@
                     <option value="6">6</option>
                 </select>
 
-                <button class="button-green" id="buy-no-member-button" onclick="placeOrder()">确认订票
+                <button class="button-green" id="buy-no-member-button" onclick="placeNoMemberOrder()">确认订票
                 </button>
 
                 <p class="item-title">
@@ -213,6 +214,7 @@
 
 <script>
     $(document).ready(loadPlanInfo());
+    $(document).ready(loadPlanSeats());
 </script>
 
 </html>

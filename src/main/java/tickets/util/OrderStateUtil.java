@@ -26,13 +26,18 @@ public class OrderStateUtil {
             case "已关闭":
                 order.setIsClosed(1);
                 break;
+            case "已过期":
+                order.setIsOut(1);
+                break;
         }
 
         return order;
     }
 
-    public String getOrderState(int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed) {
-        if (isUsed == 1) {
+    public String getOrderState(int isPaid, int isSeatSelected, int isAssigned, int isUsed, int isClosed, int isOut) {
+        if (isOut == 1) {
+            return "已过期";
+        } else if (isUsed == 1) {
             return "已使用";
         } else if (isClosed == 1) {
             return "已关闭";
