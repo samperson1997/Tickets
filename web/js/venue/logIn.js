@@ -41,8 +41,6 @@ angular.module("mainapp", [])
                     $scope.$apply(function () {
                         if (data.result) {
                             window.location.href = "/venue.html";
-
-                            sessionStorage.setItem("venue_log_state", "true");
                             sessionStorage.setItem("venueId", data.message);
                         } else {
                             $scope.inputPassword = "";

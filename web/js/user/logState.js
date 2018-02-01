@@ -1,22 +1,3 @@
-if (sessionStorage.getItem("log_state") === "true") {
-    document.getElementById("log-button").style.display = "none";
+if (sessionStorage.getItem("userId") === null) {
+    window.location.href = "login.html";
 }
-
-var getParam = function (name) {
-    var search = document.location.search;
-    var pattern = new RegExp("[?&]" + name + "\=([^&]+)", "g");
-    var matcher = pattern.exec(search);
-    var items = null;
-    if (null != matcher) {
-        try {
-            items = decodeURIComponent(decodeURIComponent(matcher[1]));
-        } catch (e) {
-            try {
-                items = decodeURIComponent(matcher[1]);
-            } catch (e) {
-                items = matcher[1];
-            }
-        }
-    }
-    return items;
-};

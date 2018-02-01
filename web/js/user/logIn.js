@@ -54,7 +54,6 @@ angular.module("mainapp", [])
                             } else {
                                 window.location.href = str;
                             }
-                            sessionStorage.setItem("log_state", "true");
                             sessionStorage.setItem("userId", data.message);
                         } else {
                             $scope.inputPassword = "";

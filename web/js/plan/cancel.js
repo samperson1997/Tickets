@@ -1,5 +1,12 @@
+window.onload = init;
 state = "";
 isSeatSelectedGlobal = 0;
+
+function init() {
+    if (getParam("orderId") === null) {
+        window.location.href = "login.html";
+    }
+}
 
 var getParam = function (name) {
     var search = document.location.search;
