@@ -127,19 +127,19 @@ function loadOrders() {
                         break;
 
                     case "已关闭":
-                        if (data[i].realPrice !== 0) {
-                            $("#closed-order").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
+                        if (data[i].realPrice === 0) {
+                            $("#closed-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
                                 + "</b><br><i class='fa fa-clock-o'></i> "
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location + "</p></div>");
                         } else {
-                            $("#closed-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
+                            $("#closed-order").append("<div class=\"userinfo-div\"><p><b>" + data[i].introduction
                                 + "</b><br><i class='fa fa-clock-o'></i> "
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-money'></i> 因配票失败, " + data[i].price + "元已全额退款</p></div>");
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元 (手续费)</p></div>");
                         }
                         break;
 

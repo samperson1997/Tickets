@@ -202,7 +202,8 @@ function cancelPayOrder() {
         url: "/orders/cancelOrder",
         contentType: "application/x-www-form-urlencoded",
         data: {
-            "orderId": getParam("orderId")
+            "orderId": getParam("orderId"),
+            "realPrice": 0
         },
         dataType: "json",
         success: function (data) {
@@ -270,8 +271,7 @@ function payOrder() {
                                 dataType: "json",
                                 success: function (data) {
                                     console.log("update order state: " + data.result);
-                                    alert("支付成功! ");
-                                    window.location.href = "index.html";
+                                    assignTickets();
                                 }
                             });
 
@@ -282,6 +282,77 @@ function payOrder() {
             }
         }
     })
+}
 
+function assignTickets() {
 
+    $.ajax({
+        type: "GET",
+        url: "/orders/order",
+        contentType: "application/x-www-form-urlencoded",
+        data: {
+            "orderId": getParam("orderId")
+        },
+        dataType: "json",
+        success: function (data) {
+
+            $.ajax({
+                type: "GET",
+                url: "/plans/detailedPlan",
+                contentType: "application/x-www-form-urlencoded",
+                data: {
+                    "planId": data.planId
+                },
+                dataType: "json",
+                success: function (data1) {
+                    var startTime = data1.startTime.substr(0, 10) + " " + data1.startTime.substr(11);
+
+                    var currentTimePlusTwoWeeks = new Date(+new Date() + 8 * 3600 * 1000 + 14 * 24 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '');
+                    console.log(currentTimePlusTwoWeeks);
+                    console.log(startTime);
+
+                    if (compareDate(currentTimePlusTwoWeeks, startTime)) {
+                        alert("支付成功! 由于距离活动时间不足两周, 将立即为您配票");
+                        var orderBean = {};
+
+                        orderBean.orderId = data.orderId;
+                        orderBean.email = data.email;
+                        orderBean.planId = data.planId;
+                        orderBean.price = data.price;
+                        orderBean.realPrice = data.price;
+                        orderBean.state = data.state;
+                        orderBean.seatAssigned = data.seatAssigned;
+                        orderBean.isSeatSelected = data.isSeatSelected;
+                        orderBean.seatName = data.seatName;
+                        orderBean.seatNum = data.seatNum;
+
+                        console.log(orderBean);
+
+                        $.ajax({
+                            type: "POST",
+                            url: "/orders/addOrderWithinTwoWeeks",
+                            contentType: "application/json",
+                            data: JSON.stringify(orderBean),
+                            dataType: "text",
+                            success: function (data0) {
+                                console.log("座位号为" + orderBean.seatName + "区 " + data0);
+                                window.location.href = "order.html";
+                            }
+                        })
+                    } else {
+                        alert("支付成功! ");
+                        window.location.href = "order.html";
+                    }
+                }
+            });
+        }
+    })
+}
+
+/**
+ * @return {boolean}
+ */
+function compareDate(d1, d2) {
+
+    return ((new Date(d1.replace(/-/g, "\/"))) >= (new Date(d2.replace(/-/g, "\/"))));
 }

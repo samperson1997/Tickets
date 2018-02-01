@@ -54,7 +54,7 @@ public class OrderController {
 
                 // 取消订单
                 if (orderService.getOrderByOrderId(orderId).getState().equals("未支付")) {
-                    cancelOrder(orderId);
+                    cancelOrder(orderId, 0);
                 }
                 cancel();
 
@@ -84,6 +84,23 @@ public class OrderController {
     }
 
     /**
+     * 距离演出两周内开票与配票
+     *
+     * @param orderBean
+     * @return 订单分配座位号
+     */
+    @RequestMapping(
+            value = "/addOrderWithinTwoWeeks",
+            method = RequestMethod.POST,
+            consumes = {"application/json; charset=UTF-8"}
+    )
+    @ResponseBody
+    public String addOrderWithinTwoWeeks(@RequestBody OrderBean orderBean) {
+
+        return orderService.addOrderWithinTwoWeeks(orderBean);
+    }
+
+    /**
      * 取消订单
      *
      * @param orderId
@@ -94,7 +111,7 @@ public class OrderController {
             method = RequestMethod.POST
     )
     @ResponseBody
-    public ResultMessageBean cancelOrder(String orderId) {
+    public ResultMessageBean cancelOrder(String orderId, double realPrice) {
 
         OrderBean orderBean = orderService.getOrderByOrderId(orderId);
 
@@ -103,8 +120,14 @@ public class OrderController {
             planService.updatePlanSeat(orderBean.getPlanId(), orderBean.getSeatName(), orderBean.getSeatNum());
         }
 
+        // 如果已经开票/配票，已经分配座位，那么要收回座位
+        if (!orderBean.getSeatAssigned().equals("")) {
+            orderService.cancelPlanSeats(orderBean);
+        }
+
         // 修改订单状态
         orderBean.setState("已关闭");
+        orderBean.setRealPrice(realPrice);
         orderService.updateOrder(orderBean);
 
         return new ResultMessageBean(true);

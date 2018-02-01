@@ -23,6 +23,14 @@ public interface OrderService {
     String addOrderOnScene(OrderBean orderBean);
 
     /**
+     * 距离演出两周内开票与配票
+     *
+     * @param orderBean
+     * @return 订单分配座位号
+     */
+    String addOrderWithinTwoWeeks(OrderBean orderBean);
+
+    /**
      * 更新订单
      *
      * @param orderBean
@@ -84,4 +92,11 @@ public interface OrderService {
      * @param planId
      */
     void closeOrders(int planId);
+
+    /**
+     * 取消订单时，收回assignSeat
+     *
+     * @param orderBean
+     */
+    void cancelPlanSeats(OrderBean orderBean);
 }

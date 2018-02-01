@@ -132,9 +132,8 @@ public class ManagerServiceImpl implements ManagerService {
                         }
 
                         //totalPrice
-                    } else {
-                        totalPrice += order.getRealPrice();
                     }
+                    totalPrice += order.getRealPrice();
                 }
             }
         }
@@ -157,10 +156,7 @@ public class ManagerServiceImpl implements ManagerService {
                 if (plan.getEndTime().isBefore(LocalDateTime.now()) && plan.getIsCharged() == 0) {
                     List<Order> orders = orderDao.getOrderByPlanId(plan.getId());
                     for (Order order : orders) {
-
-                        if (order.getIsClosed() == 0) {
-                            totalPrice += order.getRealPrice();
-                        }
+                        totalPrice += order.getRealPrice();
                     }
                     plan.setIsCharged(1);
                     planDao.saveOrUpdatePlan(plan);

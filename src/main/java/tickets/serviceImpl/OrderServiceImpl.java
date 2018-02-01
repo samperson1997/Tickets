@@ -82,9 +82,111 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public String addOrderWithinTwoWeeks(OrderBean orderBean) {
+        List<PlanSeat> planSeats = planDao.getPlanSeat(orderBean.getPlanId());
+
+        double highPrice = planSeats.get(0).getPrice();
+        for (PlanSeat planSeat : planSeats) {
+            highPrice = (planSeat.getPrice() > highPrice) ? planSeat.getPrice() : highPrice;
+        }
+
+        StringBuilder seatAssigned = new StringBuilder(); // 分配到的座位号
+        if (orderBean.getIsSeatSelected() == 1) {
+            String seatName = orderBean.getSeatName();
+
+            for (PlanSeat planSeat : planSeats) {
+
+                if (planSeat.getName().equals(seatName)) {
+
+                    String seats = planSeat.getSeats(); // 剩下的座位号
+                    for (int i = 0; i < orderBean.getSeatNum(); i++) {
+                        seatAssigned.append(seats.split(";")[0]).append(";");
+                        seats = seats.substring(seats.indexOf(";") + 1);
+                    }
+
+                    Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderBean.getOrderId()));
+                    order.setIsAssigned(1);
+                    order.setSeatAssigned(seatAssigned.toString());
+
+                    orderDao.saveOrUpdateOrder(order);
+                    planDao.updatePlanSeat(orderBean.getPlanId(), seatName, seats);
+                    break;
+                }
+            }
+        }
+
+        // 未选座购票
+        else if (orderBean.getIsSeatSelected() == 0) {
+            int seatNum = orderBean.getSeatNum();
+            boolean isAssigned = false;
+
+            for (PlanSeat planSeat : planSeats) {
+                String seats = planSeat.getSeats(); // 剩下的座位号
+                // 先看座位够不够
+                int remainSeatNum = seats.split(";").length;
+                if (remainSeatNum < seatNum) {
+                    continue;
+                }
+
+                isAssigned = true;
+                for (int i = 0; i < seatNum; i++) {
+                    seatAssigned.append(seats.split(";")[0]).append(";");
+                    seats = seats.substring(seats.indexOf(";") + 1);
+                }
+
+                User user = userDao.getUser(orderBean.getEmail());
+                double discount = memberLevelUtil.getLevelDiscount(user.getScore());
+                double totalPrice = highPrice * seatNum * discount;
+                double couponPrice = totalPrice - orderBean.getPrice();
+                double realPrice = planSeat.getPrice() * seatNum * discount - couponPrice;
+
+                Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderBean.getOrderId()));
+                order.setIsAssigned(1);
+                order.setSeatName(planSeat.getName());
+                order.setSeatAssigned(seatAssigned.toString());
+                order.setRealPrice(realPrice);
+                orderDao.saveOrUpdateOrder(order);
+
+                planDao.updatePlanSeat(orderBean.getPlanId(), planSeat.getName(), seats);
+                planDao.updatePlanSeat(orderBean.getPlanId(), planSeat.getName(), -orderBean.getSeatNum());
+
+                double returnPrice = order.getPrice() - realPrice;
+                user.setAccount(user.getAccount() + returnPrice);
+                userDao.saveOrUpdateUser(user);
+
+                break;
+            }
+
+            if (!isAssigned) {
+                // 配票失败，全额退款
+                User user = userDao.getUser(orderBean.getEmail());
+                user.setAccount(user.getAccount() + orderBean.getPrice());
+                userDao.saveOrUpdateUser(user);
+
+                Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderBean.getOrderId()));
+
+                order.setIsClosed(1);
+                order.setRealPrice(0);
+                orderDao.saveOrUpdateOrder(order);
+            }
+        }
+
+        String seatAssignedString = seatAssigned.toString();
+        if (!seatAssignedString.equals("")) {
+            seatAssignedString = seatAssignedString.substring(0, seatAssigned.lastIndexOf(";"));
+        }
+
+        return seatAssignedString;
+
+    }
+
+    @Override
     public ResultMessageBean updateOrder(OrderBean orderBean) {
         Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderBean.getOrderId()));
-        orderDao.saveOrUpdateOrder(orderStateUtil.updateOrderState(orderBean, order));
+        order = orderStateUtil.updateOrderState(orderBean, order);
+        order.setRealPrice(orderBean.getRealPrice());
+
+        orderDao.saveOrUpdateOrder(order);
         return new ResultMessageBean(true);
     }
 
@@ -96,7 +198,10 @@ public class OrderServiceImpl implements OrderService {
                     order.getIsUsed(), order.getIsClosed(), order.getIsOut());
 
             String seatAssigned = order.getSeatAssigned();
-            seatAssigned = seatAssigned.substring(0, seatAssigned.lastIndexOf(";"));
+            if (!seatAssigned.equals("")) {
+                seatAssigned = seatAssigned.substring(0, seatAssigned.lastIndexOf(";"));
+            }
+
             return new OrderBean(orderId, order.getEmail(), order.getPlanId(), order.getPrice(), order.getRealPrice(),
                     order.getIsSeatSelected(), state, order.getSeatName(), order.getSeatNum(), seatAssigned);
 
@@ -148,7 +253,6 @@ public class OrderServiceImpl implements OrderService {
                     cancelOrders++;
                 }
             } else {
-                totalPrice += order.getRealPrice();
                 Plan plan = planDao.getPlanByPlanId(order.getPlanId());
                 switch (plan.getType()) {
                     case 1:
@@ -168,6 +272,8 @@ public class OrderServiceImpl implements OrderService {
                         break;
                 }
             }
+
+            totalPrice += order.getRealPrice();
         }
         return new UserStatisticBean(allOrders, closedOrders, cancelOrders, totalPrice,
                 type1Order, type2Order, type3Order, type4Order, type5Order);
@@ -196,9 +302,9 @@ public class OrderServiceImpl implements OrderService {
             for (Order order : orders) {
                 if (order.getIsClosed() == 1 && order.getIsPaid() == 1) {
                     cancelOrders++;
-                } else if (order.getIsClosed() == 0) {
-                    totalPrice += order.getRealPrice();
                 }
+
+                totalPrice += order.getRealPrice();
             }
         }
         return new VenueStatisticBean(planNum, endPlanNum, allOrders, cancelOrders, totalPrice,
@@ -296,6 +402,7 @@ public class OrderServiceImpl implements OrderService {
                     orderDao.saveOrUpdateOrder(order);
 
                     planDao.updatePlanSeat(planId, planSeat.getName(), seats);
+                    planDao.updatePlanSeat(order.getPlanId(), planSeat.getName(), -order.getSeatNum());
 
                     double returnPrice = order.getPrice() - realPrice;
                     user.setAccount(user.getAccount() + returnPrice);
@@ -329,6 +436,30 @@ public class OrderServiceImpl implements OrderService {
             if (order.getIsUsed() == 0 && order.getIsClosed() == 0) {
                 order.setIsOut(1);
                 orderDao.saveOrUpdateOrder(order);
+            }
+        }
+    }
+
+    @Override
+    public void cancelPlanSeats(OrderBean orderBean) {
+        List<PlanSeat> planSeats = planDao.getPlanSeat(orderBean.getPlanId());
+
+        String seatName = orderBean.getSeatName();
+        for (PlanSeat planSeat : planSeats) {
+            if (planSeat.getName().equals(seatName)) {
+                String seatAssigned = orderBean.getSeatAssigned(); // 分配到的座位号
+                StringBuilder seats = new StringBuilder(planSeat.getSeats()); // 剩下的座位号
+                for (int i = 0; i < orderBean.getSeatNum(); i++) {
+                    seats.append(seatAssigned.split(";")[0]).append(";");
+                    seatAssigned = seatAssigned.substring(seatAssigned.indexOf(";") + 1);
+                }
+
+                Order order = orderDao.getOrderByOrderId(Integer.valueOf(orderBean.getOrderId()));
+                order.setSeatAssigned("");
+                orderDao.saveOrUpdateOrder(order);
+
+                planDao.updatePlanSeat(orderBean.getPlanId(), seatName, seats.toString());
+                break;
             }
         }
     }

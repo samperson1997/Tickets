@@ -43,7 +43,7 @@ function loadFinalPrice() {
     })
 }
 
-// 取消支付
+// 暂不取消
 function cancelCancelOrder() {
     window.location.href = "javascript: history.go(-1);";
 }
@@ -53,6 +53,7 @@ function cancelOrder() {
 
     var finalPrice = parseFloat($("#final-price").text());
     var returnPrice = parseFloat($("#return-price").text());
+    var realPrice = finalPrice - returnPrice;
 
     var email = sessionStorage.getItem('userId');
 
@@ -108,7 +109,8 @@ function cancelOrder() {
                                         url: "/orders/cancelOrder",
                                         contentType: "application/x-www-form-urlencoded",
                                         data: {
-                                            "orderId": getParam("orderId")
+                                            "orderId": getParam("orderId"),
+                                            "realPrice": realPrice
                                         },
                                         dataType: "json",
                                         success: function (data) {
