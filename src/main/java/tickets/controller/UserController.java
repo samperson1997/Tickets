@@ -45,7 +45,7 @@ public class UserController {
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     @ResponseBody
     public ResultMessageBean register(String email, String password) {
-        return userService.login(email, password);
+        return userService.register(email, password);
     }
 
     /**

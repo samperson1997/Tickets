@@ -149,8 +149,8 @@ function loadStatistics() {
             $("#end-plan-num").text(data.endPlanNum);
             $("#all-orders").text(data.allOrders);
             $("#cancel-orders").text(data.cancelOrders);
-            $("#total-price").text(data.totalPrice);
-            $("#account").text(data.account);
+            $("#total-price").text(data.totalPrice.toFixed(2));
+            $("#account").text(data.account.toFixed(2));
         }
     })
 }

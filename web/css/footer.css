@@ -1,45 +1,16 @@
 #footer {
     clear: both;
-    background-color: rgb(25, 44, 72);
+    background-color: #222;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
     text-align: center;
     color: #FFF;
     font-weight: lighter;
 
-    padding: 1%;
-}
-
-#footer-div {
-    margin-left: 6%;
-}
-
-.big-li {
-    float: left;
-    width: 30%;
-}
-
-.big-li h4 {
-    font-size: 120%;
-    border-bottom: 1px solid #FFF;
-    margin: 5% 40%;
-    padding: 1%;
-}
-
-.big-li p {
-    text-align: left;
-    margin: 5% 25% 3% 40%;
-    cursor: pointer;
-    font-weight: 100;
-    font-size: 90%;
-}
-
-.big-li p:hover {
-    color: rgb(102, 102, 255);
+    padding: 3%;
 }
 
 #cr {
     clear: both;
-    margin: 16% 0 0 0;
     font-weight: 100;
     font-size: 90%;
 }

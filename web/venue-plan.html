@@ -5,12 +5,11 @@
     <meta charset="UTF-8">
     <title>Tickets - venue</title>
     <link rel="stylesheet" href="css/origin.css">
-    <link rel="stylesheet" href="css/top-bar.css">
-    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/top.css">
     <link rel="stylesheet" href="css/button.css">
-    <link rel="stylesheet" href="css/function.css">
-    <link rel="stylesheet" href="css/page-main-body.css">
-    <link rel="stylesheet" href="css/strategy.css">
+    <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/main-body.css">
+    <link rel="stylesheet" href="css/form.css">
     <link rel="stylesheet" href="css/date-picker.css">
 
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
@@ -65,9 +64,7 @@
                 <input style="display: inline-block;" class="date-picker" type="text" id="date-picker" ng-model="date"/>
 
                 <p class="item-title">
-                    活动的发布需要提前至少两周的时间，以便系统的开票与配票。
-                    <br>
-                    <br>开始时间
+                    开始时间
                 </p>
                 <input type="text" class="input-box" id="start-time-input">
 
@@ -117,6 +114,12 @@
 </header>
 
 </body>
+
+<footer>
+    <div id="footer" onselectstart="return false;">
+        <div id="cr">Copyright &copy; 2018 All Rights Reserved</div>
+    </div>
+</footer>
 
 <script src="js/venue/logState.js"></script>
 <script src="js/util/scrollReveal.js"></script>

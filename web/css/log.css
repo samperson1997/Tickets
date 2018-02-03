@@ -2,7 +2,7 @@
     background-image: url("../img/background3.png");
     font-family: "Chalkduster", sans-serif;
     text-align: center;
-    padding: 16% 2%;
+    padding: 17% 2%;
     color: #FFF;
     background-size: 100% 100%;
 }
@@ -11,7 +11,7 @@
     background-image: url("../img/background3.png");
     font-family: "Chalkduster", sans-serif;
     text-align: center;
-    padding: 14% 2%;
+    padding: 15% 2%;
     color: #FFF;
     background-size: 100% 100%;
 }
@@ -79,6 +79,6 @@
 #log-tip,
 #reg-tip {
     color: red;
-    font-size: 60%;
+    font-size: 40%;
     font-weight: 300;
 }

@@ -58,16 +58,13 @@ angular.module("mainapp", [])
                     console.log(data);
                     $scope.$apply(function () {
                         if (data.result) {
-                            $scope.inputEmail = "";
-                            $scope.inputPassword = "";
-                            $scope.inputPassword2 = "";
                             tip.innerHTML = "欢迎, 注册成功, 请查收您的收件箱";
-                            window.location.href = "../../login.html";
+
                         } else if (data === "fail") {
                             $scope.inputEmail = "";
                             $scope.inputPassword = "";
                             $scope.inputPassword2 = "";
-                            tip.innerHTML = "该用户名已被注册";
+                            tip.innerHTML = "该用户邮箱已被注册";
                         }
                     });
                 }

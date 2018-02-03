@@ -1,76 +1,87 @@
-#title {
-    background-image: url("../img/background.png");
+.input-area {
+    margin: 1%;
+}
+
+.stock-name {
+    margin-left: 1%;
+    font-size: 150%;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
-    padding: 8% 50%;
-    background-size: 100% 100%;
-    color: #FFF;
 }
 
-#main-title {
-    margin: -10% 0 0 5%;
-    font-family: "Chalkduster", sans-serif;
-    font-size: 60px;
-    color: #FFF;
-    font-style: italic;
+.title-sub-name {
+    font-size: 100%;
+    font-weight: 300;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
+    margin-right: 1%;
 }
 
-#sub-title {
-    font-size: 40%;
-    font-style: normal;
-    margin-left: -1.5%;
-}
-
-#introduce {
-    background-color: rgb(102, 102, 255);
+.whole-table {
+    margin: 0.5%;
+    border-collapse: collapse;
     text-align: center;
-    color: #FFF;
+    width: 60%;
+}
+
+.whole-table tr {
+    border-top: 1px solid #AAA;
+    border-bottom: 1px solid #AAA;
+}
+
+.whole-table th {
+    color: #AAA;
+    font-size: 80%;
+    font-weight: 400;
+    padding: 0.5% 0 0.5% 0;
+}
+
+.whole-table td {
+    color: #AAA;
+    font-size: 80%;
+    padding: 0.5% 0;
+}
+
+.whole-table a {
+    color: #000;
+}
+
+.whole-table a:hover {
+    color: #0080ff;
+}
+
+.page-content-fix {
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
-    padding: 5% 10% 0% 10%;
-
-    font-weight: lighter;
+    width: 13%;
+    padding-left: 5%;
+    margin: 6% 0;
+    float: left;
+    border-right: 1px solid #AAA;
 }
 
-#introduce h2 {
-    margin-bottom: 3%;
+.page-content-fix li {
+    list-style: none;
+    cursor: pointer;
+    margin: 2% 0;
 }
 
-#introduce-function {
-    background-color: rgb(102, 102, 255);
-    margin: 0 auto;
-    text-align: center;
-    color: #FFF;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
-    font-weight: lighter;
+.page-content-fix li a:hover, .page-content-fix li:hover {
+    color: #0080ff;
 }
 
-#introduce-function li {
-    display: inline-block;
-    width: 15%;
-    font-size: 18px;
-    color: #FFF;
-    margin: 3%;
+.page-content-fix li a {
+    color: #000;
 }
 
-#introduce-function h1 {
-    border-radius: 100px;
-    border-style: solid;
-    border-color: white;
-    border-width: 5px;
-    background-color: white;
-    color: rgb(102, 102, 255);
-
-    font-size: 300%;
-    margin-top: 20%;
+.item-title {
+    color: #AAA;
+    font-size: 80%;
+    font-weight: 400;
+    padding: 0.5% 0 0.5% 0;
 }
 
-#introduce-function h4 {
-    margin: 4% 0 0.5% 0;
+.userinfo-div {
+    margin: 2%;
 }
 
-#introduce-end {
-    background-color: rgb(102, 102, 255);
-    text-align: center;
-    font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, "PingFang SC", sans-serif;
-    font-weight: lighter;
-    padding: 2%;
+.item-title a {
+    color: #0080ff;
 }

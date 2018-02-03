@@ -40,7 +40,7 @@ public class UserServiceImpl implements UserService {
     public ResultMessageBean register(String email, String password) {
         User user = userDao.getUser(email);
         if (user == null) {
-            User newUser = new User(email, email, password, 1, 1, 0, password, 10000);
+            User newUser = new User(email, email, password, 1, 0, 0, password, 10000);
 
             String randomCode = RandomCodeUtil.generateUniqueCode();
             registerUserMap.put(randomCode, newUser);
@@ -93,9 +93,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultMessageBean updateUserInfoAfterOrder(String email, double deltaAccount, int deltaScore) {
+
         User user = userDao.getUser(email);
         user.setAccount(user.getAccount() + deltaAccount);
         user.setScore(user.getScore() + deltaScore);
+        user.setCurrentScore(user.getCurrentScore() + deltaScore);
         userDao.saveOrUpdateUser(user);
 
         return new ResultMessageBean(true);

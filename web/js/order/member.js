@@ -181,7 +181,7 @@ function loadStatistics() {
             $("#all-orders").text(data.allOrders);
             $("#closed-orders").text(data.closedOrders);
             $("#cancel-orders").text(data.cancelOrders);
-            $("#total-price").text(data.totalPrice);
+            $("#total-price").text(data.totalPrice.toFixed(2));
 
             // 饼图
 

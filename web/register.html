@@ -5,49 +5,52 @@
     <meta charset="UTF-8">
     <title>Tickets</title>
     <link rel="stylesheet" href="css/origin.css">
-    <link rel="stylesheet" href="css/top-bar.css">
     <link rel="stylesheet" href="css/log.css">
     <link rel="stylesheet" href="css/button.css">
-    <link rel="stylesheet" href="css/footer.css">
     <script src="js/angular/angular.js"></script>
-    <script src="js/user/register.js"></script>
 
     <link href="css/font-awesome.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-    <header>
+<header>
 
-        <div id="whole-page-r" onselectstart="return false;" ng-app="mainapp">
-            <div id="register-part" ng-controller="UserController">
-                <h1 data-scroll-reveal="enter from the top over 1s">注册Tickets</h1>
-                <a href="login.html">
-                    <h5 id="register-label">已有账号？去登录>></h5>
-                </a>
+    <div id="whole-page-r" onselectstart="return false;" ng-app="mainapp">
+        <div id="register-part" ng-controller="UserController">
+            <h1 data-scroll-reveal="enter from the top over 1s">注册Tickets</h1>
+            <a href="login.html">
+                <h5 id="register-label">已有账号？去登录>></h5>
+            </a>
 
 
-                <form method="post" data-scroll-reveal="enter from bottom over 1s but wait 0.5s">
-                    <p><input type="text" seatName="username" placeholder="用户邮箱" class="form-username form-control" id="reg-username" ng-model="inputEmail" onblur="emailIsValid()" ng-change="check()"></p>
-                    <p><input type="password" seatName="password" placeholder="密码" class="form-password form-control" id="reg-password" ng-model="inputPassword"></p>
-                    <p><input type="password" seatName="password2" placeholder="确认密码" class="form-password form-control" id="reg-password2" ng-model="inputPassword2" onblur="passwordIsSame()"></p>
-                    <div>
-                        <p id="reg-tip"></p>
+            <form method="post" data-scroll-reveal="enter from bottom over 1s but wait 0.5s">
+                <p><input type="text" seatName="username" placeholder="用户邮箱" class="form-username form-control"
+                          id="reg-username" ng-model="inputEmail" onblur="emailIsValid()" ng-change="check()"></p>
+                <p><input type="password" seatName="password" placeholder="密码" class="form-password form-control"
+                          id="reg-password" ng-model="inputPassword"></p>
+                <p><input type="password" seatName="password2" placeholder="确认密码" class="form-password form-control"
+                          id="reg-password2" ng-model="inputPassword2" onblur="passwordIsSame()"></p>
+                <div>
+                    <p id="reg-tip"></p>
+                </div>
+                <div>
+                    <div class="log-buttons">
+                        <button class="button-green" id="register-button" type="button" ng-click="register()">注册
+                        </button>
+                        <a href="javascript: history.go(-1);">
+                            <button class="button-red" id="reg-back-button" type="button">取消</button>
+                        </a>
                     </div>
-                    <div>
-                        <div class="log-buttons">
-                            <button class="button-blue" id="register-button" type="button" ng-click="register()">注册</button>
-                            <a href="javascript: history.go(-1);"><button class="button-big" id="reg-back-button" type="button">取消</button></a>
-                        </div>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
-    </header>
+    </div>
+</header>
 </body>
 
 <script src="js/util/scrollReveal.js"></script>
 <script>
-    (function() {
+    (function () {
         window.scrollReveal = new scrollReveal({
             reset: false,
             move: '50px'
@@ -58,6 +61,5 @@
 
 <script src="js/util/jquery-3.2.1.min.js"></script>
 <script src="js/bootstrap/bootstrap.min.js"></script>
-<script src="js/user/logState.js"></script>
-
+<script src="js/user/register.js"></script>
 </html>

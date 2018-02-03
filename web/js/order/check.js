@@ -203,6 +203,7 @@ function placeOrder() {
                     dataType: "json",
                     success: function (data0) {
                         console.log("update user information: " + data0.result);
+                        window.location.href = "venue-check.html?planId=" + planId;
                     }
                 });
             }
@@ -219,11 +220,11 @@ function placeNoMemberOrder() {
     var state = "已使用";
     var seatAssigned = "";
     var isSeatSelected = 1;
-    var seatName = $("#seat-select").val().split("-")[0];
-    var seatNum = $("#choose-member-order-num").val();
-    var price = $("#choose-final-price").text().split(" ")[1].split("元")[0];
+    var seatName = $("#no-member-seat-select").val().split("-")[0];
+    var seatNum = $("#choose-no-member-order-num").val();
+    var price = $("#no-member-choose-total-price").text().split("元")[0];
 
-    var maintainNum = $("#seat-select").val().split("-")[2];
+    var maintainNum = $("#no-member-seat-select").val().split("-")[2];
 
 
     if (parseInt(maintainNum) < parseInt(seatNum)) {
@@ -250,6 +251,7 @@ function placeNoMemberOrder() {
             dataType: "text",
             success: function (data) {
                 alert("座位号为" + seatName + "区 " + data);
+                window.location.href = "venue-check.html?planId=" + planId;
             }
         })
     }
