@@ -31,7 +31,7 @@ function loadUserInfo() {
             $("#name").attr("value", data.name);
             $("#level").html(data.level);
             $("#score").html(data.score);
-            $("#account").html(data.account);
+            $("#account").html(data.account.toFixed(2));
 
             oldPassword = data.password;
             level = data.level;

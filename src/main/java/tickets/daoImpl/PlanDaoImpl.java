@@ -29,7 +29,7 @@ public class PlanDaoImpl implements PlanDao {
         tx.commit();
         session.close();
 
-        return false;
+        return true;
     }
 
     @Override
@@ -42,7 +42,7 @@ public class PlanDaoImpl implements PlanDao {
 
         tx.commit();
         session.close();
-        return false;
+        return true;
     }
 
     @Override
@@ -60,7 +60,7 @@ public class PlanDaoImpl implements PlanDao {
 
         tx.commit();
         session.close();
-        return false;
+        return true;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class PlanDaoImpl implements PlanDao {
 
         tx.commit();
         session.close();
-        return false;
+        return true;
     }
 
     @Override

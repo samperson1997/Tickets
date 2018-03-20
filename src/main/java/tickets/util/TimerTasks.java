@@ -33,12 +33,10 @@ public class TimerTasks extends TimerTask {
             }
 
             // 任务2: 每分钟检测活动列表中已经结束的活动，把未使用的订单全部关闭
-            if(plan.getEndTime().isBefore(LocalDateTime.now())){
+            if (plan.getEndTime().isBefore(LocalDateTime.now())) {
                 orderService.closeOrders(plan.getId());
             }
         }
-
-
 
 
     }

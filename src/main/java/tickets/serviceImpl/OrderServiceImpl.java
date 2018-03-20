@@ -335,12 +335,13 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void assignTickets(int planId) {
-        List<PlanSeat> planSeats = planDao.getPlanSeat(planId);
+
         List<Order> orders = orderDao.getOrderByPlanId(planId);
 
         for (Order order : orders) {
             // 选座购票
-            if (order.getIsClosed() == 0 && order.getIsSeatSelected() == 1) {
+            if (order.getIsClosed() == 0 && order.getIsSeatSelected() == 1 && order.getIsAssigned() == 0) {
+                List<PlanSeat> planSeats = planDao.getPlanSeat(planId);
                 String seatName = order.getSeatName();
                 for (PlanSeat planSeat : planSeats) {
                     if (planSeat.getName().equals(seatName)) {
@@ -360,18 +361,17 @@ public class OrderServiceImpl implements OrderService {
                     }
                 }
             }
-        }
 
-        double highPrice = planSeats.get(0).getPrice();
-        for (PlanSeat planSeat : planSeats) {
-            highPrice = (planSeat.getPrice() > highPrice) ? planSeat.getPrice() : highPrice;
-        }
-
-        for (Order order : orders) {
             // 未选座购票
-            if (order.getIsClosed() == 0 && order.getIsSeatSelected() == 0) {
+            if (order.getIsClosed() == 0 && order.getIsSeatSelected() == 0 && order.getIsAssigned() == 0) {
                 int seatNum = order.getSeatNum();
                 boolean isAssigned = false;
+
+                List<PlanSeat> planSeats = planDao.getPlanSeat(planId);
+                double highPrice = planSeats.get(0).getPrice();
+                for (PlanSeat planSeat : planSeats) {
+                    highPrice = (planSeat.getPrice() > highPrice) ? planSeat.getPrice() : highPrice;
+                }
 
                 for (PlanSeat planSeat : planSeats) {
                     String seats = planSeat.getSeats(); // 剩下的座位号

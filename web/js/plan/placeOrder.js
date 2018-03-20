@@ -168,7 +168,7 @@ function loadAccount() {
         },
         dataType: "json",
         success: function (data) {
-            $("#current-account").text(data.account);
+            $("#current-account").text(data.account.toFixed(2));
             pin = data.pin;
         },
         error: function (request, status, err) {
@@ -189,7 +189,7 @@ function loadFinalPrice() {
         },
         dataType: "json",
         success: function (data) {
-            $("#final-price").text(data.price);
+            $("#final-price").text(data.price.toFixed(2));
         }
     })
 }

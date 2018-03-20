@@ -39,7 +39,7 @@ function loadOrders() {
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                                 + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatNum + "座"
-                                + "<br><i class='fa fa-money'></i> " + data[i].price + "元, <a href='/pay.html?orderId="
+                                + "<br><i class='fa fa-money'></i> " + data[i].price.toFixed(2) + "元, <a href='/pay.html?orderId="
                                 + data[i].orderId + "'>去支付</a>" + "</p></div>");
                         } else {
                             $("#unpaid-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
@@ -48,7 +48,7 @@ function loadOrders() {
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                                 + "<br><i class='fa fa-ticket'></i> " + "未选座" + data[i].seatNum + "座"
-                                + "<br><i class='fa fa-money'></i> " + data[i].price + "元, <a href='/pay.html?orderId="
+                                + "<br><i class='fa fa-money'></i> " + data[i].price.toFixed(2) + "元, <a href='/pay.html?orderId="
                                 + data[i].orderId + "'>去支付</a>" + "</p></div>");
                         }
                         break;
@@ -60,7 +60,7 @@ function loadOrders() {
                             + "<br><i class='fa fa-bookmark'></i> " + type
                             + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                             + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatNum + "个位置"
-                            + "<br><i class='fa fa-money'></i> " + data[i].price + "元, <a href='/cancel.html?orderId="
+                            + "<br><i class='fa fa-money'></i> " + data[i].price.toFixed(2) + "元, <a href='/cancel.html?orderId="
                             + data[i].orderId + "'>取消订单</a>" + "</p></div>");
                         break;
 
@@ -72,7 +72,7 @@ function loadOrders() {
                             + "<br><i class='fa fa-bookmark'></i> " + type
                             + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                             + "<br><i class='fa fa-ticket'></i> " + "未选座" + data[i].seatNum + "个位置"
-                            + "<br><i class='fa fa-money'></i> " + data[i].price + "元, <a href='/cancel.html?orderId="
+                            + "<br><i class='fa fa-money'></i> " + data[i].price.toFixed(2) + "元, <a href='/cancel.html?orderId="
                             + data[i].orderId + "'>取消订单</a>" + "</p></div>");
 
                         break;
@@ -84,7 +84,7 @@ function loadOrders() {
                             + "<br><i class='fa fa-bookmark'></i> " + type
                             + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                             + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座, 取票号: " + data[i].orderId
-                            + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元, <a href='/cancel.html?orderId="
+                            + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元, <a href='/cancel.html?orderId="
                             + data[i].orderId + "'>取消订单</a>" + "</p></div>");
 
                         break;
@@ -97,7 +97,7 @@ function loadOrders() {
                             + "<br><i class='fa fa-bookmark'></i> " + type
                             + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                             + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座, 取票号: " + data[i].orderId
-                            + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元, 预支付" + data[i].price
+                            + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元, 预支付" + data[i].price.toFixed(2)
                             + "元, 已退款" + returnPrice + "元, <a href='/cancel.html?orderId="
                             + data[i].orderId + "'>取消订单</a>" + "</p></div>");
 
@@ -113,7 +113,7 @@ function loadOrders() {
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                                 + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座"
-                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元</p></div>");
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元</p></div>");
                         } else {
                             $("#used-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
                                 + "</b><br><i class='fa fa-clock-o'></i> "
@@ -121,8 +121,8 @@ function loadOrders() {
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
                                 + "<br><i class='fa fa-ticket'></i> " + data[i].seatName + "区" + data[i].seatAssigned + "座"
-                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元, 预支付" + data[i].price
-                                + "元, 已退款" + returnPrice + "元</div>");
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元, 预支付" + data[i].price.toFixed(2)
+                                + "元, 已退款" + returnPrice.toFixed(2) + "元</div>");
                         }
                         break;
 
@@ -139,7 +139,7 @@ function loadOrders() {
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元 (手续费)</p></div>");
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元 (手续费)</p></div>");
                         }
                         break;
 
@@ -150,14 +150,14 @@ function loadOrders() {
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元</p></div>");
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元</p></div>");
                         } else {
                             $("#out-order").append("<div class=\"userinfo-div\"><p><p><b>" + data[i].introduction
                                 + "</b><br><i class='fa fa-clock-o'></i> "
                                 + data[i].startTime.substr(0, 10) + " " + data[i].startTime.substr(11) + "-" + data[i].endTime.substr(11)
                                 + "<br><i class='fa fa-bookmark'></i> " + type
                                 + "<br><i class='fa fa-map-marker'></i> " + data[i].name + ", " + data[i].location
-                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice + "元</p></div>");
+                                + "<br><i class='fa fa-money'></i> " + data[i].realPrice.toFixed(2) + "元</p></div>");
                         }
                         break;
                 }

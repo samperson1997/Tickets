@@ -46,7 +46,7 @@ public class OrderController {
         // 增加订单表
         String orderId = orderService.addOrder(orderBean);
 
-        // 倒计时15分钟
+        // 倒计时3分钟
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
 
@@ -60,7 +60,7 @@ public class OrderController {
 
             }
         };
-        timer.scheduleAtFixedRate(task, 900000L, 900000L);
+        timer.scheduleAtFixedRate(task, 180000L, 180000L);
 
         // 返回订单id
         return orderId;

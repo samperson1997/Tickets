@@ -12,8 +12,8 @@ public class TimerListener implements ServletContextListener {
     public void contextInitialized(ServletContextEvent event) {
         timer = new Timer(true);
         event.getServletContext().log("定时器已启动");
-        timer.scheduleAtFixedRate(new TimerTasks(), 1000, 60 * 1000);
-        // 每分钟执行一次run方法
+        timer.scheduleAtFixedRate(new TimerTasks(), 1000, 10 * 1000);
+        // 每10s执行一次run方法
     }
 
     @Override

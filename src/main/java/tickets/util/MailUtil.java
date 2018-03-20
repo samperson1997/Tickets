@@ -20,8 +20,8 @@ public class MailUtil implements Runnable {
         // 1.创建连接对象javax.mail.Session
         // 2.创建邮件对象 javax.mail.Message
         // 3.发送一封激活邮件
-        String from = "welcome@trillionaire.me";// 发件人电子邮箱
-        String host = "smtp.exmail.qq.com"; // 指定发送邮件的主机
+        String from = "2474809464@qq.com";// 发件人电子邮箱
+        String host = "smtp.qq.com"; // 指定发送邮件的主机
 
         Properties properties = System.getProperties();// 获取系统属性
 
@@ -39,14 +39,14 @@ public class MailUtil implements Runnable {
             // 1.获取默认session对象
             Session session = Session.getDefaultInstance(properties, new Authenticator() {
                 public PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("welcome@trillionaire.me", "TANXIN19961003tx"); // 发件人邮箱账号、授权码
+                    return new PasswordAuthentication("2474809464@qq.com", "xmxsojjylzxgechg"); // 发件人邮箱账号、授权码
                 }
             });
 
             // 2.创建邮件对象
             Message message = new MimeMessage(session);
             // 2.1设置发件人
-            String name = javax.mail.internet.MimeUtility.encodeText("Ticket小组");
+            String name = javax.mail.internet.MimeUtility.encodeText("Tickets小组");
             message.setFrom(new InternetAddress(name + " <" + from + ">"));
             // 2.2设置接收人
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
